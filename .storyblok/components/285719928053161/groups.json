@@ -1,0 +1,30 @@
+[
+  {
+    "name": "atoms",
+    "id": 68621622444557,
+    "uuid": "4c4a2e3d-eb98-44ae-9c88-39dc4a388d09",
+    "parent_id": 67927205490997,
+    "parent_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a"
+  },
+  {
+    "name": "Components",
+    "id": 67927205490997,
+    "uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
+    "parent_id": null,
+    "parent_uuid": null
+  },
+  {
+    "name": "Globals",
+    "id": 67927180562740,
+    "uuid": "bc035d97-ab41-4c66-9d55-bbcb6bedb182",
+    "parent_id": null,
+    "parent_uuid": null
+  },
+  {
+    "name": "Pages",
+    "id": 67927921946934,
+    "uuid": "3fca1665-e66e-428c-9474-64b33f5f503a",
+    "parent_id": null,
+    "parent_uuid": null
+  }
+]

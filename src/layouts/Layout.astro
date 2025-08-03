@@ -1,0 +1,50 @@
+---
+import "../styles.css";
+import { useStoryblokApi } from "@storyblok/astro";
+
+interface Props {
+  seoPage: {
+    title: string;
+    description: string;
+  };
+}
+
+const storyblokApi = useStoryblokApi();
+
+const { data: seoData } = await storyblokApi.get("cdn/stories/global/seo", {
+  version: import.meta.env.DEV ? "draft" : "published",
+});
+
+const canonicalUrl = Astro.url.origin + Astro.url.pathname;
+const seo = seoData.story.content;
+
+const { seoPage } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{seoPage.title} | {seo.siteName}</title>
+    <meta name="description" content={seoPage.description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:title" content={`${seoPage.title} | ${seo.siteName}`} />
+    <meta property="og:description" content={seoPage.description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={seo.siteName} />
+    <meta property="og:image" content={seo.ogImage.filename} />
+    <meta name="twitter:title" content={`${seoPage.title} | ${seo.siteName}`} />
+    <meta name="twitter:description" content={seoPage.description} />
+    <meta name="twitter:image" content={seo.ogImage.filename} />
+    <link rel="preconnect" href="https://app.storyblok.com" />
+  </head>
+  <body class="font-sans">
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
