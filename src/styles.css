@@ -1,1 +1,92 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+/* Fallback fonts (non-subset) */
+@font-face {
+  font-family: "Hind";
+  src: url("/fonts/Hind-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Hind";
+  src: url("/fonts/Hind-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Hind";
+  src: url("/fonts/Hind-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cardo";
+  src: url("/fonts/Cardo-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cardo";
+  src: url("/fonts/Cardo-Italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Subset fonts (performance optimized) - declared last to take precedence */
+@font-face {
+  font-family: "Hind";
+  src: url("/fonts/subset-Hind-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Hind";
+  src: url("/fonts/subset-Hind-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Hind";
+  src: url("/fonts/subset-Hind-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cardo";
+  src: url("/fonts/subset-Cardo-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cardo";
+  src: url("/fonts/subset-Cardo-Italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@theme {
+  --color-mine-shaft: #262626;
+  --color-black: #000000;
+  --color-alabaster: #fafafa;
+
+  --font-primary: "Hind", sans-serif;
+  --font-secondary: "Cardo", serif;
+}
