@@ -13,8 +13,9 @@ export default defineConfig({
       output: "static",
       accessToken: env.STORYBLOK_TOKEN,
       components: {
-        link: "components/atoms/Link",
-        page: "components/blocks/Page",
+        link: "components/Link",
+        page: "components/Page",
+        clipPath: "components/ClipPath",
       },
       apiOptions: {
         region: "eu",

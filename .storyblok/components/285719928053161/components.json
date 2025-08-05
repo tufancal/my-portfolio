@@ -1,10 +1,41 @@
 [
   {
+    "name": "clipPath",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-08-05T21:03:03.282Z",
+    "updated_at": "2025-08-05T21:04:00.970Z",
+    "id": 76751598730578,
+    "schema": {
+      "copy": {
+        "type": "richtext",
+        "pos": 0,
+        "id": "J7l7aljsS_uSOMCBxYwJTw",
+        "required": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "clipPath",
+    "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "link",
     "display_name": null,
     "description": "",
     "created_at": "2025-07-13T21:42:13.179Z",
-    "updated_at": "2025-07-13T21:43:41.556Z",
+    "updated_at": "2025-08-05T21:03:14.147Z",
     "id": 68621652703152,
     "schema": {
       "text": {
@@ -31,7 +62,7 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "link",
-    "component_group_uuid": "4c4a2e3d-eb98-44ae-9c88-39dc4a388d09",
+    "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
     "color": null,
     "icon": null,
     "internal_tags_list": [],
@@ -44,12 +75,32 @@
     "display_name": null,
     "description": null,
     "created_at": "2025-07-11T22:04:01.190Z",
-    "updated_at": "2025-07-11T22:04:01.190Z",
+    "updated_at": "2025-07-15T21:03:58.771Z",
     "id": 67919221521852,
     "schema": {
       "body": {
         "type": "bloks",
         "id": "IPa2Wge-S3y-5wzmoqeJ4g"
+      },
+      "tab-efec0c0a-6572-42da-916d-36625f8be876": {
+        "display_name": "SEO",
+        "keys": [
+          "title",
+          "description"
+        ],
+        "pos": 0,
+        "type": "tab",
+        "id": "7-wMCmVyQtqRbTZiX4vodg"
+      },
+      "title": {
+        "type": "text",
+        "pos": 2,
+        "id": "1v4vy5OUTwCAZHV4LJrucg"
+      },
+      "description": {
+        "type": "text",
+        "pos": 3,
+        "id": "z1UTozqnTvOEq9Q_AC_jWQ"
       }
     },
     "image": null,

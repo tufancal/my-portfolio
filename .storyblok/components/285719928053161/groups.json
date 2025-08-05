@@ -1,12 +1,5 @@
 [
   {
-    "name": "atoms",
-    "id": 68621622444557,
-    "uuid": "4c4a2e3d-eb98-44ae-9c88-39dc4a388d09",
-    "parent_id": 67927205490997,
-    "parent_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a"
-  },
-  {
     "name": "Components",
     "id": 67927205490997,
     "uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
