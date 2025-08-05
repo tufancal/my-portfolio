@@ -3,6 +3,7 @@
 import type { StoryblokRichtext, StoryblokMultilink, StoryblokAsset } from '../storyblok.d.ts';
 export interface ClipPath {
   copy: StoryblokRichtext;
+  blocks?: Link[];
   component: "clipPath";
   _uid: string;
   [k: string]: unknown;
