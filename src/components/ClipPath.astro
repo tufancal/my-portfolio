@@ -1,5 +1,10 @@
 ---
-import { storyblokEditable, renderRichText } from "@storyblok/astro";
+import {
+  storyblokEditable,
+  renderRichText,
+  type StoryblokRichTextNode,
+  type SbBlokData,
+} from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import type { ClipPath } from "@/.storyblok/types/285719928053161/storyblok-components";
 
@@ -9,10 +14,13 @@ interface Props {
 
 const { blok } = Astro.props;
 
-const content = renderRichText(blok.copy);
+const content = renderRichText(blok.copy as StoryblokRichTextNode<string>);
 ---
 
-<section {...storyblokEditable(blok)} class="container mx-auto px-4">
+<section
+  {...storyblokEditable(blok as SbBlokData)}
+  class="container mx-auto px-4"
+>
   <div class="relative mb-4 h-80 w-full overflow-hidden">
     <div class="bg-alabaster animate-morph-shape absolute inset-0"></div>
     <div
@@ -21,5 +29,9 @@ const content = renderRichText(blok.copy);
       <Fragment set:html={content} />
     </div>
   </div>
-  {blok.blocks?.map((block) => <StoryblokComponent blok={block} />)}
+  {
+    blok.blocks?.map((block) => (
+      <StoryblokComponent blok={block as SbBlokData} />
+    ))
+  }
 </section>
