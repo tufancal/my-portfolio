@@ -1,8 +1,14 @@
 ---
-import { storyblokEditable } from "@storyblok/astro";
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { BlogPost } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+interface Props {
+  blok: BlogPost;
+}
+
 const { blok } = Astro.props;
 ---
 
-<article {...storyblokEditable(blok)}>
+<article {...storyblokEditable(blok as SbBlokData)}>
   <h1>{blok.headline}</h1>
 </article>
