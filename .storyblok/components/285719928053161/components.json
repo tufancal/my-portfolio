@@ -4,13 +4,29 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-08-30T11:31:11.850Z",
-    "updated_at": "2025-08-30T11:31:16.495Z",
+    "updated_at": "2025-08-31T20:20:01.484Z",
     "id": 85458419103308,
     "schema": {
       "headline": {
         "type": "text",
         "pos": 0,
-        "id": "KL5sUS5XTPSnpeVtH7jVEg"
+        "id": "KL5sUS5XTPSnpeVtH7jVEg",
+        "required": true,
+        "translatable": true
+      },
+      "introText": {
+        "type": "richtext",
+        "pos": 1,
+        "required": true,
+        "translatable": true,
+        "id": "pxCuDHZnQdyajBLXQaQWLg"
+      },
+      "copy": {
+        "type": "richtext",
+        "pos": 2,
+        "id": "SR6lq81-R5G6wMKk8Vc7VQ",
+        "required": true,
+        "translatable": true
       }
     },
     "image": null,
@@ -34,9 +50,23 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-08-31T12:20:22.806Z",
-    "updated_at": "2025-08-31T12:20:22.806Z",
+    "updated_at": "2025-08-31T20:26:52.378Z",
     "id": 85824400620498,
-    "schema": {},
+    "schema": {
+      "headline": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "BeNvK1VmRWCyyEThjwCoyw"
+      },
+      "linkText": {
+        "type": "text",
+        "pos": 1,
+        "required": true,
+        "translatable": true,
+        "id": "snbL1VszTmilRI9NRUm1Tw"
+      }
+    },
     "image": null,
     "preview_field": null,
     "is_root": false,

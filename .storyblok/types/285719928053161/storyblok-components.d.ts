@@ -2,13 +2,17 @@
 // DO NOT MODIFY THIS FILE BY HAND.
 import type { StoryblokMultilink, StoryblokAsset, StoryblokRichtext } from '../storyblok.d.ts';
 export interface BlogPost {
-  headline?: string;
+  headline: string;
+  introText: StoryblokRichtext;
+  copy: StoryblokRichtext;
   component: "blogPost";
   _uid: string;
   [k: string]: unknown;
 }
 
 export interface BlogPostList {
+  headline: string;
+  linkText: string;
   component: "blogPostList";
   _uid: string;
   [k: string]: unknown;

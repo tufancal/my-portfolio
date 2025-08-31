@@ -1,5 +1,10 @@
 ---
-import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
 import { useStoryblokApi } from "@storyblok/astro";
 import type { BlogPostList } from "@/.storyblok/types/285719928053161/storyblok-components";
 import { formatDate, formatDateTime } from "../utils/date";
@@ -17,11 +22,11 @@ const { data } = await storyblokApi.get("cdn/stories", {
   content_type: "blogPost",
 });
 
-const posts = data.stories.map((story: any) => {
+const posts = data.stories.slice(0, 2).map((story: any) => {
   return {
-    title: story.content.headline,
+    headline: story.content.headline,
     date: formatDate(story.published_at),
-    description: story.content.description,
+    introText: renderRichText(story.content.introText as StoryblokRichTextNode),
     slug: story.full_slug,
   };
 });
@@ -36,24 +41,27 @@ const { blok } = Astro.props;
   <h2
     class="before:bg-mine-shaft text-mine-shaft font-secondary before:bg-opacity-10 relative mb-6 text-right text-xl font-bold uppercase before:absolute before:top-1/2 before:left-0 before:h-0.5 before:w-3 before:-translate-y-1/2 before:content-['']"
   >
-    Latest Blog Posts
+    {blok.headline}
   </h2>
   <ul>
     {
       posts.map((post: any) => (
         <li>
           <a class="mb-1 block font-semibold" href={post.slug}>
-            {post.title}
+            {post.headline}
           </a>
           <time
             datetime={formatDateTime(post.date)}
-            class="font-secondary italic"
+            class="font-secondary mb-1 italic"
           >
             {post.date}
           </time>
+          <div class="mb-2 line-clamp-3 text-ellipsis">
+            <Fragment set:html={post.introText} />
+          </div>
           <Link
             blok={{
-              text: "Read more",
+              text: blok.linkText,
               url: {
                 url: post.slug,
                 linktype: "story",
