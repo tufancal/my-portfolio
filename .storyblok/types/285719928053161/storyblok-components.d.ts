@@ -8,6 +8,12 @@ export interface BlogPost {
   [k: string]: unknown;
 }
 
+export interface BlogPostList {
+  component: "blogPostList";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface ClipPath {
   isTitle?: boolean;
   copy: StoryblokRichtext;
@@ -26,7 +32,7 @@ export interface Link {
 }
 
 export interface Page {
-  body?: (BlogPost | ClipPath | Link | Page | SeoPage)[];
+  body?: (BlogPost | BlogPostList | ClipPath | Link | Page | SeoPage)[];
   title?: string;
   description?: string;
   component: "page";

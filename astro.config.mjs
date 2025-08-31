@@ -17,6 +17,7 @@ export default defineConfig({
         page: "components/Page",
         clipPath: "components/ClipPath",
         blogPost: "components/BlogPost",
+        blogPostList: "components/BlogPostList",
       },
       apiOptions: {
         region: "eu",

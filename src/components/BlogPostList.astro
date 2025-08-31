@@ -1,6 +1,13 @@
 ---
-import { storyblokEditable } from "@storyblok/astro";
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
 import { useStoryblokApi } from "@storyblok/astro";
+import type { BlogPostList } from "@/.storyblok/types/285719928053161/storyblok-components";
+import { formatDate, formatDateTime } from "../utils/date";
+import Link from "./Link.astro";
+
+interface Props {
+  blok: BlogPostList;
+}
 
 const storyblokApi = useStoryblokApi();
 
@@ -13,9 +20,7 @@ const { data } = await storyblokApi.get("cdn/stories", {
 const posts = data.stories.map((story: any) => {
   return {
     title: story.content.headline,
-    date: new Date(story.published_at).toLocaleDateString("de-DE", {
-      dateStyle: "full",
-    }),
+    date: formatDate(story.published_at),
     description: story.content.description,
     slug: story.full_slug,
   };
@@ -24,13 +29,48 @@ const posts = data.stories.map((story: any) => {
 const { blok } = Astro.props;
 ---
 
-<ul {...storyblokEditable(blok)}>
-  {
-    posts.map((post: any) => (
-      <li>
-        <time>{post.date}</time>
-        <a href={post.slug}>{post.title}</a>
-      </li>
-    ))
-  }
-</ul>
+<section
+  {...storyblokEditable(blok as SbBlokData)}
+  class="container mx-auto px-4"
+>
+  <h2
+    class="before:bg-mine-shaft text-mine-shaft font-secondary before:bg-opacity-10 relative mb-6 text-right text-xl font-bold uppercase before:absolute before:top-1/2 before:left-0 before:h-0.5 before:w-3 before:-translate-y-1/2 before:content-['']"
+  >
+    Latest Blog Posts
+  </h2>
+  <ul>
+    {
+      posts.map((post: any) => (
+        <li>
+          <a class="mb-1 block font-semibold" href={post.slug}>
+            {post.title}
+          </a>
+          <time
+            datetime={formatDateTime(post.date)}
+            class="font-secondary italic"
+          >
+            {post.date}
+          </time>
+          <Link
+            blok={{
+              text: "Read more",
+              url: {
+                url: post.slug,
+                linktype: "story",
+                fieldtype: "multilink",
+                id: post.slug,
+                cached_url: post.slug,
+                target: "_self",
+                rel: "noopener noreferrer",
+                title: post.title,
+                prep: post.slug,
+              },
+              component: "link",
+              _uid: post.slug,
+            }}
+          />
+        </li>
+      ))
+    }
+  </ul>
+</section>
