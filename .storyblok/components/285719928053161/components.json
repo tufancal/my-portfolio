@@ -4,7 +4,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-08-30T11:31:11.850Z",
-    "updated_at": "2025-08-31T20:20:01.484Z",
+    "updated_at": "2025-09-02T20:38:36.201Z",
     "id": 85458419103308,
     "schema": {
       "headline": {
@@ -14,16 +14,26 @@
         "required": true,
         "translatable": true
       },
+      "image": {
+        "type": "asset",
+        "pos": 1,
+        "required": true,
+        "translatable": true,
+        "id": "F72S4gh5SRWHQOc0D8WgSg",
+        "filetypes": [
+          "images"
+        ]
+      },
       "introText": {
         "type": "richtext",
-        "pos": 1,
+        "pos": 2,
         "required": true,
         "translatable": true,
         "id": "pxCuDHZnQdyajBLXQaQWLg"
       },
       "copy": {
         "type": "richtext",
-        "pos": 2,
+        "pos": 3,
         "id": "SR6lq81-R5G6wMKk8Vc7VQ",
         "required": true,
         "translatable": true

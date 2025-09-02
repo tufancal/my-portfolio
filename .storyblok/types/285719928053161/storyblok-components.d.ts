@@ -3,6 +3,7 @@
 import type { StoryblokMultilink, StoryblokAsset, StoryblokRichtext } from '../storyblok.d.ts';
 export interface BlogPost {
   headline: string;
+  image: StoryblokAsset;
   introText: StoryblokRichtext;
   copy: StoryblokRichtext;
   component: "blogPost";

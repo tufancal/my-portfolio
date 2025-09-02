@@ -8,8 +8,9 @@ import {
 import { useStoryblokApi } from "@storyblok/astro";
 import type { BlogPostList } from "@/.storyblok/types/285719928053161/storyblok-components";
 import { formatDate, formatDateTime } from "../utils/date";
-import Link from "./Link.astro";
-
+import { generateResponsiveImageData } from "../utils/optimizeImage";
+import { Image } from "astro:assets";
+import Arrow from "@/src/icons/arrow.svg";
 interface Props {
   blok: BlogPostList;
 }
@@ -23,11 +24,20 @@ const { data } = await storyblokApi.get("cdn/stories", {
 });
 
 const posts = data.stories.slice(0, 2).map((story: any) => {
+  const image = generateResponsiveImageData(story.content.image.filename, {
+    breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
+    aspectRatio: 3 / 2,
+    sizes:
+      "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
+  });
+
   return {
     headline: story.content.headline,
     date: formatDate(story.published_at),
     introText: renderRichText(story.content.introText as StoryblokRichTextNode),
     slug: story.full_slug,
+    image: image,
+    alt: story.content.image.alt,
   };
 });
 
@@ -46,10 +56,19 @@ const { blok } = Astro.props;
   <ul>
     {
       posts.map((post: any) => (
-        <li>
-          <a class="mb-1 block font-semibold" href={post.slug}>
-            {post.headline}
-          </a>
+        <li class="group relative">
+          <div class="mb-4 overflow-hidden rounded-lg">
+            <img
+              src={post.image.src}
+              srcset={post.image.srcset}
+              alt={post.alt}
+              sizes={post.image.sizes}
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <h3 class="mb-1 block font-semibold">{post.headline}</h3>
           <time
             datetime={formatDateTime(post.date)}
             class="font-secondary mb-1 italic"
@@ -59,24 +78,13 @@ const { blok } = Astro.props;
           <div class="mb-2 line-clamp-3 text-ellipsis">
             <Fragment set:html={post.introText} />
           </div>
-          <Link
-            blok={{
-              text: blok.linkText,
-              url: {
-                url: post.slug,
-                linktype: "story",
-                fieldtype: "multilink",
-                id: post.slug,
-                cached_url: post.slug,
-                target: "_self",
-                rel: "noopener noreferrer",
-                title: post.title,
-                prep: post.slug,
-              },
-              component: "link",
-              _uid: post.slug,
-            }}
-          />
+          <a
+            href={post.slug}
+            class="font-secondary text-mine-shaft group inline-flex items-center gap-2 text-base font-bold after:absolute after:inset-0"
+          >
+            {blok.linkText}
+            <Arrow class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </a>
         </li>
       ))
     }

@@ -1,5 +1,10 @@
 ---
-import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
 import type { BlogPost } from "@/.storyblok/types/285719928053161/storyblok-components";
 
 interface Props {
@@ -7,6 +12,17 @@ interface Props {
 }
 
 const { blok } = Astro.props;
+
+const headlineAnchorIds =
+  blok.copy.content
+    ?.filter((item) => item.type === "heading")
+    .map((heading) => {
+      const anchorMark = heading.content?.[0]?.marks?.find(
+        (mark) => mark.type === "anchor",
+      );
+      return anchorMark?.attrs?.id;
+    })
+    .filter((anchorId) => anchorId !== null && anchorId !== undefined) || [];
 ---
 
 <article {...storyblokEditable(blok as SbBlokData)}>
