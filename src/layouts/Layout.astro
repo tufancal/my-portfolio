@@ -1,6 +1,7 @@
 ---
 import "../styles.css";
 import { useStoryblokApi } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 interface Props {
   seoPage: {
@@ -15,8 +16,16 @@ const { data: seoData } = await storyblokApi.get("cdn/stories/global/seo", {
   version: import.meta.env.DEV ? "draft" : "published",
 });
 
+const { data: headerData } = await storyblokApi.get(
+  "cdn/stories/global/header",
+  {
+    version: import.meta.env.DEV ? "draft" : "published",
+  },
+);
+
 const canonicalUrl = Astro.url.origin + Astro.url.pathname;
 const seo = seoData.story.content;
+const header = headerData.story.content;
 
 const { seoPage } = Astro.props;
 ---
@@ -26,6 +35,10 @@ const { seoPage } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
     <title>{seoPage.title} | {seo.siteName}</title>
     <meta name="description" content={seoPage.description} />
@@ -78,6 +91,7 @@ const { seoPage } = Astro.props;
     />
   </head>
   <body>
+    <StoryblokComponent blok={header} />
     <main class="bg-gallery min-h-screen">
       <slot />
     </main>

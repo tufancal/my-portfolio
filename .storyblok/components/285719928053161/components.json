@@ -143,6 +143,46 @@
     "metadata": {}
   },
   {
+    "name": "header",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-09-04T19:19:18.044Z",
+    "updated_at": "2025-09-04T19:20:28.928Z",
+    "id": 87342932157803,
+    "schema": {
+      "logo": {
+        "type": "asset",
+        "pos": 0,
+        "id": "eDYo5o3rS7ajnPUx9dWH-A"
+      },
+      "navLinks": {
+        "type": "bloks",
+        "pos": 1,
+        "id": "Oc0CH0u9TQOnvxI3xWVD5A",
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "link"
+        ]
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "header",
+    "component_group_uuid": "bc035d97-ab41-4c66-9d55-bbcb6bedb182",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "link",
     "display_name": null,
     "description": "",
@@ -176,6 +216,45 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "link",
+    "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "navLink",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-09-04T19:28:29.358Z",
+    "updated_at": "2025-09-04T19:29:09.300Z",
+    "id": 87345190335885,
+    "schema": {
+      "url": {
+        "type": "multilink",
+        "pos": 0,
+        "id": "TAmPx0IcQ8O4VfwV-k8A6g",
+        "required": true,
+        "translatable": true
+      },
+      "text": {
+        "type": "text",
+        "pos": 1,
+        "id": "n3ZqM3INQMGrMWacMOgvuA",
+        "required": true,
+        "translatable": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "navLink",
     "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
     "color": null,
     "icon": null,

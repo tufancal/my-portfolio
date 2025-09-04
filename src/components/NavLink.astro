@@ -1,0 +1,14 @@
+---
+import type { NavLink } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+interface Props {
+  blok: NavLink;
+}
+
+const { blok } = Astro.props;
+---
+
+<a
+  class="font-secondary text-mine-shaft text-4xl font-bold uppercase"
+  href={blok.url.url}>{blok.text}</a
+>

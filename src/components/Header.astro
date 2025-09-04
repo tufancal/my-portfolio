@@ -1,0 +1,100 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import Logo from "@/src/icons/logo.svg";
+
+const { blok } = Astro.props;
+---
+
+<header {...storyblokEditable(blok)}>
+  <nav id="main-navigation" class="bg-gallery bg-opacity-95">
+    <div class="container mx-auto px-3 py-4 sm:px-4 md:px-6">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex flex-shrink-0 items-center space-x-2">
+          <Logo class="h-10 w-32 sm:h-12 sm:w-48" />
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden items-center space-x-10 lg:flex">
+          {
+            blok.navLinks?.map((link: any) => (
+              <StoryblokComponent blok={link} />
+            ))
+          }
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="lg:hidden">
+          <button
+            id="menu-toggle-button"
+            class="text-mine-shaft font-secondary p-1 font-bold uppercase focus:outline-none sm:p-2"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            Menu
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden">
+      <div class="bg-gallery flex h-dvh px-3 shadow-lg sm:px-4">
+        <div
+          class="border-mine-shaft flex h-[calc(100%-72px)] w-full flex-col justify-center space-y-10"
+        >
+          {
+            blok.navLinks?.map((link: any) => (
+              <StoryblokComponent blok={link} />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const menuButton = document.getElementById("menu-toggle-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileLinks = document.querySelectorAll(".mobile-menu-link");
+
+  function toggleMenu() {
+    if (!menuButton || !mobileMenu) return;
+
+    const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
+
+    menuButton.setAttribute("aria-expanded", String(!isExpanded));
+    menuButton.setAttribute(
+      "aria-label",
+      isExpanded ? "Open menu" : "Close menu",
+    );
+
+    menuButton.innerHTML = isExpanded ? "Menu" : "Close";
+    mobileMenu.classList.toggle("hidden");
+    document.body.classList.add("overflow-hidden");
+  }
+
+  function closeMenu() {
+    if (!menuButton) return;
+    if (menuButton.getAttribute("aria-expanded") === "true") {
+      toggleMenu();
+    }
+    document.body.classList.remove("overflow-hidden");
+  }
+
+  if (menuButton) {
+    menuButton.addEventListener("click", toggleMenu);
+  }
+
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 1024) {
+      closeMenu();
+    }
+  });
+</script>

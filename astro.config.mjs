@@ -18,6 +18,8 @@ export default defineConfig({
         clipPath: "components/ClipPath",
         blogPost: "components/BlogPost",
         blogPostList: "components/BlogPostList",
+        header: "components/Header",
+        navLink: "components/NavLink",
       },
       apiOptions: {
         region: "eu",
