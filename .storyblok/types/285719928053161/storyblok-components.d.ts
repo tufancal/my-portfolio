@@ -2,6 +2,7 @@
 // DO NOT MODIFY THIS FILE BY HAND.
 import type { StoryblokAsset, StoryblokMultilink, StoryblokRichtext } from '../storyblok.d.ts';
 export interface BlogPost {
+  author: number | string;
   headline: string;
   image: StoryblokAsset;
   introText: StoryblokRichtext;
@@ -30,7 +31,7 @@ export interface ClipPath {
 
 export interface Header {
   logo?: StoryblokAsset;
-  navLinks?: Link[];
+  navLinks?: NavLink[];
   component: "header";
   _uid: string;
   [k: string]: unknown;

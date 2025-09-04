@@ -6,12 +6,16 @@ import {
   type StoryblokRichTextNode,
 } from "@storyblok/astro";
 import type { BlogPost } from "@/.storyblok/types/285719928053161/storyblok-components";
+import { formatDate, formatDateTime } from "../utils/date";
+import { Image } from "astro:assets";
+import { generateResponsiveImageData } from "../utils/optimizeImage";
 
 interface Props {
   blok: BlogPost;
+  publishedAt: string;
 }
 
-const { blok } = Astro.props;
+const { blok, publishedAt } = Astro.props;
 
 const headlineAnchorIds =
   blok.copy.content
@@ -23,8 +27,33 @@ const headlineAnchorIds =
       return anchorMark?.attrs?.id;
     })
     .filter((anchorId) => anchorId !== null && anchorId !== undefined) || [];
+
+const image = generateResponsiveImageData(blok.image.filename, {
+  breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
+  aspectRatio: 3 / 2,
+  sizes:
+    "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
+});
 ---
 
-<article {...storyblokEditable(blok as SbBlokData)}>
-  <h1>{blok.headline}</h1>
+<article
+  class="container mx-auto px-4"
+  {...storyblokEditable(blok as SbBlokData)}
+>
+  <ul class="mb-4 space-y-2">
+    <li
+      class="font-secondary text-mine-shaft border-mine-shaft border-b pb-2 text-center text-sm italic"
+    >
+      <time datetime={formatDateTime(publishedAt)}>
+        {formatDate(publishedAt)}
+      </time>
+    </li>
+    <li class="font-secondary text-mine-shaft text-center text-sm italic">
+      {blok.author}
+    </li>
+  </ul>
+  <h1 class="font-secondary text-mine-shaft mb-8 text-center text-xl font-bold">
+    {blok.headline}
+  </h1>
+  <Image src={image.src} alt={blok.image.alt} inferSize />
 </article>

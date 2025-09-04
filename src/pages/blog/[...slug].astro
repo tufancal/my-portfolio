@@ -27,8 +27,9 @@ const { data } = await sbApi.get(`cdn/stories/blog/${slug}`, {
 });
 
 const content = data.story.content;
+const publishedAt = data.story.published_at;
 ---
 
 <Layout seoPage={{ title: "Blog", description: "Blog" }}>
-  <StoryblokComponent blok={content} />
+  <StoryblokComponent blok={content} publishedAt={publishedAt} />
 </Layout>
