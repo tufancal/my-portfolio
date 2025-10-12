@@ -28,7 +28,7 @@ const headlineAnchorIds =
     })
     .filter((anchorId) => anchorId !== null && anchorId !== undefined) || [];
 
-const image = generateResponsiveImageData(blok.image.filename, {
+const image = generateResponsiveImageData(blok.image.filename as string, {
   breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
   aspectRatio: 3 / 2,
   sizes:
