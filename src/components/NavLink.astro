@@ -6,9 +6,11 @@ interface Props {
 }
 
 const { blok } = Astro.props;
+
+const fontSize = blok.isSmall ? "text-sm lg:text-base" : "text-4xl lg:text-2xl";
 ---
 
 <a
-  class="font-secondary text-mine-shaft text-4xl font-bold uppercase lg:text-2xl"
+  class={`font-secondary text-mine-shaft ${fontSize} font-bold uppercase`}
   href={blok.url.url}>{blok.text}</a
 >

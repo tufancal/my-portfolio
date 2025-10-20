@@ -2,6 +2,7 @@
 import "../styles.css";
 import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
   seoPage: {
@@ -16,6 +17,13 @@ const { data: seoData } = await storyblokApi.get("cdn/stories/global/seo", {
   version: import.meta.env.DEV ? "draft" : "published",
 });
 
+const { data: footerData } = await storyblokApi.get(
+  "cdn/stories/global/footer",
+  {
+    version: import.meta.env.DEV ? "draft" : "published",
+  },
+);
+
 const { data: headerData } = await storyblokApi.get(
   "cdn/stories/global/header",
   {
@@ -26,7 +34,7 @@ const { data: headerData } = await storyblokApi.get(
 const canonicalUrl = Astro.url.origin + Astro.url.pathname;
 const seo = seoData.story.content;
 const header = headerData.story.content;
-
+const footer = footerData.story.content;
 const { seoPage } = Astro.props;
 ---
 
@@ -92,8 +100,9 @@ const { seoPage } = Astro.props;
   </head>
   <body>
     <StoryblokComponent blok={header} />
-    <main class="bg-gallery min-h-screen">
+    <main class="bg-gallery">
       <slot />
     </main>
+    <StoryblokComponent blok={footer} />
   </body>
 </html>

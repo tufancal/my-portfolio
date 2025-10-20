@@ -155,18 +155,53 @@
     "metadata": {}
   },
   {
+    "name": "footer",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-10-12T18:37:30.622Z",
+    "updated_at": "2025-10-12T18:38:27.231Z",
+    "id": 100780648952930,
+    "schema": {
+      "copyright": {
+        "type": "text",
+        "pos": 0,
+        "id": "VFU7rnl-RgCWkeCPz6tLNg"
+      },
+      "legalLinks": {
+        "type": "bloks",
+        "pos": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "navLink"
+        ],
+        "id": "8CGh5O_KQ4ScFT2epnbvlQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "footer",
+    "component_group_uuid": "bc035d97-ab41-4c66-9d55-bbcb6bedb182",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "header",
     "display_name": null,
     "description": "",
     "created_at": "2025-09-04T19:19:18.044Z",
-    "updated_at": "2025-09-04T19:34:43.208Z",
+    "updated_at": "2025-10-12T18:37:18.295Z",
     "id": 87342932157803,
     "schema": {
-      "logo": {
-        "type": "asset",
-        "pos": 0,
-        "id": "eDYo5o3rS7ajnPUx9dWH-A"
-      },
       "navLinks": {
         "type": "bloks",
         "pos": 1,
@@ -241,7 +276,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-09-04T19:28:29.358Z",
-    "updated_at": "2025-09-04T19:29:09.300Z",
+    "updated_at": "2025-10-12T18:42:37.495Z",
     "id": 87345190335885,
     "schema": {
       "url": {
@@ -257,6 +292,11 @@
         "id": "n3ZqM3INQMGrMWacMOgvuA",
         "required": true,
         "translatable": true
+      },
+      "isSmall": {
+        "type": "boolean",
+        "pos": 2,
+        "id": "I0EwpI_2RjiqyViCcPXdaw"
       }
     },
     "image": null,
@@ -352,6 +392,77 @@
     "preset_id": null,
     "real_name": "seoPage",
     "component_group_uuid": "3fca1665-e66e-428c-9474-64b33f5f503a",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "socialMedia",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-10-12T18:38:59.901Z",
+    "updated_at": "2025-10-12T18:53:50.699Z",
+    "id": 100781014639716,
+    "schema": {
+      "text": {
+        "type": "text",
+        "pos": 0,
+        "id": "A8oOLa7SRYuBzQLAwn9ajA"
+      },
+      "url": {
+        "type": "multilink",
+        "pos": 1,
+        "id": "C98XPcCUSdKtzElOGUJ89Q",
+        "email_link_type": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "socialMedia",
+    "component_group_uuid": "bc035d97-ab41-4c66-9d55-bbcb6bedb182",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "socialMediaList",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-10-12T18:52:30.386Z",
+    "updated_at": "2025-10-12T18:52:48.449Z",
+    "id": 100784334386344,
+    "schema": {
+      "links": {
+        "type": "bloks",
+        "pos": 0,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "socialMedia"
+        ],
+        "id": "ZFtP0hEKSMOZsNNWqB7BJg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "socialMediaList",
+    "component_group_uuid": "bc035d97-ab41-4c66-9d55-bbcb6bedb182",
     "color": null,
     "icon": null,
     "internal_tags_list": [],

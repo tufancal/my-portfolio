@@ -20,6 +20,7 @@ export default defineConfig({
         blogPostList: "components/BlogPostList",
         header: "components/Header",
         navLink: "components/NavLink",
+        footer: "components/Footer",
       },
       apiOptions: {
         region: "eu",

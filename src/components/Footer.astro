@@ -1,0 +1,62 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import type { Footer } from "@/.storyblok/types/285719928053161/storyblok-components";
+import { useStoryblokApi } from "@storyblok/astro";
+
+const storyblokApi = useStoryblokApi();
+
+const { blok } = Astro.props;
+
+// get global social media data
+const { data: socialMediaData } = await storyblokApi.get(
+  "cdn/stories/global/social-media",
+  {
+    version: import.meta.env.DEV ? "draft" : "published",
+  },
+);
+
+const socialMedia = socialMediaData.story.content;
+const socialMediaLinks = socialMedia.body[0].links;
+---
+
+<footer class="bg-gallery" {...storyblokEditable(blok)}>
+  <div class="container mx-auto px-3 py-4 sm:px-4 md:px-6">
+    <div
+      class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+    >
+      <small class="text-mine-shaft font-secondary text-sm lg:text-base"
+        >{blok.copyright}</small
+      >
+      <ul class="flex items-center space-x-4">
+        {
+          blok.legalLinks?.map((link: any) => (
+            <li>
+              <StoryblokComponent blok={link} />
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="flex items-center space-x-4">
+        {
+          socialMediaLinks?.map((link: any) => (
+            <li>
+              <a
+                class="font-secondary text-mine-shaft text-sm font-bold uppercase lg:text-base"
+                href={
+                  link.url.linktype === "email"
+                    ? `mailto:${link.url.url}`
+                    : link.url.url
+                }
+                target={link.url.linktype === "email" ? "_self" : "_blank"}
+                rel="noopener noreferrer"
+              >
+                {link.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</footer>
