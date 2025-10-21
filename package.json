@@ -10,7 +10,7 @@
     "types": "npx storyblok components pull --space 285719928053161 && npx storyblok types generate -s 285719928053161"
   },
   "dependencies": {
-    "@storyblok/astro": "^7.3.3",
+    "@storyblok/astro": "^7.3.4",
     "@storyblok/js": "^4.4.0",
     "@tailwindcss/vite": "^4.1.15",
     "astro": "^5.14.5",
