@@ -1,0 +1,63 @@
+---
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
+import { useStoryblokApi } from "@storyblok/astro";
+import type { BlogPost } from "@/.storyblok/types/285719928053161/storyblok-components";
+import { formatDate, formatDateTime } from "../utils/date";
+import { generateResponsiveImageData } from "../utils/optimizeImage";
+
+const storyblokApi = useStoryblokApi();
+
+const { data } = await storyblokApi.get("cdn/stories", {
+  version: import.meta.env.DEV ? "draft" : "published",
+  starts_with: "blog",
+  content_type: "blogPost",
+});
+
+const posts = data.stories.slice(0, 2).map((story: any) => {
+  const image = generateResponsiveImageData(story.content.image.filename, {
+    breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
+    aspectRatio: 3 / 2,
+    sizes:
+      "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
+  });
+
+  return {
+    headline: story.content.headline,
+    date: formatDate(story.published_at),
+    introText: renderRichText(story.content.introText as StoryblokRichTextNode),
+    slug: story.full_slug,
+    image: image,
+    alt: story.content.image.alt,
+  };
+});
+---
+
+<section class="container mx-auto px-4">
+  <h2
+    class="text-mine-shaft font-secondary text-center text-xl font-bold uppercase"
+  >
+    hello world
+  </h2>
+  <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {
+      posts.map((post: BlogPost) => (
+        <li>
+          <img src={post.image.src as string} alt={post.alt as string} />
+          <h3>{post.headline}</h3>
+          <time datetime={formatDateTime(post.date as string)}>
+            {formatDate(post.date as string)}
+          </time>
+          <div class="mb-2 line-clamp-3 text-ellipsis">
+            <Fragment set:html={post.introText} />
+          </div>
+          <a href={post.slug as string}>Read more</a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

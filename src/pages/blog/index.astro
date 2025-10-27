@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { useStoryblokApi } from "@storyblok/astro";
+import BlogPostGrid from "../../components/BlogPostGrid.astro";
 
 const storyblokApi = useStoryblokApi();
 const { data } = await storyblokApi.get("cdn/stories/blog", {
@@ -9,8 +9,9 @@ const { data } = await storyblokApi.get("cdn/stories/blog", {
 });
 
 const content = data.story.content;
+console.log(content);
 ---
 
 <Layout seoPage={{ title: "Blog", description: "Blog" }}>
-  <StoryblokComponent blok={content} />
+  <BlogPostGrid />
 </Layout>
