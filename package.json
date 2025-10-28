@@ -13,7 +13,7 @@
     "@storyblok/astro": "^7.3.4",
     "@storyblok/js": "^4.4.0",
     "@tailwindcss/vite": "^4.1.16",
-    "astro": "^5.15.1",
+    "astro": "^5.15.2",
     "tailwindcss": "^4.1.16",
     "vite": "^7.1.12"
   },
