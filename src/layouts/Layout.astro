@@ -97,9 +97,9 @@ const { seoPage } = Astro.props;
       crossorigin
     />
   </head>
-  <body>
+  <body class="bg-gallery">
     <StoryblokComponent blok={header} />
-    <main class="bg-gallery">
+    <main>
       <slot />
     </main>
     <StoryblokComponent blok={footer} />

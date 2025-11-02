@@ -15,12 +15,13 @@ export default defineConfig({
       components: {
         link: "components/Link",
         page: "components/Page",
-        clipPath: "components/ClipPath",
+        textBackground: "components/TextBackground",
         blogPost: "components/BlogPost",
         blogPostList: "components/BlogPostList",
         header: "components/Header",
         navLink: "components/NavLink",
         footer: "components/Footer",
+        intro: "components/Intro",
       },
       apiOptions: {
         region: "eu",

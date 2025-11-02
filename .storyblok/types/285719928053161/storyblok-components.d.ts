@@ -3,6 +3,7 @@
 import type { StoryblokMultilink, StoryblokAsset, StoryblokRichtext } from '../storyblok.d.ts';
 export interface BlogPost {
   author: number | string;
+  category?: number | string;
   headline: string;
   image: StoryblokAsset;
   introText: StoryblokRichtext;
@@ -20,15 +21,6 @@ export interface BlogPostList {
   [k: string]: unknown;
 }
 
-export interface ClipPath {
-  isTitle?: boolean;
-  copy: StoryblokRichtext;
-  blocks?: Link[];
-  component: "clipPath";
-  _uid: string;
-  [k: string]: unknown;
-}
-
 export interface Footer {
   copyright?: string;
   legalLinks?: NavLink[];
@@ -40,6 +32,15 @@ export interface Footer {
 export interface Header {
   navLinks?: NavLink[];
   component: "header";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface Intro {
+  headline?: string;
+  richtext?: StoryblokRichtext;
+  blocks?: Link[];
+  component: "intro";
   _uid: string;
   [k: string]: unknown;
 }
@@ -65,15 +66,16 @@ export interface Page {
   body?: (
     | BlogPost
     | BlogPostList
-    | ClipPath
     | Footer
     | Header
+    | Intro
     | Link
     | NavLink
     | Page
     | SeoPage
     | SocialMedia
     | SocialMediaList
+    | TextBackground
   )[];
   title?: string;
   description?: string;
@@ -101,6 +103,15 @@ export interface SocialMedia {
 export interface SocialMediaList {
   links?: SocialMedia[];
   component: "socialMediaList";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface TextBackground {
+  isTitle?: boolean;
+  copy: StoryblokRichtext;
+  blocks?: Link[];
+  component: "textBackground";
   _uid: string;
   [k: string]: unknown;
 }
