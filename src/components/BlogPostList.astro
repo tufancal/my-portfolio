@@ -45,14 +45,14 @@ const { blok } = Astro.props;
 
 <section
   {...storyblokEditable(blok as SbBlokData)}
-  class="container mx-auto mb-12 px-4"
+  class="container mx-auto mb-12 max-w-3xl px-4"
 >
   <h2
     class="before:bg-mine-shaft text-mine-shaft font-secondary before:bg-opacity-10 relative mb-6 text-right text-xl font-bold uppercase before:absolute before:top-1/2 before:left-0 before:h-0.5 before:w-3 before:-translate-y-1/2 before:content-['']"
   >
     {blok.headline}
   </h2>
-  <ul>
+  <ul class="grid gap-4 md:grid-cols-2 md:gap-16">
     {
       posts.map((post: any) => (
         <li class="group relative">

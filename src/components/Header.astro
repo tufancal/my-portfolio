@@ -6,11 +6,11 @@ import Logo from "@/src/icons/logo.svg";
 const { blok } = Astro.props;
 ---
 
-<header {...storyblokEditable(blok)}>
+<header {...storyblokEditable(blok)} class="mb-4 md:mb-8">
   <nav id="main-navigation" class="bg-gallery bg-opacity-95">
-    <div class="container mx-auto px-3 py-4 sm:px-4 md:px-6">
+    <div class="container mx-auto max-w-5xl px-3 py-4 sm:px-4 md:px-6">
       <div class="flex items-center justify-between">
-        <a href="/" class="flex flex-shrink-0 items-center space-x-2">
+        <a href="/" class="flex shrink-0 items-center space-x-2">
           <Logo class="h-10 w-32 sm:h-12 sm:w-48" />
         </a>
 
@@ -43,7 +43,7 @@ const { blok } = Astro.props;
       id="mobile-menu"
       class="fixed inset-0 z-20 translate-x-full transform transition-transform duration-300 ease-in-out lg:hidden"
     >
-      <div class="bg-gallery flex h-dvh px-3 shadow-lg sm:px-4">
+      <div class="bg-gallery flex h-dvh px-4 shadow-lg">
         <div
           class="border-mine-shaft flex h-[calc(100%-72px)] w-full flex-col justify-center space-y-10"
         >
