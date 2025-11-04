@@ -24,7 +24,7 @@ const headlineAnchorIds =
       const anchorMark = heading.content?.[0]?.marks?.find(
         (mark) => mark.type === "anchor",
       );
-      return anchorMark?.attrs?.id;
+      return { id: anchorMark?.attrs?.id, text: heading.content?.[0]?.text };
     })
     .filter((anchorId) => anchorId !== null && anchorId !== undefined) || [];
 
@@ -34,13 +34,15 @@ const image = generateResponsiveImageData(blok.image.filename as string, {
   sizes:
     "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
 });
+
+console.log(headlineAnchorIds);
 ---
 
 <article
-  class="container mx-auto px-4"
+  class="container mx-auto max-w-3xl px-4"
   {...storyblokEditable(blok as SbBlokData)}
 >
-  <ul class="mb-4 space-y-2">
+  <ul class="mx-auto mb-4 max-w-max space-y-2">
     <li
       class="font-secondary text-mine-shaft border-mine-shaft border-b pb-2 text-center text-sm italic"
     >
@@ -55,5 +57,41 @@ const image = generateResponsiveImageData(blok.image.filename as string, {
   <h1 class="font-secondary text-mine-shaft mb-8 text-center text-xl font-bold">
     {blok.headline}
   </h1>
-  <Image src={image.src} alt={blok.image.alt} inferSize />
+  <Image class="mb-8" src={image.src} alt={blok.image.alt} inferSize />
+  <div class="mb-8 font-bold">
+    <Fragment
+      set:html={renderRichText(blok.introText as StoryblokRichTextNode)}
+    />
+  </div>
+  <div class="prose xl:prose-lg [&:has(h2)_a]:no-underline">
+    <Fragment
+      set:html={renderRichText(blok.copy as StoryblokRichTextNode, {
+        optimizeImages: {
+          width: 1024,
+          height: 576,
+          loading: "lazy",
+          filters: {
+            format: "webp",
+            quality: 85,
+          },
+          srcset: [320, 640, 768, 1024, 1280],
+          sizes: [
+            "(max-width: 640px) 100vw",
+            "(max-width: 1024px) 80vw",
+            "1024px",
+          ],
+        },
+      })}
+    />
+  </div>
+
+  <ul>
+    {
+      headlineAnchorIds.map((anchor) => (
+        <li>
+          <a href={`#${anchor.id}`}>{anchor.text}</a>
+        </li>
+      ))
+    }
+  </ul>
 </article>
