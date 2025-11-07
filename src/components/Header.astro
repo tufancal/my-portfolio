@@ -7,110 +7,52 @@ const { blok } = Astro.props;
 ---
 
 <header {...storyblokEditable(blok)} class="mb-4 md:mb-8">
-  <nav id="main-navigation" class="bg-gallery bg-opacity-95">
-    <div class="container mx-auto max-w-5xl px-3 py-4 sm:px-4 md:px-6">
-      <div class="flex items-center justify-between">
-        <a href="/" class="flex shrink-0 items-center space-x-2">
-          <Logo class="h-10 w-32 sm:h-12 sm:w-48" />
-        </a>
-
-        <!-- Desktop Menu -->
-        <div class="hidden items-center space-x-10 lg:flex">
-          {
-            blok.navLinks?.map((link: any) => (
-              <StoryblokComponent blok={link} />
-            ))
-          }
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <div class="z-30 lg:hidden">
-          <button
-            id="menu-toggle-button"
-            class="text-mine-shaft font-secondary p-1 font-bold uppercase transition-colors duration-200 focus:outline-none sm:p-2"
-            aria-label="Open menu"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
+  <nav class="navbar bg-base-100 container mx-auto shadow-sm">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            Menu
-          </button>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h8m-8 6h16"></path>
+          </svg>
         </div>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div
-      id="mobile-menu"
-      class="fixed inset-0 z-20 translate-x-full transform transition-transform duration-300 ease-in-out lg:hidden"
-    >
-      <div class="bg-gallery flex h-dvh px-4 shadow-lg">
-        <div
-          class="border-mine-shaft flex h-[calc(100%-72px)] w-full flex-col justify-center space-y-10"
+        <ul
+          tabindex="-1"
+          class="menu menu-sm dropdown-content bg-base-100 rounded-box z-20 mt-3 w-52 p-2 shadow"
         >
           {
             blok.navLinks?.map((link: any) => (
-              <StoryblokComponent blok={link} />
+              <li>
+                <StoryblokComponent blok={link} variant="secondary" />
+              </li>
             ))
           }
-        </div>
+        </ul>
       </div>
+      <a class="btn btn-ghost text-xl">Tufan Calisir</a>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        {
+          blok.navLinks?.map((link: any) => (
+            <li>
+              <StoryblokComponent blok={link} variant="secondary" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="navbar-end">
+      <a class="btn">Projekt <span class="hidden sm:inline">starten</span></a>
     </div>
   </nav>
 </header>
-
-<script>
-  const menuButton = document.getElementById("menu-toggle-button");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const mobileLinks = document.querySelectorAll(".mobile-menu-link");
-
-  function toggleMenu() {
-    if (!menuButton || !mobileMenu) return;
-
-    const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
-
-    menuButton.setAttribute("aria-expanded", String(!isExpanded));
-    menuButton.setAttribute(
-      "aria-label",
-      isExpanded ? "Open menu" : "Close menu",
-    );
-
-    menuButton.innerHTML = isExpanded ? "Menu" : "Close";
-
-    if (isExpanded) {
-      mobileMenu.classList.add("translate-x-full");
-      document.body.classList.remove("overflow-hidden");
-    } else {
-      mobileMenu.classList.remove("translate-x-full");
-      document.body.classList.add("overflow-hidden");
-    }
-  }
-
-  function closeMenu() {
-    if (!menuButton) return;
-    if (menuButton.getAttribute("aria-expanded") === "true") {
-      toggleMenu();
-    }
-    document.body.classList.remove("overflow-hidden");
-  }
-
-  if (menuButton) {
-    menuButton.addEventListener("click", toggleMenu);
-  }
-
-  mobileLinks.forEach((link) => {
-    link.addEventListener("click", closeMenu);
-  });
-
-  const mediaQuery = window.matchMedia("(min-width: 1024px)");
-
-  const handleMediaChange = (e: MediaQueryListEvent) => {
-    if (e.matches) {
-      closeMenu();
-    }
-  };
-  mediaQuery.addEventListener("change", handleMediaChange);
-
-  if (mediaQuery.matches) {
-    closeMenu();
-  }
-</script>

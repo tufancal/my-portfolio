@@ -10,7 +10,4 @@ const { blok } = Astro.props;
 const fontSize = blok.isSmall ? "text-sm lg:text-base" : "text-4xl lg:text-2xl";
 ---
 
-<a
-  class={`font-secondary text-mine-shaft ${fontSize} font-bold uppercase`}
-  href={blok.url.url}>{blok.text}</a
->
+<a class={`${fontSize}`} href={blok.url.url}>{blok.text}</a>
