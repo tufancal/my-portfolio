@@ -1,0 +1,74 @@
+---
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
+import { useStoryblokApi } from "@storyblok/astro";
+import type { BlogPostList } from "@/.storyblok/types/285719928053161/storyblok-components";
+import { formatDate } from "@/src/utils/date";
+import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
+import BlogPostCard from "@/src/components/molecules/BlogPostCard.astro";
+
+interface Props {
+  blok: BlogPostList;
+}
+
+const { blok } = Astro.props;
+
+const storyblokApi = useStoryblokApi();
+
+// Fetch blog posts
+const { data } = await storyblokApi.get("cdn/stories", {
+  version: import.meta.env.DEV ? "draft" : "published",
+  starts_with: "blog",
+  content_type: "blogPost",
+});
+
+// Transform stories into card data
+const posts = data.stories.slice(0, 2).map((story: any) => {
+  const image = generateResponsiveImageData(story.content.image.filename, {
+    breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
+    aspectRatio: 3 / 2,
+    sizes:
+      "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
+  });
+
+  return {
+    headline: story.content.headline,
+    date: formatDate(story.published_at),
+    introText: renderRichText(story.content.introText as StoryblokRichTextNode),
+    slug: story.full_slug,
+    image: image,
+    alt: story.content.image.alt,
+  };
+});
+---
+
+<section
+  {...storyblokEditable(blok as SbBlokData)}
+  class="container mx-auto mb-12 max-w-6xl px-4"
+>
+  <!-- Section heading with decorative line -->
+  <div class="divider divider-start text-xl font-bold uppercase mb-8">
+    {blok.headline}
+  </div>
+
+  <!-- Blog post grid -->
+  <div class="grid gap-6 md:grid-cols-2">
+    {
+      posts.map((post: any) => (
+        <BlogPostCard
+          headline={post.headline}
+          date={post.date}
+          introText={post.introText}
+          slug={post.slug}
+          image={post.image}
+          alt={post.alt}
+          linkText={blok.linkText}
+        />
+      ))
+    }
+  </div>
+</section>

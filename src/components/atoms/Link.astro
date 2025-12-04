@@ -1,0 +1,37 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { Link } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+interface Props {
+  blok: Link;
+  variant?: "primary" | "secondary" | "accent" | "ghost" | "link";
+  size?: "xs" | "sm" | "md" | "lg";
+}
+
+const { blok, variant = "primary", size = "md" } = Astro.props;
+
+// Build daisyUI button classes
+const buttonClasses = [
+  "btn",
+  `btn-${variant}`,
+  size !== "md" ? `btn-${size}` : "",
+].filter(Boolean).join(" ");
+
+// Determine link attributes
+const href = blok.url.linktype === "email"
+  ? `mailto:${blok.url.url}`
+  : blok.url.url;
+
+const target = blok.url.target || (blok.url.linktype === "email" ? "_self" : "_blank");
+const rel = target === "_blank" ? "noopener noreferrer" : undefined;
+---
+
+<a
+  {...storyblokEditable(blok as SbBlokData)}
+  href={href}
+  target={target}
+  rel={rel}
+  class={buttonClasses}
+>
+  {blok.text}
+</a>

@@ -1,0 +1,60 @@
+---
+import { formatDateTime } from "@/src/utils/date";
+
+interface Props {
+  headline: string;
+  date: string;
+  introText: string;
+  slug: string;
+  image: {
+    src: string;
+    srcset: string;
+    sizes: string;
+  };
+  alt: string;
+  linkText?: string;
+}
+
+const {
+  headline,
+  date,
+  introText,
+  slug,
+  image,
+  alt,
+  linkText = "Read more",
+} = Astro.props;
+---
+
+<a href={`/${slug}`} class="card bg-base-100 shadow-sm hover:shadow-md transition-all duration-300 group block no-underline">
+  <figure class="overflow-hidden">
+    <img
+      src={image.src}
+      srcset={image.srcset}
+      alt={alt}
+      sizes={image.sizes}
+      class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
+  <div class="card-body">
+    <h3 class="card-title text-base-content group-hover:text-primary transition-colors">
+      {headline}
+    </h3>
+    <time datetime={formatDateTime(date)} class="text-sm text-base-content/70 italic">
+      {date}
+    </time>
+    <div class="text-base-content/80 line-clamp-3">
+      <Fragment set:html={introText} />
+    </div>
+    <div class="card-actions justify-end mt-2">
+      <span class="text-primary font-semibold text-sm flex items-center gap-2">
+        {linkText}
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </span>
+    </div>
+  </div>
+</a>

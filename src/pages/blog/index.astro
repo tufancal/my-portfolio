@@ -1,17 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { useStoryblokApi } from "@storyblok/astro";
-import BlogPostGrid from "../../components/BlogPostGrid.astro";
-
-const storyblokApi = useStoryblokApi();
-const { data } = await storyblokApi.get("cdn/stories/blog", {
-  version: import.meta.env.DEV ? "draft" : "published",
-});
-
-const content = data.story.content;
-console.log(content);
+import BlogPostGrid from "../../components/organisms/BlogPostGrid.astro";
 ---
 
-<Layout seoPage={{ title: "Blog", description: "Blog" }}>
+<Layout seoPage={{ title: "Blog", description: "Explore our latest articles and insights" }}>
   <BlogPostGrid />
 </Layout>
