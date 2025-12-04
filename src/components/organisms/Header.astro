@@ -1,0 +1,74 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+
+const { blok } = Astro.props;
+---
+
+<header {...storyblokEditable(blok as SbBlokData)} class="mb-4 md:mb-8">
+  <div class="navbar bg-base-100 shadow-sm min-h-20">
+    <div class="container mx-auto px-4">
+      <div class="flex-1">
+        <a href="/" class="text-xl lg:text-2xl font-bold normal-case hover:text-primary transition-colors">
+          Tufan Calisir
+        </a>
+      </div>
+
+      <div class="flex-none">
+        <!-- Desktop menu -->
+        <ul class="menu menu-horizontal px-1 hidden lg:flex gap-2">
+          {
+            blok.navLinks?.map((link: any) => (
+              <li>
+                <StoryblokComponent blok={link} variant="secondary" />
+              </li>
+            ))
+          }
+        </ul>
+
+        <!-- Desktop CTA -->
+        <div class="hidden lg:block ml-4">
+          <a href="#contact" class="btn btn-primary">
+            Projekt starten
+          </a>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="dropdown dropdown-end lg:hidden">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </div>
+          <ul
+            tabindex="-1"
+            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow-lg"
+          >
+            {
+              blok.navLinks?.map((link: any) => (
+                <li>
+                  <StoryblokComponent blok={link} variant="secondary" />
+                </li>
+              ))
+            }
+            <li>
+              <a href="#contact" class="btn btn-primary btn-sm mt-2">
+                Projekt starten
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

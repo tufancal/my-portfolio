@@ -1,0 +1,64 @@
+---
+import {
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
+import { useStoryblokApi } from "@storyblok/astro";
+import { formatDate } from "@/src/utils/date";
+import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
+import BlogPostCard from "@/src/components/molecules/BlogPostCard.astro";
+
+const storyblokApi = useStoryblokApi();
+
+// Fetch all blog posts
+const { data } = await storyblokApi.get("cdn/stories", {
+  version: import.meta.env.DEV ? "draft" : "published",
+  starts_with: "blog",
+  content_type: "blogPost",
+});
+
+// Transform stories into card data
+const posts = data.stories.slice(0, 6).map((story: any) => {
+  const image = generateResponsiveImageData(story.content.image.filename, {
+    breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
+    aspectRatio: 3 / 2,
+    sizes:
+      "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
+  });
+
+  return {
+    headline: story.content.headline,
+    date: formatDate(story.published_at),
+    introText: renderRichText(story.content.introText as StoryblokRichTextNode),
+    slug: story.full_slug,
+    image: image,
+    alt: story.content.image.alt,
+  };
+});
+---
+
+<section class="container mx-auto px-4 py-8">
+  <!-- Page heading -->
+  <h1 class="text-4xl font-bold text-center text-base-content mb-4">
+    Blog Posts
+  </h1>
+  <p class="text-center text-base-content/70 mb-12">
+    Explore our latest articles and insights
+  </p>
+
+  <!-- Blog post grid -->
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      posts.map((post: any) => (
+        <BlogPostCard
+          headline={post.headline}
+          date={post.date}
+          introText={post.introText}
+          slug={post.slug}
+          image={post.image}
+          alt={post.alt}
+        />
+      ))
+    }
+  </div>
+</section>

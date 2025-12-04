@@ -1,0 +1,36 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { NavLink } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+interface Props {
+  blok: NavLink;
+  variant?: "primary" | "secondary";
+}
+
+const { blok, variant = "primary" } = Astro.props;
+
+// Determine link attributes
+const href = blok.url.linktype === "email"
+  ? `mailto:${blok.url.url}`
+  : blok.url.url;
+
+const target = blok.url.target || (blok.url.linktype === "email" ? "_self" : undefined);
+const rel = target === "_blank" ? "noopener noreferrer" : undefined;
+
+// Use daisyUI link component with responsive text sizing
+const sizeClasses = blok.isSmall
+  ? "text-sm lg:text-base"
+  : "text-base lg:text-lg";
+
+const linkClasses = `link link-hover ${sizeClasses}`;
+---
+
+<a
+  {...storyblokEditable(blok as SbBlokData)}
+  href={href}
+  target={target}
+  rel={rel}
+  class={linkClasses}
+>
+  {blok.text}
+</a>

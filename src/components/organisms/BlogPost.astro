@@ -6,9 +6,9 @@ import {
   type StoryblokRichTextNode,
 } from "@storyblok/astro";
 import type { BlogPost } from "@/.storyblok/types/285719928053161/storyblok-components";
-import { formatDate, formatDateTime } from "../utils/date";
+import { formatDate, formatDateTime } from "@/src/utils/date";
 import { Image } from "astro:assets";
-import { generateResponsiveImageData } from "../utils/optimizeImage";
+import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
 
 interface Props {
   blok: BlogPost;
@@ -17,6 +17,7 @@ interface Props {
 
 const { blok, publishedAt } = Astro.props;
 
+// Extract headline anchor IDs for table of contents
 const headlineAnchorIds =
   blok.copy.content
     ?.filter((item) => item.type === "heading")
@@ -28,42 +29,70 @@ const headlineAnchorIds =
     })
     .filter((anchorId) => anchorId !== null && anchorId !== undefined) || [];
 
+// Generate responsive image data
 const image = generateResponsiveImageData(blok.image.filename as string, {
   breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
   aspectRatio: 3 / 2,
   sizes:
     "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
 });
-
-console.log(headlineAnchorIds);
 ---
 
 <article
   class="container mx-auto max-w-3xl px-4"
   {...storyblokEditable(blok as SbBlokData)}
 >
-  <ul class="mx-auto mb-4 max-w-max space-y-2">
-    <li
-      class="font-secondary text-mine-shaft border-mine-shaft border-b pb-2 text-center text-sm italic"
-    >
+  <!-- Article metadata -->
+  <div class="flex flex-col items-center gap-2 mb-6">
+    <div class="badge badge-outline">
       <time datetime={formatDateTime(publishedAt)}>
         {formatDate(publishedAt)}
       </time>
-    </li>
-    <li class="font-secondary text-mine-shaft text-center text-sm italic">
+    </div>
+    <div class="badge badge-ghost">
       {blok.author}
-    </li>
-  </ul>
-  <h1 class="font-secondary text-mine-shaft mb-8 text-center text-xl font-bold">
+    </div>
+  </div>
+
+  <!-- Headline -->
+  <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-base-content mb-8">
     {blok.headline}
   </h1>
-  <Image class="mb-8" src={image.src} alt={blok.image.alt} inferSize />
-  <div class="mb-8 font-bold">
+
+  <!-- Hero image -->
+  <figure class="mb-8 rounded-lg overflow-hidden shadow-md">
+    <Image class="w-full" src={image.src} alt={blok.image.alt} inferSize />
+  </figure>
+
+  <!-- Intro text -->
+  <div class="text-lg font-semibold text-base-content mb-8 leading-relaxed">
     <Fragment
       set:html={renderRichText(blok.introText as StoryblokRichTextNode)}
     />
   </div>
-  <div class="prose xl:prose-lg [&:has(h2)_a]:no-underline">
+
+  <!-- Table of contents (if anchors exist) -->
+  {
+    headlineAnchorIds.length > 0 && (
+      <div class="card bg-base-200 mb-8">
+        <div class="card-body">
+          <h2 class="card-title text-base-content">Table of Contents</h2>
+          <ul class="menu menu-sm">
+            {headlineAnchorIds.map((anchor) => (
+              <li>
+                <a href={`#${anchor.id}`} class="link link-hover">
+                  {anchor.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+
+  <!-- Main content with typography -->
+  <div class="prose lg:prose-lg max-w-none prose-headings:text-base-content prose-p:text-base-content prose-a:text-primary prose-strong:text-base-content prose-code:text-base-content">
     <Fragment
       set:html={renderRichText(blok.copy as StoryblokRichTextNode, {
         optimizeImages: {
@@ -84,14 +113,4 @@ console.log(headlineAnchorIds);
       })}
     />
   </div>
-
-  <ul>
-    {
-      headlineAnchorIds.map((anchor) => (
-        <li>
-          <a href={`#${anchor.id}`}>{anchor.text}</a>
-        </li>
-      ))
-    }
-  </ul>
 </article>
