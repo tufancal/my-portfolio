@@ -4,7 +4,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-08-30T11:31:11.850Z",
-    "updated_at": "2025-10-26T20:13:36.672Z",
+    "updated_at": "2025-11-04T20:02:34.290Z",
     "id": 85458419103308,
     "schema": {
       "author": {
@@ -20,7 +20,7 @@
         "id": "ANWPl8wYTY2eIhAZPkn9dQ"
       },
       "category": {
-        "type": "option",
+        "type": "options",
         "pos": 1,
         "use_uuid": true,
         "source": "internal",
@@ -239,7 +239,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-07-13T21:42:13.179Z",
-    "updated_at": "2025-08-30T11:03:39.497Z",
+    "updated_at": "2025-12-06T21:41:27.811Z",
     "id": 68621652703152,
     "schema": {
       "text": {
@@ -258,6 +258,71 @@
         "allow_target_blank": true,
         "email_link_type": true,
         "translatable": true
+      },
+      "variant": {
+        "type": "option",
+        "pos": 2,
+        "required": true,
+        "options": [
+          {
+            "_uid": "db471873-cf75-4efa-a30b-9f0ff012d54c",
+            "name": "primary",
+            "value": "primary"
+          },
+          {
+            "_uid": "7b4504bf-adf6-4987-879f-a42884e50bb5",
+            "value": "secondary",
+            "name": "secondary"
+          },
+          {
+            "_uid": "a94ab9af-c1b3-4e8d-88dd-daf120d80528",
+            "value": "accent",
+            "name": "accent"
+          },
+          {
+            "_uid": "27a56ab9-25a6-4341-b6bb-3282adc6033c",
+            "value": "ghost",
+            "name": "ghost"
+          },
+          {
+            "_uid": "d34eda64-f6bd-4aee-b99c-c3ef57ffe1f7",
+            "value": "link",
+            "name": "link"
+          }
+        ],
+        "id": "2_gl3JVMRu6rzIWZRBagEQ",
+        "default_value": "primary",
+        "use_uuid": true
+      },
+      "size": {
+        "type": "option",
+        "pos": 3,
+        "required": true,
+        "options": [
+          {
+            "_uid": "63b5d97b-1371-4ee5-bf13-c5fde68f4538",
+            "name": "xs",
+            "value": "xs"
+          },
+          {
+            "_uid": "198113f4-55d0-4b90-b8da-40add08b5c92",
+            "value": "sm",
+            "name": "sm"
+          },
+          {
+            "_uid": "5e264539-de1c-40b3-b5b2-60436c748926",
+            "value": "md",
+            "name": "md"
+          },
+          {
+            "_uid": "9fe0fc25-9a0b-49a3-947e-121559bac438",
+            "value": "lg",
+            "name": "lg"
+          }
+        ],
+        "default_value": "md",
+        "id": "Y9m62_D0TGyCrtBbxCtQYQ",
+        "use_uuid": true
       }
     },
     "image": null,

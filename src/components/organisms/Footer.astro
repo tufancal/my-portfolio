@@ -17,81 +17,53 @@ const { data: socialMediaData } = await storyblokApi.get(
 
 const socialMedia = socialMediaData.story.content;
 const socialMediaLinks = socialMedia.body[0].links;
+
+// Sitemap navigation items
+const sitemapLinks = [
+  { text: "Home", href: "/" },
+  { text: "About", href: "/about" },
+  { text: "Blog", href: "/blog" },
+  { text: "Projekt Starten", href: "/projekt-starten" },
+];
 ---
 
 <footer
   {...storyblokEditable(blok as SbBlokData)}
-  class="footer bg-base-200 text-base-content py-8 md:py-10"
+  class="bg-base-200 text-base-content p-10"
 >
-  <div class="container mx-auto px-4">
-    <!-- Mobile: Centered Stack -->
-    <div class="flex flex-col lg:hidden gap-6 items-center text-center">
-      <p class="text-sm">
-        {blok.copyright}
-      </p>
-
-      <nav class="flex flex-wrap gap-4 justify-center">
-        {
-          blok.legalLinks?.map((link: any) => (
-            <StoryblokComponent blok={link} />
-          ))
-        }
-      </nav>
-
-      <nav class="flex flex-wrap gap-4 justify-center">
-        {
-          socialMediaLinks?.map((link: any) => (
-            <a
-              href={
-                link.url.linktype === "email"
-                  ? `mailto:${link.url.url}`
-                  : link.url.url
-              }
-              target={link.url.linktype === "email" ? "_self" : "_blank"}
-              rel="noopener noreferrer"
-              class="link link-hover text-sm font-semibold uppercase"
-            >
-              {link.text}
-            </a>
-          ))
-        }
-      </nav>
-    </div>
-
-    <!-- Desktop: Horizontal Distribution -->
-    <div class="hidden lg:flex lg:justify-between lg:items-center">
-      <div class="flex-shrink-0">
-        <p class="text-base">
-          {blok.copyright}
-        </p>
-      </div>
-
-      <nav class="flex gap-6">
-        {
-          blok.legalLinks?.map((link: any) => (
-            <StoryblokComponent blok={link} />
-          ))
-        }
-      </nav>
-
-      <nav class="flex gap-6">
-        {
-          socialMediaLinks?.map((link: any) => (
-            <a
-              href={
-                link.url.linktype === "email"
-                  ? `mailto:${link.url.url}`
-                  : link.url.url
-              }
-              target={link.url.linktype === "email" ? "_self" : "_blank"}
-              rel="noopener noreferrer"
-              class="link link-hover text-base font-semibold uppercase"
-            >
-              {link.text}
-            </a>
-          ))
-        }
-      </nav>
-    </div>
+  <div class="footer sm:footer-horizontal mx-auto max-w-3xl">
+    <nav>
+      <h6 class="footer-title">Sitemap</h6>
+      {
+        sitemapLinks.map((link) => (
+          <a href={link.href} class="link link-hover">
+            {link.text}
+          </a>
+        ))
+      }
+    </nav>
+    <nav>
+      <h6 class="footer-title">Legal</h6>
+      {blok.legalLinks?.map((link: any) => <StoryblokComponent blok={link} />)}
+    </nav>
+    <nav>
+      <h6 class="footer-title">Social</h6>
+      {
+        socialMediaLinks?.map((link: any) => (
+          <a
+            href={
+              link.url.linktype === "email"
+                ? `mailto:${link.url.url}`
+                : link.url.url
+            }
+            target={link.url.linktype === "email" ? "_self" : "_blank"}
+            rel="noopener noreferrer"
+            class="link link-hover"
+          >
+            {link.text}
+          </a>
+        ))
+      }
+    </nav>
   </div>
 </footer>

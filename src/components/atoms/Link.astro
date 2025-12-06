@@ -4,25 +4,26 @@ import type { Link } from "@/.storyblok/types/285719928053161/storyblok-componen
 
 interface Props {
   blok: Link;
-  variant?: "primary" | "secondary" | "accent" | "ghost" | "link";
-  size?: "xs" | "sm" | "md" | "lg";
 }
 
-const { blok, variant = "primary", size = "md" } = Astro.props;
+const { blok } = Astro.props;
 
-// Build daisyUI button classes
+const variant = blok.variant || "primary";
+const size = blok.size || "md";
+
 const buttonClasses = [
   "btn",
-  `btn-${variant}`,
-  size !== "md" ? `btn-${size}` : "",
-].filter(Boolean).join(" ");
+  variant ? `btn-${variant}` : "",
+  size && size !== "md" ? `btn-${size}` : "",
+]
+  .filter(Boolean)
+  .join(" ");
 
-// Determine link attributes
-const href = blok.url.linktype === "email"
-  ? `mailto:${blok.url.url}`
-  : blok.url.url;
+const href =
+  blok.url.linktype === "email" ? `mailto:${blok.url.url}` : blok.url.url;
 
-const target = blok.url.target || (blok.url.linktype === "email" ? "_self" : "_blank");
+const target =
+  blok.url.target || (blok.url.linktype === "email" ? "_self" : "_blank");
 const rel = target === "_blank" ? "noopener noreferrer" : undefined;
 ---
 
