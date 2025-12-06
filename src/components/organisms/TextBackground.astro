@@ -25,11 +25,11 @@ const textClasses = blok.isTitle
 
 <section
   {...storyblokEditable(blok as SbBlokData)}
-  class="container mx-auto mb-12 max-w-5xl px-4"
+  class="container mx-auto mb-12 max-w-3xl px-4"
 >
   <!-- Hero section with background -->
-  <div class="hero min-h-[250px] md:min-h-[300px] bg-base-200 rounded-box mb-8">
-    <div class="hero-content text-center py-12">
+  <div class="hero bg-base-200 rounded-box mb-8 min-h-[250px] md:min-h-[300px]">
+    <div class="hero-content py-12 text-center">
       <div class={`max-w-3xl text-base-content ${textClasses}`}>
         <Fragment set:html={content} />
       </div>
@@ -39,7 +39,7 @@ const textClasses = blok.isTitle
   <!-- Action blocks grid -->
   {
     blok.blocks && blok.blocks.length > 0 && (
-      <div class="flex flex-wrap gap-4 justify-center">
+      <div class="flex flex-wrap justify-center gap-4">
         {blok.blocks?.map((block) => (
           <div class="flex-shrink-0">
             <StoryblokComponent blok={block as SbBlokData} />

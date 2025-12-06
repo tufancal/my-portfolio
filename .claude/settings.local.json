@@ -3,7 +3,9 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(npm run build:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(npm run types:*)",
+      "WebFetch(domain:daisyui.com)"
     ],
     "deny": [],
     "ask": []
