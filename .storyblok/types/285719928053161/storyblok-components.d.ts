@@ -21,6 +21,32 @@ export interface BlogPostList {
   [k: string]: unknown;
 }
 
+export interface CollapsibleItem {
+  title?: string;
+  description?: string;
+  component: "collapsibleItem";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface FeatureItem {
+  number?: string;
+  title?: string;
+  description?: string;
+  component: "featureItem";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface FeatureList {
+  title?: string;
+  description?: string;
+  features?: FeatureItem[];
+  component: "featureList";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface Footer {
   copyright?: string;
   legalLinks?: NavLink[];
@@ -32,6 +58,14 @@ export interface Footer {
 export interface Header {
   navLinks?: NavLink[];
   component: "header";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface HeroSection {
+  title?: string;
+  description?: string;
+  component: "heroSection";
   _uid: string;
   [k: string]: unknown;
 }
@@ -68,12 +102,19 @@ export interface Page {
   body?: (
     | BlogPost
     | BlogPostList
+    | CollapsibleItem
+    | FeatureItem
+    | FeatureList
     | Footer
     | Header
+    | HeroSection
     | Intro
     | Link
     | NavLink
     | Page
+    | PricingCard
+    | PricingCardFeature
+    | PricingGrid
     | SeoPage
     | SocialMedia
     | SocialMediaList
@@ -82,6 +123,36 @@ export interface Page {
   title?: string;
   description?: string;
   component: "page";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface PricingCard {
+  badge_text?: string;
+  title?: string;
+  subtitle?: string;
+  price?: string;
+  price_suffix?: string;
+  description?: string;
+  highlighted?: boolean;
+  features?: PricingCardFeature[];
+  component: "pricingCard";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface PricingCardFeature {
+  text?: string;
+  component: "pricingCardFeature";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface PricingGrid {
+  title?: string;
+  footer_text?: string;
+  pricing_cards?: PricingCard[];
+  component: "pricingGrid";
   _uid: string;
   [k: string]: unknown;
 }
@@ -117,3 +188,5 @@ export interface TextBackground {
   _uid: string;
   [k: string]: unknown;
 }
+
+export type ContentType = BlogPost | Page | SeoPage;

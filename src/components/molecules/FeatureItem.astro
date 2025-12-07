@@ -1,0 +1,23 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { FeatureItem } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+export interface Props {
+  blok: FeatureItem;
+}
+
+const { blok } = Astro.props;
+const { number, title, description } = blok;
+---
+
+<div {...storyblokEditable(blok as SbBlokData)}>
+  <h3 class="mb-2 flex items-start gap-2 text-xl font-bold">
+    {number && <span class="text-primary">{number}</span>}
+    {title && <span>{title}</span>}
+  </h3>
+  {description && (
+    <p class="text-base-content/80 pl-6">
+      {description}
+    </p>
+  )}
+</div>

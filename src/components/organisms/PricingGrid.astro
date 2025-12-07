@@ -1,0 +1,45 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import type { PricingGrid } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+export interface Props {
+  blok: PricingGrid;
+}
+
+const { blok } = Astro.props;
+const { title, pricing_cards = [], footer_text } = blok;
+---
+
+<section
+  class="bg-base-100 py-16 sm:py-24"
+  {...storyblokEditable(blok as SbBlokData)}
+>
+  <div class="container mx-auto max-w-6xl px-4">
+    {
+      title && (
+        <h2 class="mb-12 text-center text-3xl font-bold sm:text-4xl">
+          {title}
+        </h2>
+      )
+    }
+
+    {
+      pricing_cards.length > 0 && (
+        <div class="grid gap-8 md:grid-cols-3">
+          {pricing_cards.map((cardBlok) => (
+            <StoryblokComponent blok={cardBlok as SbBlokData} />
+          ))}
+        </div>
+      )
+    }
+
+    {
+      footer_text && (
+        <p class="text-base-content/60 mt-8 text-center text-sm">
+          {footer_text}
+        </p>
+      )
+    }
+  </div>
+</section>

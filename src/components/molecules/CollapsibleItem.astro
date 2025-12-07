@@ -1,0 +1,23 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { CollapsibleItem } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+export interface Props {
+  blok: CollapsibleItem;
+}
+
+const { blok } = Astro.props;
+const { title, description } = blok;
+---
+
+<div class="collapse-arrow bg-base-300 collapse" {...storyblokEditable(blok as SbBlokData)}>
+  <input type="checkbox" />
+  {title && <div class="collapse-title font-medium">{title}</div>}
+  {description && (
+    <div class="collapse-content">
+      <p class="text-base-content/80 text-sm">
+        {description}
+      </p>
+    </div>
+  )}
+</div>

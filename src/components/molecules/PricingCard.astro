@@ -1,0 +1,63 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { PricingCard } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+export interface Props {
+  blok: PricingCard;
+}
+
+const { blok } = Astro.props;
+const {
+  badge_text,
+  title,
+  subtitle,
+  price,
+  price_suffix = "netto",
+  features = [],
+  description,
+  highlighted = false,
+} = blok;
+---
+
+<div
+  class:list={[
+    "card bg-base-200 shadow-xl",
+    { "border-primary border-2": highlighted },
+  ]}
+  {...storyblokEditable(blok as SbBlokData)}
+>
+  <div class="card-body">
+    {badge_text && <div class="badge badge-primary mb-2">{badge_text}</div>}
+
+    {title && <h3 class="card-title mb-2 text-2xl">{title}</h3>}
+
+    {subtitle && (
+      <p class="text-base-content/70 mb-4 text-sm">
+        {subtitle}
+      </p>
+    )}
+
+    {price && (
+      <div class="mb-6 text-3xl font-bold">
+        {price} <span class="text-base font-normal">{price_suffix}</span>
+      </div>
+    )}
+
+    {features.length > 0 && (
+      <div class="mb-6 space-y-3">
+        {features.map((feature) => (
+          <div class="flex items-start gap-2">
+            <span class="text-primary">✓</span>
+            <span class="text-sm">{feature?.text}</span>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {description && (
+      <p class="text-base-content/70 text-sm italic">
+        {description}
+      </p>
+    )}
+  </div>
+</div>

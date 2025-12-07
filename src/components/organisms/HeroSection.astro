@@ -1,0 +1,27 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { HeroSection } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+export interface Props {
+  blok: HeroSection;
+}
+
+const { blok } = Astro.props;
+const { title, description } = blok;
+---
+
+<section
+  class="bg-base-100 py-16 sm:py-24"
+  {...storyblokEditable(blok as SbBlokData)}
+>
+  <div class="container mx-auto max-w-3xl px-4">
+    {title && <h1 class="mb-6 text-4xl font-bold sm:text-5xl">{title}</h1>}
+    {
+      description && (
+        <p class="text-base-content/80 text-lg leading-relaxed sm:text-xl">
+          {description}
+        </p>
+      )
+    }
+  </div>
+</section>
