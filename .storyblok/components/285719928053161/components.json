@@ -149,6 +149,52 @@
     "metadata": {}
   },
   {
+    "name": "collapsibleItemList",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-08T19:43:12.409Z",
+    "updated_at": "2025-12-08T19:44:11.187Z",
+    "id": 120968775314026,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "YUPz0_OoTseqMXFqJBSFjA"
+      },
+      "description": {
+        "type": "text",
+        "pos": 1,
+        "id": "3iPX3p8iSiKz4bO79Yj-dA"
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 2,
+        "restrict_type": "",
+        "restrict_components": true,
+        "id": "QQOxbNu_R5CtWGuNAtIWVA",
+        "component_whitelist": [
+          "collapsibleItem"
+        ],
+        "component_denylist": []
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "collapsibleItemList",
+    "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "featureItem",
     "display_name": null,
     "description": "",
@@ -193,7 +239,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-07T21:38:58.424Z",
-    "updated_at": "2025-12-07T21:39:25.193Z",
+    "updated_at": "2025-12-08T19:51:57.076Z",
     "id": 120643331791093,
     "schema": {
       "title": {
@@ -215,6 +261,17 @@
           "featureItem"
         ],
         "id": "dyDaRCp1SE2RXh8bhgiPrw"
+      },
+      "links": {
+        "type": "bloks",
+        "pos": 3,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "link"
+        ],
+        "component_denylist": [],
+        "id": "hoea-i_HQsORm-2srCHJJw"
       }
     },
     "image": null,
@@ -313,7 +370,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-07T21:37:08.101Z",
-    "updated_at": "2025-12-07T21:38:01.132Z",
+    "updated_at": "2025-12-08T19:51:36.458Z",
     "id": 120642879908083,
     "schema": {
       "title": {
@@ -325,6 +382,17 @@
         "type": "text",
         "pos": 1,
         "id": "bu9cl-b9QfSNbvv_fJ-Gsg"
+      },
+      "links": {
+        "type": "bloks",
+        "pos": 2,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "link"
+        ],
+        "component_denylist": [],
+        "id": "tGZUTWa-RRK64boBSvzErA"
       }
     },
     "image": null,
@@ -594,7 +662,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-07T21:40:01.977Z",
-    "updated_at": "2025-12-07T21:45:06.741Z",
+    "updated_at": "2025-12-08T19:52:16.982Z",
     "id": 120643592104183,
     "schema": {
       "badge_text": {
@@ -641,6 +709,14 @@
           "pricingCardFeature"
         ],
         "id": "Mfav9zDRT1i2TjQRmVhO1A"
+      },
+      "links": {
+        "type": "bloks",
+        "pos": 8,
+        "maximum": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "id": "9UBWuxKyTTS_1n3cwdstmA"
       }
     },
     "image": null,

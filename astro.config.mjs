@@ -30,6 +30,7 @@ export default defineConfig({
         pricingCardFeature: "components/molecules/PricingCardFeature",
         // contactForm: "components/organisms/ContactForm",
         collapsibleItem: "components/molecules/CollapsibleItem",
+        collapsibleItemList: "components/organisms/CollapsibleItemList",
       },
       apiOptions: {
         region: "eu",

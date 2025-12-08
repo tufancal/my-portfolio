@@ -1,0 +1,36 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import type { CollapsibleItemList } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+interface Props {
+  blok: CollapsibleItemList;
+}
+
+const { blok } = Astro.props;
+---
+
+<section
+  {...storyblokEditable(blok as SbBlokData)}
+  class="container mx-auto mb-12 max-w-3xl px-4"
+>
+  {blok.title && (
+    <h2 class="divider divider-start mb-8 text-xl font-bold uppercase">
+      {blok.title}
+    </h2>
+  )}
+
+  {blok.description && (
+    <p class="text-base-content mb-6">{blok.description}</p>
+  )}
+
+  {
+    blok.items && blok.items.length > 0 && (
+      <div class="flex flex-col gap-4">
+        {blok.items.map((item) => (
+          <StoryblokComponent blok={item as SbBlokData} />
+        ))}
+      </div>
+    )
+  }
+</section>

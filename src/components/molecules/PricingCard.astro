@@ -1,5 +1,6 @@
 ---
 import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import type { PricingCard } from "@/.storyblok/types/285719928053161/storyblok-components";
 
 export interface Props {
@@ -16,6 +17,7 @@ const {
   features = [],
   description,
   highlighted = false,
+  links = [],
 } = blok;
 ---
 
@@ -55,9 +57,17 @@ const {
     )}
 
     {description && (
-      <p class="text-base-content/70 text-sm italic">
+      <p class="text-base-content/70 mb-6 text-sm italic">
         {description}
       </p>
+    )}
+
+    {links.length > 0 && (
+      <div class="card-actions justify-end">
+        {links.map((linkBlok) => (
+          <StoryblokComponent blok={linkBlok as SbBlokData} />
+        ))}
+      </div>
     )}
   </div>
 </div>

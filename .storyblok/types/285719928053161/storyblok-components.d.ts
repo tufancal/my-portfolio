@@ -29,6 +29,15 @@ export interface CollapsibleItem {
   [k: string]: unknown;
 }
 
+export interface CollapsibleItemList {
+  title?: string;
+  description?: string;
+  items?: CollapsibleItem[];
+  component: "collapsibleItemList";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface FeatureItem {
   number?: string;
   title?: string;
@@ -42,6 +51,7 @@ export interface FeatureList {
   title?: string;
   description?: string;
   features?: FeatureItem[];
+  links?: Link[];
   component: "featureList";
   _uid: string;
   [k: string]: unknown;
@@ -65,6 +75,7 @@ export interface Header {
 export interface HeroSection {
   title?: string;
   description?: string;
+  links?: Link[];
   component: "heroSection";
   _uid: string;
   [k: string]: unknown;
@@ -103,6 +114,7 @@ export interface Page {
     | BlogPost
     | BlogPostList
     | CollapsibleItem
+    | CollapsibleItemList
     | FeatureItem
     | FeatureList
     | Footer
@@ -136,6 +148,7 @@ export interface PricingCard {
   description?: string;
   highlighted?: boolean;
   features?: PricingCardFeature[];
+  links?: unknown[];
   component: "pricingCard";
   _uid: string;
   [k: string]: unknown;

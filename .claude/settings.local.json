@@ -5,7 +5,8 @@
       "Bash(npm run build:*)",
       "Bash(tree:*)",
       "Bash(npm run types:*)",
-      "WebFetch(domain:daisyui.com)"
+      "WebFetch(domain:daisyui.com)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

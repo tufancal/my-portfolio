@@ -1,5 +1,6 @@
 ---
 import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import type { HeroSection } from "@/.storyblok/types/285719928053161/storyblok-components";
 
 export interface Props {
@@ -7,7 +8,7 @@ export interface Props {
 }
 
 const { blok } = Astro.props;
-const { title, description } = blok;
+const { title, description, links = [] } = blok;
 ---
 
 <section
@@ -18,9 +19,18 @@ const { title, description } = blok;
     {title && <h1 class="mb-6 text-4xl font-bold sm:text-5xl">{title}</h1>}
     {
       description && (
-        <p class="text-base-content/80 text-lg leading-relaxed sm:text-xl">
+        <p class="text-base-content/80 mb-8 text-lg leading-relaxed sm:text-xl">
           {description}
         </p>
+      )
+    }
+    {
+      links.length > 0 && (
+        <div class="flex flex-wrap gap-4">
+          {links.map((linkBlok) => (
+            <StoryblokComponent blok={linkBlok as SbBlokData} />
+          ))}
+        </div>
       )
     }
   </div>
