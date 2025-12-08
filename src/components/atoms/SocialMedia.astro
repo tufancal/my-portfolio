@@ -1,0 +1,24 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { SocialMedia } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+interface Props {
+  blok: SocialMedia;
+}
+
+const { blok } = Astro.props;
+
+const href = blok.url?.url || "#";
+const target = blok.url?.target || "_blank";
+const rel = target === "_blank" ? "noopener noreferrer" : undefined;
+---
+
+<a
+  {...storyblokEditable(blok as SbBlokData)}
+  href={href}
+  target={target}
+  rel={rel}
+  class="link link-hover text-base-content/70 hover:text-primary transition-colors"
+>
+  {blok.text}
+</a>

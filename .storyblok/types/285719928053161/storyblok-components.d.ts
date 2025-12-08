@@ -21,6 +21,25 @@ export interface BlogPostList {
   [k: string]: unknown;
 }
 
+export interface CareerItem {
+  period?: string;
+  title?: string;
+  company?: string;
+  description?: string;
+  component: "careerItem";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface CareerTimeline {
+  title: string;
+  description?: string;
+  items?: CareerItem[];
+  component: "careerTimeline";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface CollapsibleItem {
   title?: string;
   description?: string;
@@ -72,11 +91,39 @@ export interface Header {
   [k: string]: unknown;
 }
 
+export interface HeroImage {
+  title?: string;
+  description?: string;
+  image?: StoryblokAsset;
+  links?: Link[];
+  component: "heroImage";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface HeroSection {
   title?: string;
   description?: string;
   links?: Link[];
   component: "heroSection";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface InfoCard {
+  emoji?: string;
+  title?: string;
+  description?: string;
+  component: "infoCard";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface InfoCardList {
+  title?: string;
+  description?: string;
+  cards?: InfoCard[];
+  component: "infoCardList";
   _uid: string;
   [k: string]: unknown;
 }
@@ -113,13 +160,18 @@ export interface Page {
   body?: (
     | BlogPost
     | BlogPostList
+    | CareerItem
+    | CareerTimeline
     | CollapsibleItem
     | CollapsibleItemList
     | FeatureItem
     | FeatureList
     | Footer
     | Header
+    | HeroImage
     | HeroSection
+    | InfoCard
+    | InfoCardList
     | Intro
     | Link
     | NavLink
@@ -130,6 +182,8 @@ export interface Page {
     | SeoPage
     | SocialMedia
     | SocialMediaList
+    | TechStack
+    | TechStackItem
     | TextBackground
   )[];
   title?: string;
@@ -148,7 +202,7 @@ export interface PricingCard {
   description?: string;
   highlighted?: boolean;
   features?: PricingCardFeature[];
-  links?: unknown[];
+  links?: Link[];
   component: "pricingCard";
   _uid: string;
   [k: string]: unknown;
@@ -189,6 +243,23 @@ export interface SocialMedia {
 export interface SocialMediaList {
   links?: SocialMedia[];
   component: "socialMediaList";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface TechStack {
+  title?: string;
+  description?: string;
+  items?: TechStackItem[];
+  component: "techStack";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface TechStackItem {
+  name?: string;
+  icon?: string;
+  component: "techStackItem";
   _uid: string;
   [k: string]: unknown;
 }

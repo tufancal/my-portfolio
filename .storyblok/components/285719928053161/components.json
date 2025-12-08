@@ -114,6 +114,98 @@
     "metadata": {}
   },
   {
+    "name": "careerItem",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-08T21:36:28.438Z",
+    "updated_at": "2025-12-08T21:36:55.335Z",
+    "id": 120996611853209,
+    "schema": {
+      "period": {
+        "type": "text",
+        "pos": 0,
+        "id": "8X6-pbGbQrG-S3F3yzt4NQ"
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "id": "H67BOearRNaRZygG1_vIuw"
+      },
+      "company": {
+        "type": "text",
+        "pos": 2,
+        "id": "Fv3rHx4-SxuZLMaCGwE-7A"
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 3,
+        "id": "NMfwJwvnTPKYJEsQ2VB0dw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "careerItem",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "careerTimeline",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-08T21:37:11.020Z",
+    "updated_at": "2025-12-08T21:37:39.405Z",
+    "id": 120996786264986,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "WVUKiA51QpKPrzryVmJY4g"
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 1,
+        "id": "xeI29Sn-SWqcBbOToYKhQQ"
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 2,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "careerItem"
+        ],
+        "component_denylist": [],
+        "id": "vW2-Zi0NSd6pb_q4RtL81w"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "careerTimeline",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "collapsibleItem",
     "display_name": null,
     "description": "",
@@ -366,6 +458,60 @@
     "metadata": {}
   },
   {
+    "name": "heroImage",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-08T21:28:11.940Z",
+    "updated_at": "2025-12-08T21:29:05.627Z",
+    "id": 120994578193201,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "rANjen5qRHCpod1BqCLFsQ"
+      },
+      "description": {
+        "type": "text",
+        "pos": 1,
+        "id": "FTLuKGRXQ-aRH2JucbdjiQ"
+      },
+      "image": {
+        "type": "asset",
+        "pos": 2,
+        "filetypes": [
+          "images"
+        ],
+        "id": "N8SSsGGpQJmwKTiIF1aMaQ"
+      },
+      "links": {
+        "type": "bloks",
+        "pos": 3,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "link"
+        ],
+        "component_denylist": [],
+        "id": "f2_Oe6_oTD6jUwuzmujSSw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "heroImage",
+    "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "heroSection",
     "display_name": null,
     "description": "",
@@ -404,6 +550,92 @@
     "preset_id": null,
     "real_name": "heroSection",
     "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "infoCard",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-08T21:38:54.778Z",
+    "updated_at": "2025-12-08T21:39:07.406Z",
+    "id": 120997211261853,
+    "schema": {
+      "emoji": {
+        "type": "text",
+        "pos": 0,
+        "id": "cnlgO3_6R9-w-PaLXHNWDA"
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "id": "7t8iIyB_Rna6ELE8ybgtKQ"
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 2,
+        "id": "CCEcUmY-TFSnTEkB2acnPA"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "infoCard",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "infoCardList",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-08T21:39:14.344Z",
+    "updated_at": "2025-12-08T21:39:40.446Z",
+    "id": 120997291400094,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "NZzeBCcgSh6XnYjkcLQ9dg"
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 1,
+        "id": "1dJaM8plSfGTyJhGKyOtZA"
+      },
+      "cards": {
+        "type": "bloks",
+        "pos": 2,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "infoCard"
+        ],
+        "component_denylist": [],
+        "id": "AzgF3-wyTjSIOOyM-5vP7w"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "infoCardList",
+    "component_group_uuid": null,
     "color": null,
     "icon": null,
     "internal_tags_list": [],
@@ -662,7 +894,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-07T21:40:01.977Z",
-    "updated_at": "2025-12-08T19:52:16.982Z",
+    "updated_at": "2025-12-08T19:56:59.774Z",
     "id": 120643592104183,
     "schema": {
       "badge_text": {
@@ -716,7 +948,11 @@
         "maximum": 1,
         "restrict_type": "",
         "restrict_components": true,
-        "id": "9UBWuxKyTTS_1n3cwdstmA"
+        "id": "9UBWuxKyTTS_1n3cwdstmA",
+        "component_whitelist": [
+          "link"
+        ],
+        "component_denylist": []
       }
     },
     "image": null,
@@ -909,6 +1145,87 @@
     "preset_id": null,
     "real_name": "socialMediaList",
     "component_group_uuid": "bc035d97-ab41-4c66-9d55-bbcb6bedb182",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "techStack",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-08T21:38:22.438Z",
+    "updated_at": "2025-12-08T21:38:44.890Z",
+    "id": 120997078793116,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "MYD_Y7PDT62VxYzL2jnALA"
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 1,
+        "id": "c2xFqSaqSPyMmYs0XlzhzA"
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 2,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "techStackItem"
+        ],
+        "component_denylist": [],
+        "id": "FdG7wSppR1K3Lk7jKOo2tg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "techStack",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "techStackItem",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-08T21:38:06.969Z",
+    "updated_at": "2025-12-08T21:38:12.904Z",
+    "id": 120997015432091,
+    "schema": {
+      "name": {
+        "type": "text",
+        "pos": 0,
+        "id": "kXNMNqBfTT6renWDH1JyXw"
+      },
+      "icon": {
+        "type": "text",
+        "pos": 1,
+        "id": "KnIbaGKFR-aR5Kqo863WGA"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "techStackItem",
+    "component_group_uuid": null,
     "color": null,
     "icon": null,
     "internal_tags_list": [],

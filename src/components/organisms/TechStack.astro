@@ -1,0 +1,37 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import type { TechStack } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+export interface Props {
+  blok: TechStack;
+}
+
+const { blok } = Astro.props;
+const { title, description, items = [] } = blok;
+---
+
+<section
+  class="bg-base-100 py-16 sm:py-24"
+  {...storyblokEditable(blok as SbBlokData)}
+>
+  <div class="container mx-auto max-w-5xl px-4">
+    {title && <h2 class="mb-4 text-3xl font-bold sm:text-4xl">{title}</h2>}
+
+    {
+      description && (
+        <p class="text-base-content/80 mb-12 text-lg">{description}</p>
+      )
+    }
+
+    {
+      items.length > 0 && (
+        <div class="flex flex-wrap gap-3">
+          {items.map((itemBlok) => (
+            <StoryblokComponent blok={itemBlok as SbBlokData} />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>

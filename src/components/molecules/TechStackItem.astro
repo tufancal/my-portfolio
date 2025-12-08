@@ -1,0 +1,19 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { TechStackItem } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+export interface Props {
+  blok: TechStackItem;
+}
+
+const { blok } = Astro.props;
+const { name, icon } = blok;
+---
+
+<div
+  class="badge badge-lg badge-outline gap-2"
+  {...storyblokEditable(blok as SbBlokData)}
+>
+  {icon && <span>{icon}</span>}
+  {name && <span>{name}</span>}
+</div>
