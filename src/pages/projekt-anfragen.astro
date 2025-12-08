@@ -1,0 +1,24 @@
+---
+import { useStoryblokApi } from "@storyblok/astro";
+import Layout from "@/src/layouts/Layout.astro";
+import Page from "@/src/components/Page.astro";
+
+const storyblokApi = useStoryblokApi();
+
+const { data } = await storyblokApi.get("cdn/stories/projekt-anfragen", {
+  version: import.meta.env.DEV ? "draft" : "published",
+});
+
+const story = data.story;
+
+const seoPage = {
+  title: story.content.title || "Projekt Anfragen",
+  description:
+    story.content.description ||
+    "Webentwicklung aus Hamburg: Performant. Modern. Direkt vom Entwickler. Professionelle Websites mit Astro & Storyblok.",
+};
+---
+
+<Layout seoPage={seoPage}>
+  <Page blok={story.content} />
+</Layout>

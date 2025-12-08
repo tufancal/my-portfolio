@@ -5,7 +5,7 @@ import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 const { blok } = Astro.props;
 ---
 
-<header {...storyblokEditable(blok as SbBlokData)}>
+<header class="mb-4 sm:mb-8" {...storyblokEditable(blok as SbBlokData)}>
   <div class="navbar bg-base-100 mx-auto max-w-3xl shadow-sm">
     <div class="navbar-start">
       <div class="dropdown">
@@ -51,7 +51,9 @@ const { blok } = Astro.props;
       </ul>
     </div>
     <div class="navbar-end">
-      <a href="/projekt-starten" class="btn btn-primary">Projekt Starten</a>
+      <a href="/projekt-starten" class="btn btn-primary btn-xs sm:btn-md"
+        >Projekt Starten</a
+      >
     </div>
   </div>
 </header>

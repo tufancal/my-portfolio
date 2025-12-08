@@ -1,0 +1,16 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { PricingCardFeature } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+export interface Props {
+  blok: PricingCardFeature;
+}
+
+const { blok } = Astro.props;
+const { text } = blok;
+---
+
+<div class="flex items-start gap-2" {...storyblokEditable(blok as SbBlokData)}>
+  <span class="text-primary">✓</span>
+  <span class="text-sm">{text}</span>
+</div>
