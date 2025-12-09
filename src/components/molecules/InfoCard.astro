@@ -1,0 +1,19 @@
+---
+import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import type { InfoCard } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+export interface Props {
+  blok: InfoCard;
+}
+
+const { blok } = Astro.props;
+const { emoji, title, description } = blok;
+---
+
+<div class="card bg-base-200 shadow-xl" {...storyblokEditable(blok as SbBlokData)}>
+  <div class="card-body items-center text-center">
+    {emoji && <div class="mb-4 text-5xl">{emoji}</div>}
+    {title && <h3 class="card-title mb-2">{title}</h3>}
+    {description && <p class="text-base-content/70">{description}</p>}
+  </div>
+</div>

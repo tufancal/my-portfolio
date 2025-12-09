@@ -7,7 +7,6 @@ const storyblokApi = useStoryblokApi();
 
 const { blok } = Astro.props;
 
-// Get global social media data
 const { data: socialMediaData } = await storyblokApi.get(
   "cdn/stories/global/social-media",
   {
@@ -18,7 +17,6 @@ const { data: socialMediaData } = await storyblokApi.get(
 const socialMedia = socialMediaData.story.content;
 const socialMediaLinks = socialMedia.body[0].links;
 
-// Sitemap navigation items
 const sitemapLinks = [
   { text: "Home", href: "/" },
   { text: "About", href: "/about" },
