@@ -2,13 +2,21 @@
 import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import type { HeroImage } from "@/.storyblok/types/285719928053161/storyblok-components";
-
+import { Image } from "astro:assets";
+import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
 export interface Props {
   blok: HeroImage;
 }
 
 const { blok } = Astro.props;
 const { title, description, image, links = [] } = blok;
+
+const imageData = generateResponsiveImageData(image?.filename || "", {
+  breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
+  aspectRatio: 3 / 2,
+  sizes:
+    "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
+});
 ---
 
 <section
@@ -20,15 +28,23 @@ const { title, description, image, links = [] } = blok;
       <div class="hero-content flex-col gap-8 lg:flex-row-reverse">
         {
           image?.filename && (
-            <img
-              src={image.filename}
+            <Image
+              src={imageData.src}
+              fetchpriority="high"
               alt={image.alt || title || "Hero image"}
               class="max-w-sm rounded-lg shadow-2xl"
+              inferSize
+              loading="eager"
+              decoding="sync"
             />
           )
         }
         <div>
-          {title && <h1 class="mb-6 text-4xl font-bold sm:text-5xl">{title}</h1>}
+          {
+            title && (
+              <h1 class="mb-6 text-4xl font-bold sm:text-5xl">{title}</h1>
+            )
+          }
           {
             description && (
               <p class="text-base-content/80 mb-8 text-lg leading-relaxed sm:text-xl">
