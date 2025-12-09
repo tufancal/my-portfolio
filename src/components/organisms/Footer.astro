@@ -31,21 +31,21 @@ const sitemapLinks = [
 >
   <div class="footer sm:footer-horizontal mx-auto max-w-3xl">
     <nav>
-      <h6 class="footer-title">Sitemap</h6>
+      <h2 class="footer-title">Sitemap</h2>
       {
         sitemapLinks.map((link) => (
-          <a href={link.href} class="link link-hover">
+          <a href={link.href} class="link link-hover lg:text-base">
             {link.text}
           </a>
         ))
       }
     </nav>
     <nav>
-      <h6 class="footer-title">Legal</h6>
+      <h2 class="footer-title">Legal</h2>
       {blok.legalLinks?.map((link: any) => <StoryblokComponent blok={link} />)}
     </nav>
     <nav>
-      <h6 class="footer-title">Social</h6>
+      <h2 class="footer-title">Social</h2>
       {
         socialMediaLinks?.map((link: any) => (
           <a
@@ -56,7 +56,7 @@ const sitemapLinks = [
             }
             target={link.url.linktype === "email" ? "_self" : "_blank"}
             rel="noopener noreferrer"
-            class="link link-hover"
+            class="link link-hover lg:text-base"
           >
             {link.text}
           </a>
