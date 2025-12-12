@@ -42,6 +42,7 @@ const posts = data.stories.slice(0, 2).map((story: any) => {
     slug: story.full_slug,
     image: image,
     alt: story.content.image.alt,
+    category: story.content.category,
   };
 });
 ---
@@ -67,6 +68,7 @@ const posts = data.stories.slice(0, 2).map((story: any) => {
           image={post.image}
           alt={post.alt}
           linkText={blok.linkText}
+          category={post.category}
         />
       ))
     }

@@ -2,6 +2,7 @@
 import { formatDateTime } from "@/src/utils/date";
 import { Image } from "astro:assets";
 import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
+import { getBlogCategory } from "@/src/utils/storyblok";
 
 interface Props {
   headline: string;
@@ -10,11 +11,10 @@ interface Props {
   slug: string;
   image: {
     src: string;
-    srcset: string;
-    sizes: string;
   };
   alt: string;
   linkText?: string;
+  category: string[];
 }
 
 const {
@@ -25,6 +25,7 @@ const {
   image,
   alt,
   linkText = "Read more",
+  category,
 } = Astro.props;
 
 const imageData = generateResponsiveImageData(image.src, {
@@ -33,6 +34,12 @@ const imageData = generateResponsiveImageData(image.src, {
   sizes:
     "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
 });
+
+const categories = await Promise.all(
+  category?.map((category: string) =>
+    getBlogCategory(category, import.meta.env.DEV ? "draft" : "published"),
+  ),
+);
 ---
 
 <a
@@ -48,6 +55,16 @@ const imageData = generateResponsiveImageData(image.src, {
     decoding="async"
   />
   <div class="card-body">
+    <ul class="flex flex-wrap gap-2">
+      {
+        categories.map((category: any) => (
+          <li class={`badge badge-${category?.color}`}>
+            {category?.name}
+            {category?.icon}
+          </li>
+        ))
+      }
+    </ul>
     <h2
       class="card-title text-base-content group-hover:text-primary transition-colors"
     >
