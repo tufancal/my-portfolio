@@ -13,7 +13,7 @@ const href =
   blok.url.linktype === "email"
     ? `mailto:${blok.url.url}`
     : blok.url.linktype === "story"
-      ? blok.url.cached_url == "home"
+      ? blok.url.cached_url === "home"
         ? "/"
         : `/${blok.url.cached_url}`
       : blok.url.url;
