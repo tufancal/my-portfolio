@@ -22,14 +22,31 @@ export async function getStaticPaths() {
 
 const sbApi = useStoryblokApi();
 const { slug } = Astro.params;
-const { data } = await sbApi.get(`cdn/stories/blog/${slug}`, {
-  version: import.meta.env.DEV ? "draft" : "published",
-});
 
-const content = data.story.content;
-const publishedAt = data.story.published_at;
+let content, publishedAt;
+
+try {
+  const { data } = await sbApi.get(`cdn/stories/blog/${slug}`, {
+    version: import.meta.env.DEV ? "draft" : "published",
+  });
+
+  content = data.story.content;
+  publishedAt = data.story.published_at;
+} catch (error) {
+  console.error(`Error fetching blog post "${slug}":`, error);
+  return Astro.redirect("/blog");
+}
+
+// Use SEO tab if available, fallback to headline
+const seoTitle = content.seo?.title || content.headline;
+const seoDescription = content.seo?.description || content.headline;
 ---
 
-<Layout seoPage={{ title: "Blog", description: "Blog" }}>
+<Layout
+  seoPage={{
+    title: seoTitle,
+    description: seoDescription,
+  }}
+>
   <StoryblokComponent blok={content} publishedAt={publishedAt} />
 </Layout>

@@ -31,44 +31,59 @@ export async function getBlogCategories(
 
   const storyblokApi = useStoryblokApi();
 
-  // Fetch color and icon dimensions in parallel
-  const [{ data: colorData }, { data: iconData }] = await Promise.all([
-    storyblokApi.get("cdn/datasource_entries", {
-      datasource: "blog-categories",
-      dimension: "color",
-      version,
-    }),
-    storyblokApi.get("cdn/datasource_entries", {
-      datasource: "blog-categories",
-      dimension: "icon",
-      version,
-    }),
-  ]);
+  try {
+    // Fetch color and icon dimensions in parallel
+    const [colorResponse, iconResponse] = await Promise.allSettled([
+      storyblokApi.get("cdn/datasource_entries", {
+        datasource: "blog-categories",
+        dimension: "color",
+        version,
+      }),
+      storyblokApi.get("cdn/datasource_entries", {
+        datasource: "blog-categories",
+        dimension: "icon",
+        version,
+      }),
+    ]);
 
-  // Build a map of categories with combined dimension data
-  const categories = new Map<string, CategoryData>();
+    // Build a map of categories with combined dimension data
+    const categories = new Map<string, CategoryData>();
 
-  const colorEntries = colorData.datasource_entries as DatasourceEntry[];
-  const iconEntries = iconData.datasource_entries as DatasourceEntry[];
+    // Extract color entries or use empty array if failed
+    const colorEntries =
+      colorResponse.status === "fulfilled"
+        ? (colorResponse.value.data.datasource_entries as DatasourceEntry[])
+        : [];
 
-  // Combine entries by value
-  colorEntries.forEach((colorEntry) => {
-    const iconEntry = iconEntries.find(
-      (entry) => entry.value === colorEntry.value,
-    );
+    // Extract icon entries or use empty array if failed
+    const iconEntries =
+      iconResponse.status === "fulfilled"
+        ? (iconResponse.value.data.datasource_entries as DatasourceEntry[])
+        : [];
 
-    categories.set(colorEntry.value, {
-      value: colorEntry.value,
-      name: colorEntry.name,
-      color: colorEntry.dimension_value,
-      icon: iconEntry?.dimension_value || null,
+    // Combine entries by value
+    colorEntries.forEach((colorEntry) => {
+      const iconEntry = iconEntries.find(
+        (entry) => entry.value === colorEntry.value,
+      );
+
+      categories.set(colorEntry.value, {
+        value: colorEntry.value,
+        name: colorEntry.name,
+        color: colorEntry.dimension_value,
+        icon: iconEntry?.dimension_value || null,
+      });
     });
-  });
 
-  // Cache the results
-  cachedCategories = categories;
+    // Cache the results
+    cachedCategories = categories;
 
-  return categories;
+    return categories;
+  } catch (error) {
+    console.error("Error fetching blog categories:", error);
+    // Return empty map on error to allow build to continue
+    return new Map<string, CategoryData>();
+  }
 }
 
 /**
