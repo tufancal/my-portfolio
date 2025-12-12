@@ -34,7 +34,6 @@ try {
   publishedAt = data.story.published_at;
 } catch (error) {
   console.error(`Error fetching blog post "${slug}":`, error);
-  return Astro.redirect("/blog");
 }
 
 // Use SEO tab if available, fallback to headline
