@@ -4,17 +4,22 @@ import type { NavLink } from "@/.storyblok/types/285719928053161/storyblok-compo
 
 interface Props {
   blok: NavLink;
-  variant?: "primary" | "secondary";
 }
 
-const { blok, variant = "primary" } = Astro.props;
+const { blok } = Astro.props;
 
 // Determine link attributes
-const href = blok.url.linktype === "email"
-  ? `mailto:${blok.url.url}`
-  : blok.url.url;
+const href =
+  blok.url.linktype === "email"
+    ? `mailto:${blok.url.url}`
+    : blok.url.linktype === "story"
+      ? blok.url.cached_url == "home"
+        ? "/"
+        : `/${blok.url.cached_url}`
+      : blok.url.url;
 
-const target = blok.url.target || (blok.url.linktype === "email" ? "_self" : undefined);
+const target =
+  blok.url.target || (blok.url.linktype === "email" ? "_self" : undefined);
 const rel = target === "_blank" ? "noopener noreferrer" : undefined;
 
 // Use daisyUI link component with responsive text sizing

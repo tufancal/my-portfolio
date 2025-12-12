@@ -46,7 +46,7 @@ export default defineConfig({
       apiOptions: {
         region: "eu",
       },
-      bridge: true,
+      bridge: process.env.NODE_ENV !== "production",
     }),
   ],
   vite: {

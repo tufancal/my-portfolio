@@ -7,22 +7,22 @@ const storyblokApi = useStoryblokApi();
 
 const { blok } = Astro.props;
 
-const { data: socialMediaData } = await storyblokApi.get(
-  "cdn/stories/global/social-media",
-  {
+const [socialMediaData, headerData] = await Promise.all([
+  storyblokApi.get("cdn/stories/global/social-media", {
     version: import.meta.env.DEV ? "draft" : "published",
-  },
-);
+  }),
+  storyblokApi.get("cdn/stories/global/header", {
+    version: import.meta.env.DEV ? "draft" : "published",
+  }),
+]);
 
-const socialMedia = socialMediaData.story.content;
+const socialMedia = socialMediaData.data.story.content;
 const socialMediaLinks = socialMedia.body[0].links;
 
-const sitemapLinks = [
-  { text: "Home", href: "/" },
-  { text: "Über mich", href: "/ueber-mich" },
-  { text: "Blog", href: "/blog" },
-  { text: "Projekt Starten", href: "/projekt-starten" },
-];
+const header = headerData.data.story.content;
+// Combine navLinks and ctaButton into a single array
+const sitemapLinks =
+  header.body[0].navLinks.concat(header.body[0].ctaButton) || [];
 ---
 
 <footer
@@ -33,8 +33,17 @@ const sitemapLinks = [
     <nav>
       <h2 class="footer-title">Sitemap</h2>
       {
-        sitemapLinks.map((link) => (
-          <a href={link.href} class="link link-hover lg:text-base">
+        sitemapLinks.map((link: any) => (
+          <a
+            href={
+              link.url.linktype === "story"
+                ? link.url.cached_url === "home"
+                  ? "/"
+                  : `/${link.url.cached_url}`
+                : link.url.url
+            }
+            class="link link-hover lg:text-base"
+          >
             {link.text}
           </a>
         ))

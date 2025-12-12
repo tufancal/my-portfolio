@@ -62,13 +62,14 @@ const { seoPage } = Astro.props;
     <meta name="twitter:title" content={`${seoPage.title} | ${seo.siteName}`} />
     <meta name="twitter:description" content={seoPage.description} />
     <meta name="twitter:image" content={seo.ogImage.filename} />
-    <link rel="preconnect" href="https://app.storyblok.com" />
+    {import.meta.env.DEV && <link rel="preconnect" href="https://app.storyblok.com" />}
     <link
       rel="preload"
       href="/fonts/subset-Hind-SemiBold.woff2"
       as="font"
       type="font/woff2"
       crossorigin
+      fetchpriority="high"
     />
     <link
       rel="preload"
