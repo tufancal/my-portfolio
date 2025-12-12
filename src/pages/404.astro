@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { useStoryblokApi } from "@storyblok/astro";
+import { resolveStoryblokUrl } from "@/src/utils/storyblok";
 
 const storyblokApi = useStoryblokApi();
 
@@ -58,13 +59,7 @@ const navigationLinks = header.body[0].navLinks
           {
             navigationLinks.map((link: any) => (
               <a
-                href={
-                  link.url.linktype === "story"
-                    ? link.url.cached_url === "home"
-                      ? "/"
-                      : `/${link.url.cached_url}`
-                    : link.url.url
-                }
+                href={resolveStoryblokUrl(link.url)}
                 class="link link-hover text-base-content flex items-center gap-2"
               >
                 <svg

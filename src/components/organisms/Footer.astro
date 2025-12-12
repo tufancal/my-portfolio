@@ -2,6 +2,7 @@
 import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { useStoryblokApi } from "@storyblok/astro";
+import { resolveStoryblokUrl } from "@/src/utils/storyblok";
 
 const storyblokApi = useStoryblokApi();
 
@@ -34,16 +35,7 @@ const sitemapLinks =
       <h2 class="footer-title">Sitemap</h2>
       {
         sitemapLinks.map((link: any) => (
-          <a
-            href={
-              link.url.linktype === "story"
-                ? link.url.cached_url === "home"
-                  ? "/"
-                  : `/${link.url.cached_url}`
-                : link.url.url
-            }
-            class="link link-hover lg:text-base"
-          >
+          <a href={resolveStoryblokUrl(link.url)} class="link link-hover lg:text-base">
             {link.text}
           </a>
         ))
@@ -58,11 +50,7 @@ const sitemapLinks =
       {
         socialMediaLinks?.map((link: any) => (
           <a
-            href={
-              link.url.linktype === "email"
-                ? `mailto:${link.url.url}`
-                : link.url.url
-            }
+            href={resolveStoryblokUrl(link.url)}
             target={link.url.linktype === "email" ? "_self" : "_blank"}
             rel="noopener noreferrer"
             class="link link-hover lg:text-base"

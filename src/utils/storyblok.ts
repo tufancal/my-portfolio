@@ -96,3 +96,16 @@ export async function getBlogCategory(
   const categories = await getBlogCategories(version);
   return categories.get(categoryValue);
 }
+
+/**
+ * Resolves a Storyblok URL to a full URL.
+ */
+export function resolveStoryblokUrl(url: any): string {
+  if (url.linktype === "email") {
+    return `mailto:${url.url}`;
+  }
+  if (url.linktype === "story") {
+    return url.cached_url === "home" ? "/" : `/${url.cached_url}`;
+  }
+  return url.url;
+}

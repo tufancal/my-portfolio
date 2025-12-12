@@ -1,6 +1,7 @@
 ---
 import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
 import type { NavLink } from "@/.storyblok/types/285719928053161/storyblok-components";
+import { resolveStoryblokUrl } from "@/src/utils/storyblok";
 
 interface Props {
   blok: NavLink;
@@ -9,14 +10,7 @@ interface Props {
 const { blok } = Astro.props;
 
 // Determine link attributes
-const href =
-  blok.url.linktype === "email"
-    ? `mailto:${blok.url.url}`
-    : blok.url.linktype === "story"
-      ? blok.url.cached_url === "home"
-        ? "/"
-        : `/${blok.url.cached_url}`
-      : blok.url.url;
+const href = resolveStoryblokUrl(blok.url);
 
 const target =
   blok.url.target || (blok.url.linktype === "email" ? "_self" : undefined);
