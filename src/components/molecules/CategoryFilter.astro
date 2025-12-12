@@ -1,0 +1,128 @@
+---
+interface Category {
+  value: string;
+  name: string;
+  color: string | null;
+  icon: string | null;
+}
+
+interface Props {
+  categories: Category[];
+}
+
+const { categories } = Astro.props;
+---
+
+<div class="mb-8">
+  <div class="flex flex-col gap-3">
+    <span class="text-base-content/70 text-sm font-medium">Filter by category:</span>
+    <div class="join join-horizontal flex-wrap">
+      <button
+        data-category="all"
+        class="btn btn-primary join-item btn-sm sm:btn-md"
+        aria-pressed="true"
+      >
+        All Posts
+      </button>
+      {
+        categories.map((category) => (
+          <button
+            data-category={category.value}
+            class="btn btn-outline join-item btn-sm sm:btn-md"
+            aria-pressed="false"
+          >
+            {category.icon && <span set:html={category.icon} />}
+            {category.name}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  function initCategoryFilter() {
+    const filterButtons = document.querySelectorAll('[data-category]') as NodeListOf<HTMLButtonElement>;
+    const blogCards = document.querySelectorAll('[data-post-categories]');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const selectedCategory = button.getAttribute('data-category');
+
+        // Update active state for buttons with proper ARIA attributes
+        filterButtons.forEach((btn) => {
+          const isActive = btn === button;
+          btn.setAttribute('aria-pressed', isActive.toString());
+
+          if (isActive) {
+            btn.classList.remove('btn-outline');
+            btn.classList.add('btn-primary');
+          } else {
+            btn.classList.add('btn-outline');
+            btn.classList.remove('btn-primary');
+          }
+        });
+
+        // Filter blog posts
+        blogCards.forEach((card) => {
+          const cardCategories = card.getAttribute('data-post-categories')?.split(',') || [];
+
+          if (selectedCategory === 'all' || cardCategories.includes(selectedCategory)) {
+            (card as HTMLElement).style.display = '';
+            card.classList.remove('opacity-0');
+            card.classList.add('opacity-100');
+          } else {
+            (card as HTMLElement).style.display = 'none';
+            card.classList.add('opacity-0');
+          }
+        });
+
+        // Announce filter change to screen readers
+        const activeCount = Array.from(blogCards).filter(
+          (card) => (card as HTMLElement).style.display !== 'none'
+        ).length;
+
+        const announcement = `Filtered to ${selectedCategory === 'all' ? 'all posts' : button.textContent?.trim()}. Showing ${activeCount} ${activeCount === 1 ? 'post' : 'posts'}.`;
+        announceToScreenReader(announcement);
+      });
+    });
+  }
+
+  // Helper function to announce changes to screen readers
+  function announceToScreenReader(message: string) {
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.className = 'sr-only';
+    announcement.textContent = message;
+    document.body.appendChild(announcement);
+
+    setTimeout(() => {
+      document.body.removeChild(announcement);
+    }, 1000);
+  }
+
+  // Initialize on page load
+  initCategoryFilter();
+
+  // Re-initialize after Astro page transitions (if using View Transitions)
+  document.addEventListener('astro:page-load', initCategoryFilter);
+</script>
+
+<style>
+  [data-post-categories] {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>

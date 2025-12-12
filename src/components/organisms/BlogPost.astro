@@ -9,6 +9,7 @@ import type { BlogPost } from "@/.storyblok/types/285719928053161/storyblok-comp
 import { formatDate, formatDateTime } from "@/src/utils/date";
 import { Image } from "astro:assets";
 import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
+import { getBlogCategory } from "@/src/utils/storyblok";
 
 interface Props {
   blok: BlogPost;
@@ -36,6 +37,12 @@ const image = generateResponsiveImageData(blok.image.filename as string, {
   sizes:
     "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
 });
+
+const categories = await Promise.all(
+  blok.category?.map((category: string) =>
+    getBlogCategory(category, import.meta.env.DEV ? "draft" : "published"),
+  ),
+);
 ---
 
 <article
@@ -43,7 +50,7 @@ const image = generateResponsiveImageData(blok.image.filename as string, {
   {...storyblokEditable(blok as SbBlokData)}
 >
   <!-- Article metadata -->
-  <div class="flex flex-col items-center gap-2 mb-6">
+  <div class="mb-6 flex flex-col items-center gap-2">
     <div class="badge badge-outline">
       <time datetime={formatDateTime(publishedAt)}>
         {formatDate(publishedAt)}
@@ -52,20 +59,25 @@ const image = generateResponsiveImageData(blok.image.filename as string, {
     <div class="badge badge-ghost">
       {blok.author}
     </div>
+    <ul class="flex flex-wrap justify-center gap-2">
+      {
+        categories.map((category: any) => (
+          <li class={`badge badge-${category?.color}`}>
+            <a href={`/blog/kategorie/${category?.value}`}>
+              {category?.name}
+              {category?.icon}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
-
-  <!-- Headline -->
-  <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-base-content mb-8">
-    {blok.headline}
-  </h1>
-
-  <!-- Hero image -->
-  <figure class="mb-8 rounded-lg overflow-hidden shadow-md">
+  <figure class="mb-8 overflow-hidden rounded-lg shadow-md">
     <Image class="w-full" src={image.src} alt={blok.image.alt} inferSize />
   </figure>
 
   <!-- Intro text -->
-  <div class="text-lg font-semibold text-base-content mb-8 leading-relaxed">
+  <div class="text-base-content mb-8 text-lg leading-relaxed font-semibold">
     <Fragment
       set:html={renderRichText(blok.introText as StoryblokRichTextNode)}
     />
@@ -92,7 +104,9 @@ const image = generateResponsiveImageData(blok.image.filename as string, {
   }
 
   <!-- Main content with typography -->
-  <div class="prose lg:prose-lg max-w-none prose-headings:text-base-content prose-p:text-base-content prose-a:text-primary prose-strong:text-base-content prose-code:text-base-content">
+  <div
+    class="prose lg:prose-lg prose-headings:text-base-content prose-p:text-base-content prose-a:text-primary prose-strong:text-base-content prose-code:text-base-content max-w-none"
+  >
     <Fragment
       set:html={renderRichText(blok.copy as StoryblokRichTextNode, {
         optimizeImages: {

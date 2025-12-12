@@ -1,12 +1,11 @@
 ---
-import {
-  renderRichText,
-  type StoryblokRichTextNode,
-} from "@storyblok/astro";
+import { renderRichText, type StoryblokRichTextNode } from "@storyblok/astro";
 import { useStoryblokApi } from "@storyblok/astro";
 import { formatDate } from "@/src/utils/date";
 import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
+import { getBlogCategories } from "@/src/utils/storyblok";
 import BlogPostCard from "@/src/components/molecules/BlogPostCard.astro";
+import CategoryFilter from "@/src/components/molecules/CategoryFilter.astro";
 
 const storyblokApi = useStoryblokApi();
 
@@ -16,6 +15,12 @@ const { data } = await storyblokApi.get("cdn/stories", {
   starts_with: "blog",
   content_type: "blogPost",
 });
+
+// Fetch all categories for the filter
+const categoriesMap = await getBlogCategories(
+  import.meta.env.DEV ? "draft" : "published"
+);
+const categories = Array.from(categoriesMap.values());
 
 // Transform stories into card data
 const posts = data.stories.slice(0, 6).map((story: any) => {
@@ -33,31 +38,38 @@ const posts = data.stories.slice(0, 6).map((story: any) => {
     slug: story.full_slug,
     image: image,
     alt: story.content.image.alt,
+    category: story.content.category,
   };
 });
 ---
 
 <section class="container mx-auto px-4 py-8">
   <!-- Page heading -->
-  <h1 class="text-4xl font-bold text-center text-base-content mb-4">
+  <h1 class="text-base-content mb-4 text-center text-4xl font-bold">
     Blog Posts
   </h1>
-  <p class="text-center text-base-content/70 mb-12">
+  <p class="text-base-content/70 mb-12 text-center">
     Explore our latest articles and insights
   </p>
+
+  <!-- Category filter -->
+  <CategoryFilter categories={categories} />
 
   <!-- Blog post grid -->
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {
       posts.map((post: any) => (
-        <BlogPostCard
-          headline={post.headline}
-          date={post.date}
-          introText={post.introText}
-          slug={post.slug}
-          image={post.image}
-          alt={post.alt}
-        />
+        <div data-post-categories={post.category?.join(',')}>
+          <BlogPostCard
+            category={post.category}
+            headline={post.headline}
+            date={post.date}
+            introText={post.introText}
+            slug={post.slug}
+            image={post.image}
+            alt={post.alt}
+          />
+        </div>
       ))
     }
   </div>
