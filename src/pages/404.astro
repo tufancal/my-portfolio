@@ -1,0 +1,87 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { useStoryblokApi } from "@storyblok/astro";
+import { resolveStoryblokUrl } from "@/src/utils/storyblok";
+
+const storyblokApi = useStoryblokApi();
+
+const { data: headerData } = await storyblokApi.get(
+  "cdn/stories/global/header",
+  {
+    version: import.meta.env.DEV ? "draft" : "published",
+  },
+);
+
+const header = headerData.story.content;
+// Combine navLinks and ctaButton into a single array
+const navigationLinks = header.body[0].navLinks
+  ? header.body[0].ctaButton
+    ? header.body[0].navLinks.concat(header.body[0].ctaButton)
+    : header.body[0].navLinks
+  : [];
+---
+
+<Layout
+  seoPage={{
+    title: "404 - Seite nicht gefunden",
+    description: "Die angeforderte Seite konnte nicht gefunden werden.",
+  }}
+>
+  <section class="container mx-auto max-w-3xl px-4 py-16">
+    <div class="hero bg-base-200 rounded-box mb-8 min-h-[400px]">
+      <div class="hero-content text-center">
+        <div class="max-w-2xl">
+          <h1 class="text-base-content mb-4 text-6xl font-bold md:text-8xl">
+            404
+          </h1>
+          <h2 class="text-base-content mb-6 text-2xl font-semibold md:text-3xl">
+            Seite nicht gefunden
+          </h2>
+          <p class="text-base-content/80 mb-8 text-lg">
+            Die Seite, die Sie suchen, existiert leider nicht oder wurde
+            verschoben.
+          </p>
+
+          <div class="flex flex-col justify-center gap-4 sm:flex-row">
+            <a href="/" class="btn btn-primary"> Zur Startseite </a>
+            <a href="/blog" class="btn btn-secondary"> Zum Blog </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card bg-base-200 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title text-base-content mb-4">
+          Das könnte Sie interessieren:
+        </h3>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {
+            navigationLinks.map((link: any) => (
+              <a
+                href={resolveStoryblokUrl(link.url)}
+                class="link link-hover text-base-content flex items-center gap-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+                <span>{link.text}</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -52,9 +52,22 @@ const { blok } = Astro.props;
       </ul>
     </div>
     <div class="navbar-end">
-      <a href="/projekt-starten" class="btn btn-primary btn-xs sm:btn-md"
-        >Projekt Starten</a
-      >
+      {
+        blok.ctaButton && (
+          <a
+            href={
+              blok.ctaButton[0].url.linktype === "story"
+                ? blok.ctaButton[0].url.cached_url === "home"
+                  ? "/"
+                  : `/${blok.ctaButton[0].url.cached_url}`
+                : blok.ctaButton[0].url.url
+            }
+            class="btn btn-primary btn-xs sm:btn-md"
+          >
+            {blok.ctaButton[0].text}
+          </a>
+        )
+      }
     </div>
   </div>
 </header>

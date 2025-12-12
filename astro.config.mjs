@@ -1,3 +1,4 @@
+import sitemap from "@astrojs/sitemap";
 import { storyblok } from "@storyblok/astro";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
@@ -8,7 +9,9 @@ import mkcert from "vite-plugin-mkcert";
 const env = loadEnv("", process.cwd(), "STORYBLOK");
 
 export default defineConfig({
+  site: "https://tufancalisir.de",
   integrations: [
+    sitemap(),
     storyblok({
       output: "static",
       accessToken: env.STORYBLOK_TOKEN,
@@ -43,7 +46,7 @@ export default defineConfig({
       apiOptions: {
         region: "eu",
       },
-      bridge: true,
+      bridge: process.env.NODE_ENV !== "production",
     }),
   ],
   vite: {
