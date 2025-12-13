@@ -15,7 +15,7 @@
     "@storyblok/js": "^4.4.3",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.5",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^4.1.18",
     "vite": "^7.2.7"
   },
   "devDependencies": {
