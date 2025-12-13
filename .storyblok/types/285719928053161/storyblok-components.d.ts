@@ -86,6 +86,7 @@ export interface Footer {
 
 export interface Header {
   navLinks?: NavLink[];
+  ctaButton?: NavLink[];
   component: "header";
   _uid: string;
   [k: string]: unknown;
@@ -179,6 +180,7 @@ export interface Page {
     | PricingCard
     | PricingCardFeature
     | PricingGrid
+    | RichText
     | SeoPage
     | SocialMedia
     | SocialMediaList
@@ -220,6 +222,15 @@ export interface PricingGrid {
   footer_text?: string;
   pricing_cards?: PricingCard[];
   component: "pricingGrid";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface RichText {
+  content: StoryblokRichtext;
+  max_width?: "" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl";
+  background?: "" | "base-100" | "base-200" | "base-300";
+  component: "richText";
   _uid: string;
   [k: string]: unknown;
 }
