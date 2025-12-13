@@ -32,7 +32,9 @@ try {
   footer = footerData.data.story.content;
 } catch (error) {
   console.error("Error fetching global content from Storyblok:", error);
-  throw new Error("Failed to load global content. Please check your Storyblok connection.");
+  throw new Error(
+    "Failed to load global content. Please check your Storyblok connection.",
+  );
 }
 
 const canonicalUrl = Astro.url.origin + Astro.url.pathname;
@@ -40,7 +42,7 @@ const { seoPage } = Astro.props;
 ---
 
 <!doctype html>
-<html data-theme="nearanimal" lang="en">
+<html data-theme="nearanimal" lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -62,7 +64,12 @@ const { seoPage } = Astro.props;
     <meta name="twitter:title" content={`${seoPage.title} | ${seo.siteName}`} />
     <meta name="twitter:description" content={seoPage.description} />
     <meta name="twitter:image" content={seo.ogImage.filename} />
-    {import.meta.env.DEV && <link rel="preconnect" href="https://app.storyblok.com" />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {
+      import.meta.env.DEV && (
+        <link rel="preconnect" href="https://app.storyblok.com" />
+      )
+    }
     <link
       rel="preload"
       href="/fonts/subset-Hind-SemiBold.woff2"
