@@ -42,6 +42,7 @@ export default defineConfig({
         techStack: "components/organisms/TechStack",
         infoCard: "components/molecules/InfoCard",
         infoCardList: "components/organisms/InfoCardList",
+        richText: "components/organisms/RichText",
       },
       apiOptions: {
         region: "eu",
