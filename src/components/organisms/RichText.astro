@@ -1,0 +1,49 @@
+---
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
+import type { RichText } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+export interface Props {
+  blok: RichText;
+}
+
+const { blok } = Astro.props;
+const { content, max_width = "3xl", background = "base-100" } = blok;
+---
+
+<section
+  class={`bg-${background} py-8`}
+  {...storyblokEditable(blok as SbBlokData)}
+>
+  <div class={`container mx-auto max-w-${max_width} px-4`}>
+    {
+      content && (
+        <div class="prose lg:prose-lg prose-headings:text-base-content prose-p:text-base-content prose-a:text-primary hover:prose-a:text-primary-focus prose-strong:text-base-content prose-code:text-base-content prose-code:bg-base-200 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-base-200 prose-pre:text-base-content prose-blockquote:text-base-content prose-blockquote:border-primary prose-li:text-base-content prose-table:text-base-content prose-th:text-base-content prose-td:text-base-content max-w-none">
+          <Fragment
+            set:html={renderRichText(content as StoryblokRichTextNode, {
+              optimizeImages: {
+                width: 1024,
+                height: 576,
+                loading: "lazy",
+                filters: {
+                  format: "webp",
+                  quality: 85,
+                },
+                srcset: [320, 640, 768, 1024, 1280],
+                sizes: [
+                  "(max-width: 640px) 100vw",
+                  "(max-width: 1024px) 80vw",
+                  "1024px",
+                ],
+              },
+            })}
+          />
+        </div>
+      )
+    }
+  </div>
+</section>
