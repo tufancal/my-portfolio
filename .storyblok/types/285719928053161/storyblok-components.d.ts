@@ -57,6 +57,18 @@ export interface CollapsibleItemList {
   [k: string]: unknown;
 }
 
+export interface ContactForm {
+  id: string;
+  title: string;
+  description?: StoryblokRichtext;
+  submit_button_text?: string;
+  background?: "" | "base-100" | "base-200" | "base-300";
+  max_width?: "" | "2xl" | "3xl" | "4xl";
+  component: "contactForm";
+  _uid: string;
+  [k: string]: unknown;
+}
+
 export interface FeatureItem {
   number?: string;
   title?: string;
@@ -165,6 +177,7 @@ export interface Page {
     | CareerTimeline
     | CollapsibleItem
     | CollapsibleItemList
+    | ContactForm
     | FeatureItem
     | FeatureList
     | Footer

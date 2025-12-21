@@ -1,3 +1,4 @@
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { storyblok } from "@storyblok/astro";
 import tailwindcss from "@tailwindcss/vite";
@@ -11,6 +12,7 @@ const env = loadEnv("", process.cwd(), "STORYBLOK");
 export default defineConfig({
   site: "https://tufancalisir.de",
   integrations: [
+    react(),
     sitemap(),
     storyblok({
       output: "static",
@@ -32,7 +34,7 @@ export default defineConfig({
         pricingGrid: "components/organisms/PricingGrid",
         pricingCard: "components/molecules/PricingCard",
         pricingCardFeature: "components/molecules/PricingCardFeature",
-        // contactForm: "components/organisms/ContactForm",
+        contactForm: "components/organisms/ContactForm",
         collapsibleItem: "components/molecules/CollapsibleItem",
         collapsibleItemList: "components/organisms/CollapsibleItemList",
         socialMediaList: "components/organisms/SocialMediaList",
