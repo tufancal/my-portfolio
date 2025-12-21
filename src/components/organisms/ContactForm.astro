@@ -1,150 +1,59 @@
 ---
-import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
-import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
+import type { ContactForm } from "@/.storyblok/types/285719928053161/storyblok-components";
+import ContactFormReact from "./ContactFormReact";
 
 export interface Props {
-  blok: {
-    title?: string;
-    description?: string;
-    form_action?: string;
-    submit_button_text?: string;
-    collapsible_items?: SbBlokData[];
-    collapsible_title?: string;
-    background?: "base-100" | "base-200" | "base-300";
-    max_width?: "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl";
-    _uid?: string;
-  };
+  blok: ContactForm;
 }
 
 const { blok } = Astro.props;
 const {
+  id,
   title,
   description,
-  form_action = "/api/contact",
   submit_button_text = "Anfrage senden",
-  collapsible_items = [],
-  collapsible_title,
   background = "base-200",
   max_width = "2xl",
 } = blok;
+
+const renderedDescription = description
+  ? renderRichText(description as StoryblokRichTextNode)
+  : null;
 ---
 
-<section class={`bg-${background} py-16 sm:py-24`} {...storyblokEditable(blok as SbBlokData)}>
+<section
+  id={id}
+  class={`bg-${background} py-16 sm:py-24`}
+  {...storyblokEditable(blok as SbBlokData)}
+>
   <div class={`container mx-auto max-w-${max_width} px-4`}>
-    {title && (
-      <h2 class="mb-4 text-center text-3xl font-bold sm:text-4xl">
-        {title}
-      </h2>
-    )}
+    {
+      title && (
+        <h2 class="mb-4 text-center text-3xl font-bold sm:text-4xl">{title}</h2>
+      )
+    }
 
-    {description && (
-      <p class="text-base-content/80 mb-12 text-center">
-        {description}
-      </p>
-    )}
-
-    <form class="space-y-6" method="POST" action={form_action}>
-      <div class="grid gap-6 sm:grid-cols-2">
-        <!-- Name/Firma -->
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Name / Firma</span>
-          </label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Max Mustermann GmbH"
-            class="input input-bordered w-full"
-            required
-          />
-        </div>
-
-        <!-- E-Mail -->
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">E-Mail</span>
-          </label>
-          <input
-            type="email"
-            name="email"
-            placeholder="mail@example.com"
-            class="input input-bordered w-full"
-            required
-          />
-        </div>
-      </div>
-
-      <!-- Aktuelle Webseite -->
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">Aktuelle Webseite (falls vorhanden)</span>
-        </label>
-        <input
-          type="url"
-          name="website"
-          placeholder="https://www.example.com"
-          class="input input-bordered w-full"
+    {
+      renderedDescription && (
+        <div
+          class="text-base-content/80 prose prose-sm mx-auto mb-12 text-center"
+          set:html={renderedDescription}
         />
-      </div>
+      )
+    }
 
-      <!-- Welches Paket -->
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">Welches Paket passt am besten?</span>
-        </label>
-        <select name="package" class="select select-bordered w-full">
-          <option disabled selected>Bitte wählen...</option>
-          <option value="light">💡 Light Paket (1.100 €)</option>
-          <option value="premium">🚀 Premium Paket (2.200 €)</option>
-          <option value="business">🧭 Business Paket (3.900 €)</option>
-          <option value="consultation">Beratung nötig</option>
-        </select>
-      </div>
-
-      <!-- Projekt-Budget -->
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">Projekt-Budget</span>
-        </label>
-        <select name="budget" class="select select-bordered w-full">
-          <option disabled selected>Bitte wählen...</option>
-          <option value="under-1500">Unter 1.500 €</option>
-          <option value="2000-3000">2.000–3.000 €</option>
-          <option value="4000-plus">4.000 €+</option>
-          <option value="open">Offen</option>
-        </select>
-      </div>
-
-      <!-- Nachricht -->
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">Nachricht</span>
-        </label>
-        <textarea
-          name="message"
-          class="textarea textarea-bordered h-32"
-          placeholder="Erzählen Sie mir kurz von Ihrem Projekt..."
-          required></textarea>
-      </div>
-
-      <!-- Submit Button -->
-      <div class="form-control">
-        <button type="submit" class="btn btn-primary btn-lg w-full">
-          {submit_button_text}
-        </button>
-      </div>
-    </form>
-
-    <!-- Protection Clauses -->
-    {(collapsible_items.length > 0 || collapsible_title) && (
-      <div class="mt-16 space-y-4">
-        {collapsible_title && (
-          <h3 class="mb-4 text-xl font-bold">{collapsible_title}</h3>
-        )}
-        {collapsible_items.map((itemBlok) => (
-          <StoryblokComponent blok={itemBlok} />
-        ))}
-      </div>
-    )}
+    <ContactFormReact
+      client:visible
+      submitButtonText={submit_button_text}
+      serviceId={import.meta.env.EMAILJS_SERVICE_ID}
+      templateId={import.meta.env.EMAILJS_TEMPLATE_ID}
+      publicKey={import.meta.env.EMAILJS_PUBLIC_KEY}
+    />
   </div>
 </section>

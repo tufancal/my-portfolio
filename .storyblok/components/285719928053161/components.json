@@ -286,6 +286,101 @@
     "metadata": {}
   },
   {
+    "name": "contactForm",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-21T21:48:51.161Z",
+    "updated_at": "2025-12-21T21:56:15.677Z",
+    "id": 125600281244032,
+    "schema": {
+      "id": {
+        "type": "text",
+        "pos": 0,
+        "id": "y4OxhMWiSJKguv-UI4qohw",
+        "required": true
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
+        "required": true,
+        "id": "9e1FbGEuQ3SwXvI8XV8_nQ"
+      },
+      "description": {
+        "type": "richtext",
+        "pos": 2,
+        "id": "vSb0N3MwQL-FrVUBw7KRlw"
+      },
+      "submit_button_text": {
+        "type": "text",
+        "pos": 3,
+        "id": "8r8IRBEtQH-6oGvPf4AWyw"
+      },
+      "background": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "id": "ZbVa3-p6Tbaq7VJ7BFWsmw",
+        "options": [
+          {
+            "_uid": "3c78b433-af96-4aa6-9a83-920c6b161b7b",
+            "name": "base-100",
+            "value": "base-100"
+          },
+          {
+            "_uid": "12acf189-2224-421d-9821-96c69c729752",
+            "value": "base-200",
+            "name": "base-200"
+          },
+          {
+            "_uid": "3a5ea77b-f96b-4e6d-986f-f0b31487e601",
+            "value": "base-300",
+            "name": "base-300"
+          }
+        ],
+        "default_value": "base-200"
+      },
+      "max_width": {
+        "type": "option",
+        "pos": 5,
+        "id": "oNN2Hz1SSoS9xCOZ0wbfwQ",
+        "use_uuid": true,
+        "options": [
+          {
+            "_uid": "c4e49a48-eb95-4c17-bbbd-b16e360293c1",
+            "name": "2xl",
+            "value": "2xl"
+          },
+          {
+            "_uid": "497a89b1-1316-4f71-8e2c-b700af9dab1f",
+            "value": "3xl",
+            "name": "3xl"
+          },
+          {
+            "_uid": "1802ac5d-880b-4152-96aa-97f2745b0a57",
+            "value": "4xl",
+            "name": "4xl"
+          }
+        ],
+        "default_value": "2xl"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "contactForm",
+    "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "featureItem",
     "display_name": null,
     "description": "",
