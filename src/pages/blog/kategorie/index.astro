@@ -1,11 +1,12 @@
 ---
 import Layout from "@/src/layouts/Layout.astro";
+import BlogPostGrid from "@/src/components/organisms/BlogPostGrid.astro";
 import { extractSeoData } from "@/src/utils/storyblok";
 import { useStoryblokApi } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 const storyblokApi = useStoryblokApi();
-const { data } = await storyblokApi.get("cdn/stories/blog", {
+const { data } = await storyblokApi.get("cdn/stories/blog/kategorie", {
   version: import.meta.env.DEV ? "draft" : "published",
 });
 

@@ -6,7 +6,13 @@ import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
 import { getBlogCategories } from "@/src/utils/storyblok";
 import BlogPostCard from "@/src/components/molecules/BlogPostCard.astro";
 import CategoryFilter from "@/src/components/molecules/CategoryFilter.astro";
+import type { BlogPostGrid } from "@/.storyblok/types/285719928053161/storyblok-components";
 
+interface Props {
+  blok: BlogPostGrid;
+}
+
+const { blok } = Astro.props;
 const storyblokApi = useStoryblokApi();
 
 // Fetch all blog posts
@@ -18,7 +24,7 @@ const { data } = await storyblokApi.get("cdn/stories", {
 
 // Fetch all categories for the filter
 const categoriesMap = await getBlogCategories(
-  import.meta.env.DEV ? "draft" : "published"
+  import.meta.env.DEV ? "draft" : "published",
 );
 const categories = Array.from(categoriesMap.values());
 
@@ -44,32 +50,37 @@ const posts = data.stories.slice(0, 6).map((story: any) => {
 ---
 
 <section class="container mx-auto px-4 py-8">
-  <!-- Page heading -->
   <h1 class="text-base-content mb-4 text-center text-4xl font-bold">
-    Blog Posts
+    {blok?.title}
   </h1>
-  <p class="text-base-content/70 mb-12 text-center">
-    Explore our latest articles and insights
-  </p>
+  {
+    blok?.description && (
+      <div class="text-base-content/70 prose prose-lg mx-auto mb-12 text-center">
+        <Fragment
+          set:html={renderRichText(blok.description as StoryblokRichTextNode)}
+        />
+      </div>
+    )
+  }
 
-  <!-- Category filter -->
   <CategoryFilter categories={categories} />
 
-  <!-- Blog post grid -->
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {
       posts.map((post: any) => (
-        <div data-post-categories={post.category?.join(',')}>
-          <BlogPostCard
-            category={post.category}
-            headline={post.headline}
-            date={post.date}
-            introText={post.introText}
-            slug={post.slug}
-            image={post.image}
-            alt={post.alt}
-          />
-        </div>
+        <ul data-post-categories={post.category?.join(",")}>
+          <li>
+            <BlogPostCard
+              category={post.category}
+              headline={post.headline}
+              date={post.date}
+              introText={post.introText}
+              slug={post.slug}
+              image={post.image}
+              alt={post.alt}
+            />
+          </li>
+        </ul>
       ))
     }
   </div>

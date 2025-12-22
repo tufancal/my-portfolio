@@ -75,6 +75,81 @@
     "metadata": {}
   },
   {
+    "name": "blogPostGrid",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-22T22:24:08.844Z",
+    "updated_at": "2025-12-22T22:24:20.396Z",
+    "id": 125962849672764,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "PGfbTR3cTNyOL_SaW-DfZw"
+      },
+      "description": {
+        "type": "richtext",
+        "pos": 1,
+        "id": "UVyLZhc9RpG0ljfTpy75yg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "blogPostGrid",
+    "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "blogPostGridCategory",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-22T22:36:01.566Z",
+    "updated_at": "2025-12-22T22:36:30.931Z",
+    "id": 125965768982083,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "QaqEkKEfTfqYKGE4UilvlA"
+      },
+      "description": {
+        "type": "richtext",
+        "pos": 1,
+        "id": "81IJiwpSS0GYH-64NeIZPA"
+      },
+      "error_message": {
+        "type": "text",
+        "pos": 2,
+        "id": "TZaNFDoNSGqjdsIKskp01g"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "blogPostGridCategory",
+    "component_group_uuid": null,
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "blogPostList",
     "display_name": null,
     "description": "",

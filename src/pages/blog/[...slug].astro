@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { useStoryblokApi } from "@storyblok/astro";
+import { extractSeoData } from "@/src/utils/storyblok";
 
 export async function getStaticPaths() {
   const sbApi = useStoryblokApi();
@@ -36,16 +37,9 @@ try {
   console.error(`Error fetching blog post "${slug}":`, error);
 }
 
-// Use SEO tab if available, fallback to headline
-const seoTitle = content.seo?.title || content.headline;
-const seoDescription = content.seo?.description || content.headline;
+const seo = extractSeoData(content);
 ---
 
-<Layout
-  seoPage={{
-    title: seoTitle,
-    description: seoDescription,
-  }}
->
+<Layout seoPage={seo}>
   <StoryblokComponent blok={content} publishedAt={publishedAt} />
 </Layout>

@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { useStoryblokApi } from "@storyblok/astro";
+import { extractSeoData } from "@/src/utils/storyblok";
 
 const storyblokApi = useStoryblokApi();
 const { data } = await storyblokApi.get("cdn/stories/home", {
@@ -9,8 +10,9 @@ const { data } = await storyblokApi.get("cdn/stories/home", {
 });
 
 const content = data.story.content;
+const seo = extractSeoData(content);
 ---
 
-<Layout seoPage={{ title: "Home", description: "Home" }}>
+<Layout seoPage={seo}>
   <StoryblokComponent blok={content} />
 </Layout>

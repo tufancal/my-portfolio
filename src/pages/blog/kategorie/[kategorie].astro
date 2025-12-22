@@ -1,10 +1,9 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
 import { useStoryblokApi } from "@storyblok/astro";
-import { getBlogCategories } from "@/src/utils/storyblok";
-import { renderRichText, type StoryblokRichTextNode } from "@storyblok/astro";
-import { formatDate } from "@/src/utils/date";
-import BlogPostCard from "@/src/components/molecules/BlogPostCard.astro";
+import { getBlogCategories, extractSeoData } from "@/src/utils/storyblok";
+import BlogPostGridCategory from "@/src/components/organisms/BlogPostGridCategory.astro";
+import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 
 export async function getStaticPaths() {
   const categories = await getBlogCategories(
@@ -19,72 +18,35 @@ export async function getStaticPaths() {
 const sbApi = useStoryblokApi();
 const { kategorie } = Astro.params;
 
-// Fetch all blog posts
-const { data } = await sbApi.get("cdn/stories", {
-  version: import.meta.env.DEV ? "draft" : "published",
-  starts_with: "blog",
-  content_type: "blogPost",
-});
+// Try to fetch category page content from Storyblok
+let content, seo;
+try {
+  const { data } = await sbApi.get(`cdn/stories/blog/kategorie/${kategorie}`, {
+    version: import.meta.env.DEV ? "draft" : "published",
+  });
+  content = data.story.content;
+  seo = extractSeoData(content);
+} catch (error) {
+  // If no story exists, use default SEO
+  const categories = await getBlogCategories(
+    import.meta.env.DEV ? "draft" : "published",
+  );
+  const currentCategory = categories.get(kategorie);
 
-// Get category information
-const categories = await getBlogCategories(
-  import.meta.env.DEV ? "draft" : "published",
-);
-const currentCategory = categories.get(kategorie);
-
-// Filter posts by category
-const filteredPosts = data.stories
-  .filter((story: any) => story.content.category?.includes(kategorie))
-  .map((story: any) => ({
-    headline: story.content.headline,
-    date: formatDate(story.published_at),
-    introText: renderRichText(story.content.introText as StoryblokRichTextNode),
-    slug: story.full_slug,
-    image: {
-      src: story.content.image.filename,
-    },
-    alt: story.content.image.alt || "",
-    category: story.content.category,
-  }));
+  seo = {
+    title: `${currentCategory?.name || kategorie} - Blog`,
+    description: `Blog posts in der Kategorie ${currentCategory?.name || kategorie}`,
+  };
+  content = null;
+}
 ---
 
-<Layout
-  seoPage={{
-    title: `${currentCategory?.name || kategorie} - Blog`,
-    description: `Blog posts in the ${currentCategory?.name || kategorie} category`,
-  }}
->
-  <section class="container mx-auto px-4 py-8">
-    <!-- Page heading -->
-    <h1 class="text-base-content mb-4 text-center text-4xl font-bold">
-      {currentCategory?.name || kategorie}
-    </h1>
-    <p class="text-base-content/70 mb-12 text-center">
-      {filteredPosts.length}
-      {filteredPosts.length === 1 ? "post" : "posts"} in this category
-    </p>
-
-    <!-- Blog post grid -->
-    {
-      filteredPosts.length > 0 ? (
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredPosts.map((post: any) => (
-            <BlogPostCard
-              category={post.category}
-              headline={post.headline}
-              date={post.date}
-              introText={post.introText}
-              slug={post.slug}
-              image={post.image}
-              alt={post.alt}
-            />
-          ))}
-        </div>
-      ) : (
-        <p class="text-base-content/70 text-center">
-          No posts found in this category.
-        </p>
-      )
-    }
-  </section>
+<Layout seoPage={seo}>
+  {
+    content ? (
+      <StoryblokComponent blok={content} categoryValue={kategorie} />
+    ) : (
+      <BlogPostGridCategory categoryValue={kategorie} />
+    )
+  }
 </Layout>
