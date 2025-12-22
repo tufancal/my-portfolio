@@ -1,0 +1,101 @@
+---
+import { renderRichText, type StoryblokRichTextNode } from "@storyblok/astro";
+import { useStoryblokApi } from "@storyblok/astro";
+import { formatDate } from "@/src/utils/date";
+import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
+import { getBlogCategories } from "@/src/utils/storyblok";
+import BlogPostCard from "@/src/components/molecules/BlogPostCard.astro";
+import type { BlogPostGridCategory } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+interface Props {
+  blok?: BlogPostGridCategory;
+  categoryValue: string;
+}
+
+const { blok, categoryValue } = Astro.props;
+const storyblokApi = useStoryblokApi();
+
+// Fetch all blog posts
+const { data } = await storyblokApi.get("cdn/stories", {
+  version: import.meta.env.DEV ? "draft" : "published",
+  starts_with: "blog",
+  content_type: "blogPost",
+});
+
+// Get category information
+const categoriesMap = await getBlogCategories(
+  import.meta.env.DEV ? "draft" : "published",
+);
+const currentCategory = categoriesMap.get(categoryValue);
+
+// Filter posts by category
+const filteredPosts = data.stories
+  .filter((story: any) => story.content.category?.includes(categoryValue))
+  .map((story: any) => {
+    const image = generateResponsiveImageData(story.content.image.filename, {
+      breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
+      aspectRatio: 3 / 2,
+      sizes:
+        "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
+    });
+
+    return {
+      headline: story.content.headline,
+      date: formatDate(story.published_at),
+      introText: renderRichText(
+        story.content.introText as StoryblokRichTextNode,
+      ),
+      slug: story.full_slug,
+      image: image,
+      alt: story.content.image.alt || "",
+      category: story.content.category,
+    };
+  });
+
+// Use blok title/description/error_message if provided, otherwise use defaults
+const title = blok?.title || currentCategory?.name || categoryValue;
+const errorMessage = blok?.error_message || "No posts found in this category.";
+---
+
+<section class="container mx-auto px-4 py-8">
+  <h1 class="text-base-content mb-4 text-center text-4xl font-bold">
+    {title}
+  </h1>
+
+  {
+    blok?.description ? (
+      <div class="text-base-content/70 prose prose-lg mx-auto mb-12 text-center">
+        <Fragment
+          set:html={renderRichText(blok.description as StoryblokRichTextNode)}
+        />
+      </div>
+    ) : (
+      <p class="text-base-content/70 mb-12 text-center">
+        {filteredPosts.length}
+        {filteredPosts.length === 1 ? "post" : "posts"} in this category
+      </p>
+    )
+  }
+
+  {
+    filteredPosts.length > 0 ? (
+      <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {filteredPosts.map((post: any) => (
+          <li>
+            <BlogPostCard
+              category={post.category}
+              headline={post.headline}
+              date={post.date}
+              introText={post.introText}
+              slug={post.slug}
+              image={post.image}
+              alt={post.alt}
+            />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-base-content/70 text-center">{errorMessage}</p>
+    )
+  }
+</section>

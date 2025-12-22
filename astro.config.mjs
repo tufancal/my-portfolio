@@ -23,6 +23,8 @@ export default defineConfig({
         textBackground: "components/organisms/TextBackground",
         blogPost: "components/organisms/BlogPost",
         blogPostList: "components/organisms/BlogPostList",
+        blogPostGrid: "components/organisms/BlogPostGrid",
+        blogPostGridCategory: "components/organisms/BlogPostGridCategory",
         header: "components/organisms/Header",
         navLink: "components/atoms/NavLink",
         footer: "components/organisms/Footer",

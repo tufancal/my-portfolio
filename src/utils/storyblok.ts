@@ -109,3 +109,17 @@ export function resolveStoryblokUrl(url: any): string {
   }
   return url.url;
 }
+
+/**
+ * Extracts SEO data from Storyblok content.
+ * Uses the SEO tab fields (title, description) with optional fallbacks.
+ */
+export function extractSeoData(content: {
+  title?: string;
+  description?: string;
+}): { title: string; description: string } {
+  return {
+    title: content.title || "",
+    description: content.description || "",
+  };
+}
