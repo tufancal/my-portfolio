@@ -11,6 +11,7 @@ interface Props {
   slug: string;
   image: {
     src: string;
+    focus?: string | null;
   };
   alt: string;
   linkText?: string;
@@ -33,6 +34,7 @@ const imageData = generateResponsiveImageData(image.src, {
   aspectRatio: 3 / 2,
   sizes:
     "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
+  focus: image.focus || undefined, // Focal point from Storyblok
 });
 
 const categories = await Promise.all(

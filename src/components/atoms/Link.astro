@@ -19,11 +19,26 @@ const buttonClasses = [
   .filter(Boolean)
   .join(" ");
 
-const href =
-  blok.url.linktype === "email" ? `mailto:${blok.url.url}` : blok.url.url;
+const getHref = () => {
+  if (blok.url.linktype === "email") {
+    return `mailto:${blok.url.email}`;
+  }
+  if (blok.url.linktype === "story") {
+    return `/${blok.url.cached_url}`;
+  }
+  return blok.url.url;
+};
 
-const target =
-  blok.url.target || (blok.url.linktype === "email" ? "_self" : "_blank");
+const href = getHref();
+
+const getTarget = () => {
+  if (blok.url.target) return blok.url.target;
+  if (blok.url.linktype === "story") return "_self";
+  if (blok.url.linktype === "email") return "_self";
+  return "_blank";
+};
+
+const target = getTarget();
 const rel = target === "_blank" ? "noopener noreferrer" : undefined;
 ---
 

@@ -2,7 +2,6 @@
 import { renderRichText, type StoryblokRichTextNode } from "@storyblok/astro";
 import { useStoryblokApi } from "@storyblok/astro";
 import { formatDate } from "@/src/utils/date";
-import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
 import { getBlogCategories } from "@/src/utils/storyblok";
 import BlogPostCard from "@/src/components/molecules/BlogPostCard.astro";
 import CategoryFilter from "@/src/components/molecules/CategoryFilter.astro";
@@ -30,19 +29,15 @@ const categories = Array.from(categoriesMap.values());
 
 // Transform stories into card data
 const posts = data.stories.slice(0, 6).map((story: any) => {
-  const image = generateResponsiveImageData(story.content.image.filename, {
-    breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
-    aspectRatio: 3 / 2,
-    sizes:
-      "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
-  });
-
   return {
     headline: story.content.headline,
     date: formatDate(story.published_at),
     introText: renderRichText(story.content.introText as StoryblokRichTextNode),
     slug: story.full_slug,
-    image: image,
+    image: {
+      src: story.content.image.filename,
+      focus: story.content.image.focus || undefined,
+    },
     alt: story.content.image.alt,
     category: story.content.category,
   };

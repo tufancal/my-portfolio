@@ -43,10 +43,12 @@ try {
 
 <Layout seoPage={seo}>
   {
-    content ? (
-      <StoryblokComponent blok={content} categoryValue={kategorie} />
-    ) : (
-      <BlogPostGridCategory categoryValue={kategorie} />
-    )
+    content?.body &&
+      content.body.map((blok: any) => {
+        if (blok.component === "blogPostGridCategory") {
+          return <BlogPostGridCategory categoryValue={kategorie} blok={blok} />;
+        }
+        return <StoryblokComponent blok={blok} />;
+      })
   }
 </Layout>

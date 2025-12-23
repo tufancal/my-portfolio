@@ -6,7 +6,7 @@ import { extractSeoData } from "@/src/utils/storyblok";
 
 const storyblokApi = useStoryblokApi();
 
-const { data } = await storyblokApi.get("cdn/stories/projekt-anfragen", {
+const { data } = await storyblokApi.get("cdn/stories/webentwicklung-hamburg", {
   version: import.meta.env.DEV ? "draft" : "published",
 });
 

@@ -36,6 +36,7 @@ const image = generateResponsiveImageData(blok.image.filename as string, {
   aspectRatio: 3 / 2,
   sizes:
     "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 400px",
+  focus: blok.image.focus || undefined, // Focal point from Storyblok
 });
 
 const categories = await Promise.all(
@@ -49,7 +50,6 @@ const categories = await Promise.all(
   class="container mx-auto max-w-3xl px-4"
   {...storyblokEditable(blok as SbBlokData)}
 >
-  <!-- Article metadata -->
   <div class="mb-6 flex flex-col items-center gap-2">
     <div class="badge badge-outline">
       <time datetime={formatDateTime(publishedAt)}>
@@ -76,14 +76,12 @@ const categories = await Promise.all(
     <Image class="w-full" src={image.src} alt={blok.image.alt} inferSize />
   </figure>
 
-  <!-- Intro text -->
   <div class="text-base-content mb-8 text-lg leading-relaxed font-semibold">
     <Fragment
       set:html={renderRichText(blok.introText as StoryblokRichTextNode)}
     />
   </div>
 
-  <!-- Table of contents (if anchors exist) -->
   {
     headlineAnchorIds.length > 0 && (
       <div class="card bg-base-200 mb-8">
@@ -103,7 +101,6 @@ const categories = await Promise.all(
     )
   }
 
-  <!-- Main content with typography -->
   <div
     class="prose lg:prose-lg prose-headings:text-base-content prose-p:text-base-content prose-a:text-primary prose-strong:text-base-content prose-code:text-base-content max-w-none"
   >
