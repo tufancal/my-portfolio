@@ -3,6 +3,11 @@ import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import { useStoryblokApi } from "@storyblok/astro";
 import { resolveStoryblokUrl } from "@/src/utils/storyblok";
+import type { Footer } from "@/.storyblok/types/285719928053161/storyblok-components";
+
+interface Props {
+  blok: Footer;
+}
 
 const storyblokApi = useStoryblokApi();
 
@@ -61,4 +66,11 @@ const sitemapLinks =
       }
     </nav>
   </div>
+  {
+    blok.copyright && (
+      <div class="mt-8 text-center">
+        <small class="text-base-content/70">{blok.copyright}</small>
+      </div>
+    )
+  }
 </footer>
