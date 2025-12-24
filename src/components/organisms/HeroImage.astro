@@ -31,38 +31,42 @@ const imageData = generateResponsiveImageData(image?.filename || "", {
 >
   <div class="container mx-auto max-w-5xl px-4">
     <div class="hero">
-      <div class="hero-content flex-col gap-8 lg:flex-row-reverse">
+      <div class="hero-content flex-col gap-6 p-0 lg:flex-row-reverse lg:gap-8">
         {
           image?.filename && (
             <Image
               src={imageData.src}
               fetchpriority="high"
               alt={image.alt || title || "Hero image"}
-              class="max-w-sm rounded-lg shadow-2xl"
+              class="w-full max-w-xs rounded-lg shadow-2xl lg:max-w-sm"
               inferSize
               loading="eager"
               decoding="sync"
             />
           )
         }
-        <div>
+        <div class="w-full">
           {
             title && (
-              <h1 class="mb-6 text-4xl font-bold sm:text-5xl">{title}</h1>
+              <h1 class="mb-4 text-2xl font-bold sm:text-4xl lg:mb-6 lg:text-5xl">
+                {title}
+              </h1>
             )
           }
           {
             description && (
-              <div class="text-base-content/80 prose prose-lg mb-8 leading-relaxed">
+              <div class="text-base-content/80 prose prose-sm sm:prose-base lg:prose-lg mb-6 max-w-none leading-relaxed lg:mb-8">
                 <Fragment
-                  set:html={renderRichText(description as StoryblokRichTextNode)}
+                  set:html={renderRichText(
+                    description as StoryblokRichTextNode,
+                  )}
                 />
               </div>
             )
           }
           {
             links.length > 0 && (
-              <div class="flex flex-wrap gap-4">
+              <div class="flex flex-wrap justify-center gap-3 lg:justify-start lg:gap-4">
                 {links.map((linkBlok) => (
                   <StoryblokComponent blok={linkBlok as SbBlokData} />
                 ))}

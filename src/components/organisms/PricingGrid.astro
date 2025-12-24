@@ -8,10 +8,11 @@ export interface Props {
 }
 
 const { blok } = Astro.props;
-const { title, pricing_cards = [], footer_text } = blok;
+const { id, title, pricing_cards = [], footer_text } = blok;
 ---
 
 <section
+  id={id}
   class="bg-base-100 py-16 sm:py-24"
   {...storyblokEditable(blok as SbBlokData)}
 >

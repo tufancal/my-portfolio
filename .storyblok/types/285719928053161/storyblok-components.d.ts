@@ -250,6 +250,7 @@ export interface PricingCardFeature {
 }
 
 export interface PricingGrid {
+  id?: string;
   title?: string;
   footer_text?: string;
   pricing_cards?: PricingCard[];

@@ -24,9 +24,9 @@ const getHref = () => {
     return `mailto:${blok.url.email}`;
   }
   if (blok.url.linktype === "story") {
-    return `/${blok.url.cached_url}`;
+    return `/${blok.url.cached_url}${blok.url.anchor ? `#${blok.url.anchor}` : ""}`;
   }
-  return blok.url.url;
+  return `${blok.url.url}${blok.url.anchor ? `#${blok.url.anchor}` : ""}`;
 };
 
 const href = getHref();

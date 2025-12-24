@@ -17,17 +17,17 @@ const { period, title, company, description } = blok;
 
 <li {...storyblokEditable(blok as SbBlokData)}>
   <hr />
-  <div class="timeline-start timeline-box">
-    {period && <div class="badge badge-primary mb-2">{period}</div>}
-    {title && <h3 class="text-lg font-bold">{title}</h3>}
-    {company && <p class="text-base-content/70 text-sm">{company}</p>}
+  <div class="timeline-start timeline-box text-sm lg:text-base">
+    {period && <div class="badge badge-primary badge-sm lg:badge-md mb-2">{period}</div>}
+    {title && <h3 class="text-base lg:text-lg font-bold wrap-break-word">{title}</h3>}
+    {company && <p class="text-base-content/70 text-xs lg:text-sm wrap-break-word">{company}</p>}
   </div>
-  <div class="timeline-middle">
+  <div class="timeline-middle shrink-0">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
       fill="currentColor"
-      class="text-primary h-5 w-5"
+      class="text-primary h-4 w-4 lg:h-5 lg:w-5"
     >
       <path
         fill-rule="evenodd"
@@ -35,10 +35,10 @@ const { period, title, company, description } = blok;
         clip-rule="evenodd"></path>
     </svg>
   </div>
-  <div class="timeline-end timeline-box">
+  <div class="timeline-end timeline-box text-sm lg:text-base">
     {
       description && (
-        <div class="prose prose-sm">
+        <div class="prose prose-sm lg:prose-base max-w-none">
           <Fragment
             set:html={renderRichText(description as StoryblokRichTextNode)}
           />

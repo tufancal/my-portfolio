@@ -1211,22 +1211,27 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-07T21:46:04.671Z",
-    "updated_at": "2025-12-07T21:46:24.934Z",
+    "updated_at": "2025-12-24T12:13:09.732Z",
     "id": 120645077702906,
     "schema": {
-      "title": {
+      "id": {
         "type": "text",
         "pos": 0,
+        "id": "tNda5tpeTJ29N2S77iR6tQ"
+      },
+      "title": {
+        "type": "text",
+        "pos": 1,
         "id": "5PLjrrq9SJ6ODRTJP8HCOg"
       },
       "footer_text": {
         "type": "text",
-        "pos": 1,
+        "pos": 2,
         "id": "-OxI79VQSEub30AwUmUNdw"
       },
       "pricing_cards": {
         "type": "bloks",
-        "pos": 2,
+        "pos": 3,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
