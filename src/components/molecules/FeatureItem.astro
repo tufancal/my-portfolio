@@ -1,5 +1,10 @@
 ---
-import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
 import type { FeatureItem } from "@/.storyblok/types/285719928053161/storyblok-components";
 
 export interface Props {
@@ -15,9 +20,13 @@ const { number, title, description } = blok;
     {number && <span class="text-primary">{number}</span>}
     {title && <span>{title}</span>}
   </h3>
-  {description && (
-    <p class="text-base-content/80 pl-6">
-      {description}
-    </p>
-  )}
+  {
+    description && (
+      <div class="text-base-content/80 prose prose-sm pl-6">
+        <Fragment
+          set:html={renderRichText(description as StoryblokRichTextNode)}
+        />
+      </div>
+    )
+  }
 </div>

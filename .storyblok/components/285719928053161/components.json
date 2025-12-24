@@ -141,7 +141,7 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "blogPostGridCategory",
-    "component_group_uuid": null,
+    "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
     "color": null,
     "icon": null,
     "internal_tags_list": [],
@@ -192,7 +192,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-08T21:36:28.438Z",
-    "updated_at": "2025-12-08T21:36:55.335Z",
+    "updated_at": "2025-12-24T11:19:26.936Z",
     "id": 120996611853209,
     "schema": {
       "period": {
@@ -211,9 +211,11 @@
         "id": "Fv3rHx4-SxuZLMaCGwE-7A"
       },
       "description": {
-        "type": "textarea",
+        "type": "richtext",
         "pos": 3,
-        "id": "NMfwJwvnTPKYJEsQ2VB0dw"
+        "id": "NMfwJwvnTPKYJEsQ2VB0dw",
+        "allow_custom_attributes": true,
+        "allow_target_blank": true
       }
     },
     "image": null,
@@ -237,7 +239,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-08T21:37:11.020Z",
-    "updated_at": "2025-12-08T21:37:39.405Z",
+    "updated_at": "2025-12-24T11:19:39.671Z",
     "id": 120996786264986,
     "schema": {
       "title": {
@@ -247,9 +249,11 @@
         "id": "WVUKiA51QpKPrzryVmJY4g"
       },
       "description": {
-        "type": "textarea",
+        "type": "richtext",
         "pos": 1,
-        "id": "xeI29Sn-SWqcBbOToYKhQQ"
+        "id": "xeI29Sn-SWqcBbOToYKhQQ",
+        "allow_custom_attributes": true,
+        "allow_target_blank": true
       },
       "items": {
         "type": "bloks",
@@ -284,7 +288,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-07T21:39:43.406Z",
-    "updated_at": "2025-12-07T21:39:53.570Z",
+    "updated_at": "2025-12-24T11:19:51.493Z",
     "id": 120643516045558,
     "schema": {
       "title": {
@@ -293,9 +297,11 @@
         "id": "ob4lCjXvSi2ovY2mgNsIDA"
       },
       "description": {
-        "type": "text",
+        "type": "richtext",
         "pos": 1,
-        "id": "-JE9I3TGSdqV_BIuaHCRPw"
+        "id": "-JE9I3TGSdqV_BIuaHCRPw",
+        "allow_custom_attributes": true,
+        "allow_target_blank": true
       }
     },
     "image": null,
@@ -319,7 +325,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-08T19:43:12.409Z",
-    "updated_at": "2025-12-08T19:44:11.187Z",
+    "updated_at": "2025-12-24T11:20:59.048Z",
     "id": 120968775314026,
     "schema": {
       "title": {
@@ -328,9 +334,11 @@
         "id": "YUPz0_OoTseqMXFqJBSFjA"
       },
       "description": {
-        "type": "text",
+        "type": "richtext",
         "pos": 1,
-        "id": "3iPX3p8iSiKz4bO79Yj-dA"
+        "id": "3iPX3p8iSiKz4bO79Yj-dA",
+        "allow_custom_attributes": true,
+        "allow_target_blank": true
       },
       "items": {
         "type": "bloks",
@@ -460,7 +468,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-07T21:38:36.037Z",
-    "updated_at": "2025-12-07T21:38:52.730Z",
+    "updated_at": "2025-12-24T11:21:08.777Z",
     "id": 120643240098036,
     "schema": {
       "number": {
@@ -474,9 +482,11 @@
         "id": "hBZCdbEwSvCvpvDcYI3JTw"
       },
       "description": {
-        "type": "text",
+        "type": "richtext",
         "pos": 2,
-        "id": "lAQ_YJwuRuOb2yFomR9P5g"
+        "id": "lAQ_YJwuRuOb2yFomR9P5g",
+        "allow_target_blank": true,
+        "allow_custom_attributes": true
       }
     },
     "image": null,
@@ -500,7 +510,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-07T21:38:58.424Z",
-    "updated_at": "2025-12-08T19:51:57.076Z",
+    "updated_at": "2025-12-24T11:21:19.676Z",
     "id": 120643331791093,
     "schema": {
       "title": {
@@ -509,9 +519,11 @@
         "id": "6kKdlLSbQ0GpFKmea7jRVg"
       },
       "description": {
-        "type": "text",
+        "type": "richtext",
         "pos": 1,
-        "id": "MoV_dH5LR-ydhiIVyMwRUg"
+        "id": "MoV_dH5LR-ydhiIVyMwRUg",
+        "allow_target_blank": true,
+        "allow_custom_attributes": true
       },
       "features": {
         "type": "bloks",
@@ -643,7 +655,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-08T21:28:11.940Z",
-    "updated_at": "2025-12-08T21:29:05.627Z",
+    "updated_at": "2025-12-24T11:21:33.678Z",
     "id": 120994578193201,
     "schema": {
       "title": {
@@ -652,9 +664,11 @@
         "id": "rANjen5qRHCpod1BqCLFsQ"
       },
       "description": {
-        "type": "text",
+        "type": "richtext",
         "pos": 1,
-        "id": "FTLuKGRXQ-aRH2JucbdjiQ"
+        "id": "FTLuKGRXQ-aRH2JucbdjiQ",
+        "allow_target_blank": true,
+        "allow_custom_attributes": true
       },
       "image": {
         "type": "asset",
@@ -697,7 +711,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-07T21:37:08.101Z",
-    "updated_at": "2025-12-08T19:51:36.458Z",
+    "updated_at": "2025-12-24T11:21:41.929Z",
     "id": 120642879908083,
     "schema": {
       "title": {
@@ -706,9 +720,11 @@
         "id": "8dOxQYPNTKyVMYwXqaJBgg"
       },
       "description": {
-        "type": "text",
+        "type": "richtext",
         "pos": 1,
-        "id": "bu9cl-b9QfSNbvv_fJ-Gsg"
+        "id": "bu9cl-b9QfSNbvv_fJ-Gsg",
+        "allow_target_blank": true,
+        "allow_custom_attributes": true
       },
       "links": {
         "type": "bloks",
@@ -743,7 +759,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-08T21:38:54.778Z",
-    "updated_at": "2025-12-08T21:39:07.406Z",
+    "updated_at": "2025-12-24T11:21:53.051Z",
     "id": 120997211261853,
     "schema": {
       "emoji": {
@@ -757,9 +773,11 @@
         "id": "7t8iIyB_Rna6ELE8ybgtKQ"
       },
       "description": {
-        "type": "textarea",
+        "type": "richtext",
         "pos": 2,
-        "id": "CCEcUmY-TFSnTEkB2acnPA"
+        "id": "CCEcUmY-TFSnTEkB2acnPA",
+        "allow_target_blank": true,
+        "allow_custom_attributes": true
       }
     },
     "image": null,
@@ -783,7 +801,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-08T21:39:14.344Z",
-    "updated_at": "2025-12-08T21:39:40.446Z",
+    "updated_at": "2025-12-24T11:22:02.025Z",
     "id": 120997291400094,
     "schema": {
       "title": {
@@ -792,9 +810,11 @@
         "id": "NZzeBCcgSh6XnYjkcLQ9dg"
       },
       "description": {
-        "type": "textarea",
+        "type": "richtext",
         "pos": 1,
-        "id": "1dJaM8plSfGTyJhGKyOtZA"
+        "id": "1dJaM8plSfGTyJhGKyOtZA",
+        "allow_target_blank": true,
+        "allow_custom_attributes": true
       },
       "cards": {
         "type": "bloks",
@@ -829,7 +849,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-11-02T20:39:08.572Z",
-    "updated_at": "2025-11-02T20:43:55.303Z",
+    "updated_at": "2025-12-24T11:22:13.750Z",
     "id": 108242323758936,
     "schema": {
       "headline": {
@@ -840,7 +860,9 @@
       "richtext": {
         "type": "richtext",
         "pos": 1,
-        "id": "EYJX_X15RwGLF051vl64Rw"
+        "id": "EYJX_X15RwGLF051vl64Rw",
+        "allow_target_blank": true,
+        "allow_custom_attributes": true
       },
       "blocks": {
         "type": "bloks",
@@ -1157,13 +1179,15 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-07T21:44:38.988Z",
-    "updated_at": "2025-12-07T21:44:42.519Z",
+    "updated_at": "2025-12-24T11:22:28.896Z",
     "id": 120644726741241,
     "schema": {
       "text": {
-        "type": "text",
+        "type": "richtext",
         "pos": 0,
-        "id": "9Rsa8hVgS1Wovt9DPDrOIg"
+        "id": "9Rsa8hVgS1Wovt9DPDrOIg",
+        "allow_target_blank": true,
+        "allow_custom_attributes": true
       }
     },
     "image": null,
@@ -1433,7 +1457,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-08T21:38:22.438Z",
-    "updated_at": "2025-12-08T21:38:44.890Z",
+    "updated_at": "2025-12-24T11:22:49.099Z",
     "id": 120997078793116,
     "schema": {
       "title": {
@@ -1442,9 +1466,11 @@
         "id": "MYD_Y7PDT62VxYzL2jnALA"
       },
       "description": {
-        "type": "textarea",
+        "type": "richtext",
         "pos": 1,
-        "id": "c2xFqSaqSPyMmYs0XlzhzA"
+        "id": "c2xFqSaqSPyMmYs0XlzhzA",
+        "allow_target_blank": true,
+        "allow_custom_attributes": true
       },
       "items": {
         "type": "bloks",

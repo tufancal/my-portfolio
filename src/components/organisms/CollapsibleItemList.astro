@@ -1,5 +1,10 @@
 ---
-import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import type { CollapsibleItemList } from "@/.storyblok/types/285719928053161/storyblok-components";
 
@@ -21,7 +26,11 @@ const { blok } = Astro.props;
   )}
 
   {blok.description && (
-    <p class="text-base-content mb-6">{blok.description}</p>
+    <div class="prose text-base-content mb-6">
+      <Fragment
+        set:html={renderRichText(blok.description as StoryblokRichTextNode)}
+      />
+    </div>
   )}
 
   {

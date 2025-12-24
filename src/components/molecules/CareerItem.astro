@@ -1,5 +1,10 @@
 ---
-import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
 import type { CareerItem } from "@/.storyblok/types/285719928053161/storyblok-components";
 
 export interface Props {
@@ -31,7 +36,15 @@ const { period, title, company, description } = blok;
     </svg>
   </div>
   <div class="timeline-end timeline-box">
-    {description && <p class="text-sm">{description}</p>}
+    {
+      description && (
+        <div class="prose prose-sm">
+          <Fragment
+            set:html={renderRichText(description as StoryblokRichTextNode)}
+          />
+        </div>
+      )
+    }
   </div>
   <hr />
 </li>

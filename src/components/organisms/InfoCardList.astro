@@ -1,5 +1,10 @@
 ---
-import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import type { InfoCardList } from "@/.storyblok/types/285719928053161/storyblok-components";
 
@@ -20,7 +25,11 @@ const { title, description, cards = [] } = blok;
 
     {
       description && (
-        <p class="text-base-content/80 mb-12 text-lg">{description}</p>
+        <div class="text-base-content/80 prose prose-lg mb-12">
+          <Fragment
+            set:html={renderRichText(description as StoryblokRichTextNode)}
+          />
+        </div>
       )
     }
 

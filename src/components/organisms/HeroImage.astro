@@ -1,5 +1,10 @@
 ---
-import { storyblokEditable, type SbBlokData } from "@storyblok/astro";
+import {
+  storyblokEditable,
+  type SbBlokData,
+  renderRichText,
+  type StoryblokRichTextNode,
+} from "@storyblok/astro";
 import StoryblokComponent from "@storyblok/astro/StoryblokComponent.astro";
 import type { HeroImage } from "@/.storyblok/types/285719928053161/storyblok-components";
 import { Image } from "astro:assets";
@@ -48,9 +53,11 @@ const imageData = generateResponsiveImageData(image?.filename || "", {
           }
           {
             description && (
-              <p class="text-base-content/80 mb-8 text-lg leading-relaxed sm:text-xl">
-                {description}
-              </p>
+              <div class="text-base-content/80 prose prose-lg mb-8 leading-relaxed">
+                <Fragment
+                  set:html={renderRichText(description as StoryblokRichTextNode)}
+                />
+              </div>
             )
           }
           {

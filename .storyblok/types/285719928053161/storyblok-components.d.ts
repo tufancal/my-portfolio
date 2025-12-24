@@ -42,7 +42,7 @@ export interface CareerItem {
   period?: string;
   title?: string;
   company?: string;
-  description?: string;
+  description?: StoryblokRichtext;
   component: "careerItem";
   _uid: string;
   [k: string]: unknown;
@@ -50,7 +50,7 @@ export interface CareerItem {
 
 export interface CareerTimeline {
   title: string;
-  description?: string;
+  description?: StoryblokRichtext;
   items?: CareerItem[];
   component: "careerTimeline";
   _uid: string;
@@ -59,7 +59,7 @@ export interface CareerTimeline {
 
 export interface CollapsibleItem {
   title?: string;
-  description?: string;
+  description?: StoryblokRichtext;
   component: "collapsibleItem";
   _uid: string;
   [k: string]: unknown;
@@ -67,7 +67,7 @@ export interface CollapsibleItem {
 
 export interface CollapsibleItemList {
   title?: string;
-  description?: string;
+  description?: StoryblokRichtext;
   items?: CollapsibleItem[];
   component: "collapsibleItemList";
   _uid: string;
@@ -89,7 +89,7 @@ export interface ContactForm {
 export interface FeatureItem {
   number?: string;
   title?: string;
-  description?: string;
+  description?: StoryblokRichtext;
   component: "featureItem";
   _uid: string;
   [k: string]: unknown;
@@ -97,7 +97,7 @@ export interface FeatureItem {
 
 export interface FeatureList {
   title?: string;
-  description?: string;
+  description?: StoryblokRichtext;
   features?: FeatureItem[];
   links?: Link[];
   component: "featureList";
@@ -123,7 +123,7 @@ export interface Header {
 
 export interface HeroImage {
   title?: string;
-  description?: string;
+  description?: StoryblokRichtext;
   image?: StoryblokAsset;
   links?: Link[];
   component: "heroImage";
@@ -133,7 +133,7 @@ export interface HeroImage {
 
 export interface HeroSection {
   title?: string;
-  description?: string;
+  description?: StoryblokRichtext;
   links?: Link[];
   component: "heroSection";
   _uid: string;
@@ -143,7 +143,7 @@ export interface HeroSection {
 export interface InfoCard {
   emoji?: string;
   title?: string;
-  description?: string;
+  description?: StoryblokRichtext;
   component: "infoCard";
   _uid: string;
   [k: string]: unknown;
@@ -151,7 +151,7 @@ export interface InfoCard {
 
 export interface InfoCardList {
   title?: string;
-  description?: string;
+  description?: StoryblokRichtext;
   cards?: InfoCard[];
   component: "infoCardList";
   _uid: string;
@@ -243,7 +243,7 @@ export interface PricingCard {
 }
 
 export interface PricingCardFeature {
-  text?: string;
+  text?: StoryblokRichtext;
   component: "pricingCardFeature";
   _uid: string;
   [k: string]: unknown;
@@ -292,7 +292,7 @@ export interface SocialMediaList {
 
 export interface TechStack {
   title?: string;
-  description?: string;
+  description?: StoryblokRichtext;
   items?: TechStackItem[];
   component: "techStack";
   _uid: string;
