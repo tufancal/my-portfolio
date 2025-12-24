@@ -37,7 +37,7 @@ const { title, description, items = [] } = blok;
       items.length > 0 && (
         <ul
           id="career-timeline"
-          class="career-timeline timeline timeline-vertical timeline-snap-icon timeline-compact"
+          class="career-timeline timeline timeline-vertical timeline-snap-icon max-lg:timeline-compact"
         >
           {items.map((itemBlok) => (
             <StoryblokComponent blok={itemBlok as SbBlokData} />
@@ -47,18 +47,3 @@ const { title, description, items = [] } = blok;
     }
   </div>
 </section>
-
-<script>
-  const careerTimelineDesktop = () => {
-    const careerTimeline = document.getElementById("career-timeline");
-    const lgBreakPoint = window.matchMedia("(min-width: 1024px)");
-
-    if (lgBreakPoint.matches) {
-      careerTimeline?.classList.remove("timeline-compact");
-    } else {
-      careerTimeline?.classList.add("timeline-compact");
-    }
-  };
-
-  window.addEventListener("resize", careerTimelineDesktop);
-</script>
