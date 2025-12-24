@@ -15,8 +15,10 @@ export async function getStaticPaths() {
   const stories = Object.values(data.stories);
 
   return stories.map((story: any) => {
+    // Extract the slug from full_slug (e.g., "blog/my-post" -> "my-post")
+    const slug = story.full_slug.replace(/^blog\//, '');
     return {
-      params: { slug: story.slug },
+      params: { slug },
     };
   });
 }

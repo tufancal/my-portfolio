@@ -1,8 +1,8 @@
-import { useState, useRef, type FormEvent } from "react";
-import emailjs from "@emailjs/browser";
 import Input from "@/src/components/atoms/Input";
-import Textarea from "@/src/components/atoms/Textarea";
 import Select, { type SelectOption } from "@/src/components/atoms/Select";
+import Textarea from "@/src/components/atoms/Textarea";
+import emailjs from "@emailjs/browser";
+import { useRef, useState, type FormEvent } from "react";
 
 export interface ContactFormProps {
   submitButtonText?: string;
@@ -18,12 +18,14 @@ interface FormData {
   package: string;
   budget: string;
   message: string;
+  privacyAccepted: boolean;
 }
 
 interface FormErrors {
   name?: string;
   email?: string;
   message?: string;
+  privacyAccepted?: string;
 }
 
 const packageOptions: SelectOption[] = [
@@ -55,6 +57,7 @@ export default function ContactFormReact({
     package: "",
     budget: "",
     message: "",
+    privacyAccepted: false,
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -80,6 +83,11 @@ export default function ContactFormReact({
       newErrors.message = "Bitte geben Sie eine Nachricht ein";
     }
 
+    if (!formData.privacyAccepted) {
+      newErrors.privacyAccepted =
+        "Bitte akzeptieren Sie die Datenschutzerklärung";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -96,12 +104,7 @@ export default function ContactFormReact({
 
     try {
       // Send email using EmailJS - sendForm method uses the form element directly
-      await emailjs.sendForm(
-        serviceId,
-        templateId,
-        formRef.current,
-        publicKey
-      );
+      await emailjs.sendForm(serviceId, templateId, formRef.current, publicKey);
 
       setSubmitStatus("success");
       // Reset form
@@ -112,6 +115,7 @@ export default function ContactFormReact({
         package: "",
         budget: "",
         message: "",
+        privacyAccepted: false,
       });
       setErrors({});
     } catch (error) {
@@ -125,11 +129,12 @@ export default function ContactFormReact({
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
+    const { name, value, type } = e.target;
+    const newValue =
+      type === "checkbox" ? (e.target as HTMLInputElement).checked : value;
+    setFormData((prev) => ({ ...prev, [name]: newValue }));
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -137,7 +142,6 @@ export default function ContactFormReact({
 
   return (
     <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
-      {/* Success Message */}
       {submitStatus === "success" && (
         <div className="alert alert-success">
           <svg
@@ -161,7 +165,6 @@ export default function ContactFormReact({
         </div>
       )}
 
-      {/* Error Message */}
       {submitStatus === "error" && (
         <div className="alert alert-error">
           <svg
@@ -185,7 +188,6 @@ export default function ContactFormReact({
       )}
 
       <div className="grid gap-6 sm:grid-cols-2">
-        {/* Name/Firma */}
         <Input
           label="Name / Firma"
           name="name"
@@ -198,7 +200,6 @@ export default function ContactFormReact({
           aria-required="true"
         />
 
-        {/* E-Mail */}
         <Input
           label="E-Mail"
           name="email"
@@ -212,7 +213,6 @@ export default function ContactFormReact({
         />
       </div>
 
-      {/* Aktuelle Webseite */}
       <Input
         label="Aktuelle Webseite (falls vorhanden)"
         name="website"
@@ -222,7 +222,6 @@ export default function ContactFormReact({
         onChange={handleChange}
       />
 
-      {/* Welches Paket */}
       <Select
         label="Welches Paket passt am besten?"
         name="package"
@@ -231,7 +230,6 @@ export default function ContactFormReact({
         onChange={handleChange}
       />
 
-      {/* Projekt-Budget */}
       <Select
         label="Projekt-Budget"
         name="budget"
@@ -240,7 +238,6 @@ export default function ContactFormReact({
         onChange={handleChange}
       />
 
-      {/* Nachricht */}
       <Textarea
         label="Nachricht"
         name="message"
@@ -253,7 +250,36 @@ export default function ContactFormReact({
         aria-required="true"
       />
 
-      {/* Submit Button */}
+      <div className="form-control">
+        <label className="label cursor-pointer justify-start gap-3">
+          <input
+            type="checkbox"
+            name="privacyAccepted"
+            checked={formData.privacyAccepted}
+            onChange={handleChange}
+            className="checkbox checkbox-primary"
+            aria-required="true"
+          />
+          <span className="label-text">
+            Ich habe die{" "}
+            <a
+              href="/datenschutz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link link-primary"
+            >
+              Datenschutzerklärung
+            </a>{" "}
+            gelesen.
+          </span>
+        </label>
+        {errors.privacyAccepted && (
+          <div className="label-text-alt text-error">
+            {errors.privacyAccepted}
+          </div>
+        )}
+      </div>
+
       <div className="form-control">
         <button
           type="submit"
