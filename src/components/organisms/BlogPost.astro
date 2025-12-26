@@ -11,6 +11,7 @@ import { Image } from "astro:assets";
 import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
 import { getBlogCategory } from "@/src/utils/storyblok";
 import { getBlogGlobalData } from "@/src/utils/storyblok";
+import { linkResolver } from "@/src/utils/richTextResolvers";
 interface Props {
   blok: BlogPost;
   publishedAt: string;
@@ -82,7 +83,9 @@ const categories = await Promise.all(
 
   <div class="text-base-content mb-8 text-lg leading-relaxed font-semibold">
     <Fragment
-      set:html={renderRichText(blok.introText as StoryblokRichTextNode)}
+      set:html={renderRichText(blok.introText as StoryblokRichTextNode, {
+        resolvers: linkResolver,
+      })}
     />
   </div>
 
@@ -127,6 +130,7 @@ const categories = await Promise.all(
             "1024px",
           ],
         },
+        resolvers: linkResolver,
       })}
     />
   </div>
@@ -139,7 +143,9 @@ const categories = await Promise.all(
           </h2>
           <div class="prose text-lg leading-relaxed font-semibold text-white">
             <Fragment
-              set:html={renderRichText(blok.tl_dr as StoryblokRichTextNode)}
+              set:html={renderRichText(blok.tl_dr as StoryblokRichTextNode, {
+                resolvers: linkResolver,
+              })}
             />
           </div>
         </div>
