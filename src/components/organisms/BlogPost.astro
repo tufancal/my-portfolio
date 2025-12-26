@@ -11,7 +11,8 @@ import { Image } from "astro:assets";
 import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
 import { getBlogCategory } from "@/src/utils/storyblok";
 import { getBlogGlobalData } from "@/src/utils/storyblok";
-import { linkResolver } from "@/src/utils/richTextResolvers";
+import { richTextResolvers } from "@/src/utils/richTextResolvers";
+import { processRichTextWithCodeHighlighting } from "@/src/utils/highlightCodeBlocks";
 interface Props {
   blok: BlogPost;
   publishedAt: string;
@@ -49,6 +50,10 @@ const categories = await Promise.all(
     getBlogCategory(category, import.meta.env.DEV ? "draft" : "published"),
   ),
 );
+
+const processedCopy = await processRichTextWithCodeHighlighting(
+  blok.copy as any,
+);
 ---
 
 <article
@@ -84,7 +89,7 @@ const categories = await Promise.all(
   <div class="text-base-content mb-8 text-lg leading-relaxed font-semibold">
     <Fragment
       set:html={renderRichText(blok.introText as StoryblokRichTextNode, {
-        resolvers: linkResolver,
+        resolvers: richTextResolvers,
       })}
     />
   </div>
@@ -114,7 +119,7 @@ const categories = await Promise.all(
     class="prose lg:prose-lg prose-headings:text-base-content prose-p:text-base-content prose-a:text-primary prose-strong:text-base-content prose-code:text-base-content mb-8 max-w-none lg:mb-16"
   >
     <Fragment
-      set:html={renderRichText(blok.copy as StoryblokRichTextNode, {
+      set:html={renderRichText(processedCopy as StoryblokRichTextNode, {
         optimizeImages: {
           width: 1024,
           height: 576,
@@ -130,7 +135,7 @@ const categories = await Promise.all(
             "1024px",
           ],
         },
-        resolvers: linkResolver,
+        resolvers: richTextResolvers,
       })}
     />
   </div>
@@ -144,7 +149,7 @@ const categories = await Promise.all(
           <div class="prose text-lg leading-relaxed font-semibold text-white">
             <Fragment
               set:html={renderRichText(blok.tl_dr as StoryblokRichTextNode, {
-                resolvers: linkResolver,
+                resolvers: richTextResolvers,
               })}
             />
           </div>
