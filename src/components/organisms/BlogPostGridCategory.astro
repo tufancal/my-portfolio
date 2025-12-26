@@ -2,10 +2,9 @@
 import { renderRichText, type StoryblokRichTextNode } from "@storyblok/astro";
 import { useStoryblokApi } from "@storyblok/astro";
 import { formatDate } from "@/src/utils/date";
-import { getBlogCategories } from "@/src/utils/storyblok";
+import { getBlogCategories, getBlogGlobalData } from "@/src/utils/storyblok";
 import BlogPostCard from "@/src/components/molecules/BlogPostCard.astro";
 import type { BlogPostGridCategory } from "@/.storyblok/types/285719928053161/storyblok-components";
-
 interface Props {
   blok?: BlogPostGridCategory;
   categoryValue: string;
@@ -20,6 +19,11 @@ const { data } = await storyblokApi.get("cdn/stories", {
   starts_with: "blog",
   content_type: "blogPost",
 });
+
+// Fetch blog globals
+const blogGlobalData = await getBlogGlobalData(
+  import.meta.env.DEV ? "draft" : "published",
+);
 
 // Get category information
 const categoriesMap = await getBlogCategories(
@@ -47,9 +51,7 @@ const filteredPosts = data.stories
     };
   });
 
-// Use blok title/description/error_message if provided, otherwise use defaults
 const title = blok?.title || currentCategory?.name || categoryValue;
-const errorMessage = blok?.error_message || "No posts found in this category.";
 ---
 
 <section class="container mx-auto px-4 py-8">
@@ -67,7 +69,9 @@ const errorMessage = blok?.error_message || "No posts found in this category.";
     ) : (
       <p class="text-base-content/70 mb-12 text-center">
         {filteredPosts.length}
-        {filteredPosts.length === 1 ? "post" : "posts"} in this category
+        {filteredPosts.length === 1
+          ? blogGlobalData.post_count_text_singular
+          : blogGlobalData.post_count_text_plural}
       </p>
     )
   }
@@ -90,7 +94,9 @@ const errorMessage = blok?.error_message || "No posts found in this category.";
         ))}
       </ul>
     ) : (
-      <p class="text-base-content/70 text-center">{errorMessage}</p>
+      <p class="text-base-content/70 text-center">
+        {blogGlobalData.error_message_not_found_posts}
+      </p>
     )
   }
 </section>

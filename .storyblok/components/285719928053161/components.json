@@ -4,7 +4,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-08-30T11:31:11.850Z",
-    "updated_at": "2025-12-10T19:35:44.705Z",
+    "updated_at": "2025-12-26T11:58:36.455Z",
     "id": 85458419103308,
     "schema": {
       "author": {
@@ -56,6 +56,11 @@
         "id": "SR6lq81-R5G6wMKk8Vc7VQ",
         "required": true,
         "translatable": true
+      },
+      "tl_dr": {
+        "type": "richtext",
+        "pos": 6,
+        "id": "0lUkujQORZ65B7r80zHzVg"
       }
     },
     "image": null,
@@ -66,6 +71,78 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "blogPost",
+    "component_group_uuid": "3fca1665-e66e-428c-9474-64b33f5f503a",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "blogPostGlobals",
+    "display_name": null,
+    "description": "",
+    "created_at": "2025-12-26T11:16:08.936Z",
+    "updated_at": "2025-12-26T11:59:22.668Z",
+    "id": 127214259972374,
+    "schema": {
+      "headlines": {
+        "type": "text",
+        "pos": 0,
+        "id": "CPx8B2lJTtW7tXk8HPgztA"
+      },
+      "error_message_not_found_posts": {
+        "type": "text",
+        "pos": 1,
+        "id": "mPmeapOqTISQOp6vjT615w"
+      },
+      "post_count_text_singular": {
+        "type": "text",
+        "pos": 2,
+        "id": "b2SrhwoQQHKhdw2edlb69w"
+      },
+      "post_count_text_plural": {
+        "type": "text",
+        "pos": 3,
+        "id": "kjlxgq03SAGbL1AJgM0DGA"
+      },
+      "default_link_text": {
+        "type": "text",
+        "pos": 4,
+        "id": "fXFRQi2DRTm5lulYt496XA"
+      },
+      "category_filter_all_label": {
+        "type": "text",
+        "pos": 5,
+        "id": "efjvtfkSTqeIMFRCqxf0gQ"
+      },
+      "category_filter_label": {
+        "type": "text",
+        "pos": 6,
+        "id": "cvAbNZ30Rd2ngBvT8nREYg"
+      },
+      "tl_dr_headline": {
+        "type": "text",
+        "pos": 7,
+        "id": "RU4UHxCiTbyBQiKv8U82qQ"
+      },
+      "body": {
+        "type": "bloks",
+        "pos": 8,
+        "restrict_type": "",
+        "restrict_components": false,
+        "id": "WwXr2gaxT1uDKGqcBr4OOw"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "blogPostGlobals",
     "component_group_uuid": "3fca1665-e66e-428c-9474-64b33f5f503a",
     "color": null,
     "icon": null,
@@ -114,7 +191,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2025-12-22T22:36:01.566Z",
-    "updated_at": "2025-12-22T22:36:30.931Z",
+    "updated_at": "2025-12-26T11:57:40.408Z",
     "id": 125965768982083,
     "schema": {
       "title": {
@@ -126,11 +203,6 @@
         "type": "richtext",
         "pos": 1,
         "id": "81IJiwpSS0GYH-64NeIZPA"
-      },
-      "error_message": {
-        "type": "text",
-        "pos": 2,
-        "id": "TZaNFDoNSGqjdsIKskp01g"
       }
     },
     "image": null,
@@ -1414,7 +1486,7 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "socialMedia",
-    "component_group_uuid": "bc035d97-ab41-4c66-9d55-bbcb6bedb182",
+    "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
     "color": null,
     "icon": null,
     "internal_tags_list": [],
@@ -1532,7 +1604,7 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "techStackItem",
-    "component_group_uuid": null,
+    "component_group_uuid": "85c6085a-2c6d-46b4-b3da-3ce69344ac2a",
     "color": null,
     "icon": null,
     "internal_tags_list": [],

@@ -29,9 +29,9 @@ interface FormErrors {
 }
 
 const packageOptions: SelectOption[] = [
-  { value: "light", label: "💡 Light Paket (1.100 €)" },
-  { value: "premium", label: "🚀 Premium Paket (2.200 €)" },
-  { value: "business", label: "🧭 Business Paket (3.900 €)" },
+  { value: "light", label: "💡 Light Paket (1.099 €)" },
+  { value: "premium", label: "🚀 Premium Paket (2.199 €)" },
+  { value: "business", label: "🧭 Business Paket (3.899 €)" },
   { value: "consultation", label: "Beratung nötig" },
 ];
 

@@ -8,7 +8,56 @@ export interface BlogPost {
   image: StoryblokAsset;
   introText: StoryblokRichtext;
   copy: StoryblokRichtext;
+  tl_dr?: StoryblokRichtext;
   component: "blogPost";
+  _uid: string;
+  [k: string]: unknown;
+}
+
+export interface BlogPostGlobals {
+  headlines?: string;
+  error_message_not_found_posts?: string;
+  post_count_text_singular?: string;
+  post_count_text_plural?: string;
+  default_link_text?: string;
+  category_filter_all_label?: string;
+  category_filter_label?: string;
+  tl_dr_headline?: string;
+  body?: (
+    | BlogPost
+    | BlogPostGlobals
+    | BlogPostGrid
+    | BlogPostGridCategory
+    | BlogPostList
+    | CareerItem
+    | CareerTimeline
+    | CollapsibleItem
+    | CollapsibleItemList
+    | ContactForm
+    | FeatureItem
+    | FeatureList
+    | Footer
+    | Header
+    | HeroImage
+    | HeroSection
+    | InfoCard
+    | InfoCardList
+    | Intro
+    | Link
+    | NavLink
+    | Page
+    | PricingCard
+    | PricingCardFeature
+    | PricingGrid
+    | RichText
+    | SeoPage
+    | SocialMedia
+    | SocialMediaList
+    | TechStack
+    | TechStackItem
+    | TextBackground
+  )[];
+  component: "blogPostGlobals";
   _uid: string;
   [k: string]: unknown;
 }
@@ -24,7 +73,6 @@ export interface BlogPostGrid {
 export interface BlogPostGridCategory {
   title?: string;
   description?: StoryblokRichtext;
-  error_message?: string;
   component: "blogPostGridCategory";
   _uid: string;
   [k: string]: unknown;
@@ -189,6 +237,7 @@ export interface NavLink {
 export interface Page {
   body?: (
     | BlogPost
+    | BlogPostGlobals
     | BlogPostGrid
     | BlogPostGridCategory
     | BlogPostList
@@ -317,4 +366,4 @@ export interface TextBackground {
   [k: string]: unknown;
 }
 
-export type ContentType = BlogPost | Page | SeoPage;
+export type ContentType = BlogPost | BlogPostGlobals | Page | SeoPage;

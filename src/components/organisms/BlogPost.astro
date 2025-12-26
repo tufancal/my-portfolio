@@ -10,7 +10,7 @@ import { formatDate, formatDateTime } from "@/src/utils/date";
 import { Image } from "astro:assets";
 import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
 import { getBlogCategory } from "@/src/utils/storyblok";
-
+import { getBlogGlobalData } from "@/src/utils/storyblok";
 interface Props {
   blok: BlogPost;
   publishedAt: string;
@@ -18,6 +18,9 @@ interface Props {
 
 const { blok, publishedAt } = Astro.props;
 
+const blogGlobalData = await getBlogGlobalData(
+  import.meta.env.DEV ? "draft" : "published",
+);
 // Extract headline anchor IDs for table of contents
 const headlineAnchorIds =
   blok.copy.content
@@ -30,6 +33,7 @@ const headlineAnchorIds =
     })
     .filter((anchorId) => anchorId !== null && anchorId !== undefined) || [];
 
+headlineAnchorIds.push({ id: "tl-dr", text: blogGlobalData.tl_dr_headline });
 // Generate responsive image data
 const image = generateResponsiveImageData(blok.image.filename as string, {
   breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
@@ -86,7 +90,9 @@ const categories = await Promise.all(
     headlineAnchorIds.length > 0 && (
       <div class="card bg-base-200 mb-8">
         <div class="card-body">
-          <h2 class="card-title text-base-content">Table of Contents</h2>
+          <h2 class="card-title text-base-content">
+            {blogGlobalData.headlines}
+          </h2>
           <ul class="menu menu-sm">
             {headlineAnchorIds.map((anchor) => (
               <li>
@@ -124,4 +130,20 @@ const categories = await Promise.all(
       })}
     />
   </div>
+  {
+    blok.tl_dr && (
+      <section id="tl-dr" class="card bg-base-200 mb-8">
+        <div class="card-body">
+          <h2 class="card-title text-base-content">
+            {blogGlobalData.tl_dr_headline}
+          </h2>
+          <div class="prose text-lg leading-relaxed font-semibold text-white">
+            <Fragment
+              set:html={renderRichText(blok.tl_dr as StoryblokRichTextNode)}
+            />
+          </div>
+        </div>
+      </section>
+    )
+  }
 </article>

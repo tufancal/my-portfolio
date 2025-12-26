@@ -3,6 +3,11 @@ import { formatDateTime } from "@/src/utils/date";
 import { Image } from "astro:assets";
 import { generateResponsiveImageData } from "@/src/utils/optimizeImage";
 import { getBlogCategory } from "@/src/utils/storyblok";
+import { getBlogGlobalData } from "@/src/utils/storyblok";
+
+const blogGlobalData = await getBlogGlobalData(
+  import.meta.env.DEV ? "draft" : "published",
+);
 
 interface Props {
   headline: string;
@@ -18,16 +23,7 @@ interface Props {
   category: string[];
 }
 
-const {
-  headline,
-  date,
-  introText,
-  slug,
-  image,
-  alt,
-  linkText = "Read more",
-  category,
-} = Astro.props;
+const { headline, date, introText, slug, image, alt, category } = Astro.props;
 
 const imageData = generateResponsiveImageData(image.src, {
   breakpoints: [240, 320, 400, 560, 800, 1024, 1280],
@@ -47,6 +43,7 @@ const categories = await Promise.all(
 <a
   href={`/${slug}`}
   class="card bg-base-100 group block no-underline shadow-sm transition-all duration-300 hover:shadow-md"
+  aria-label={`${headline} - ${date} - ${blogGlobalData.default_link_text}`}
 >
   <Image
     src={imageData.src}
@@ -83,7 +80,7 @@ const categories = await Promise.all(
     </div>
     <div class="card-actions mt-2 justify-end">
       <span class="text-primary flex items-center gap-2 text-sm font-semibold">
-        {linkText}
+        {blogGlobalData.default_link_text}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-4 w-4 transition-transform group-hover:translate-x-1"

@@ -123,3 +123,20 @@ export function extractSeoData(content: {
     description: content.description || "",
   };
 }
+
+/**
+ * Fetches blog global data from Storyblok.
+ */
+export async function getBlogGlobalData(
+  version: "draft" | "published" = "published",
+): Promise<any> {
+  const storyblokApi = useStoryblokApi();
+  const {
+    data: {
+      story: { content: blogGlobalData },
+    },
+  } = await storyblokApi.get("cdn/stories/global/blog", {
+    version,
+  });
+  return blogGlobalData;
+}
