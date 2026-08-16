@@ -1,0 +1,33 @@
+---
+import Layout from "@/src/layouts/Layout.astro";
+import ProjectIntakeFormReact from "@/src/components/organisms/ProjectIntakeFormReact";
+---
+
+<Layout
+  seoPage={{
+    title: "Projekt-Formular",
+    description:
+      "Fragebogen für dein neues Website-Projekt – hilf mir, deine Landingpage optimal vorzubereiten.",
+  }}
+  noindex={true}
+>
+  <section class="bg-base-200 py-16 sm:py-24">
+    <div class="container mx-auto max-w-2xl px-4">
+      <h1 class="mb-4 text-center text-3xl font-bold sm:text-4xl">
+        Projekt-Formular
+      </h1>
+      <p class="text-base-content/80 prose prose-sm mx-auto mb-12 text-center">
+        Damit ich deine Landingpage optimal vorbereiten kann, beantworte mir
+        kurz die folgenden Fragen. Das dauert nur ein paar Minuten.
+      </p>
+
+      <ProjectIntakeFormReact
+        client:visible
+        submitButtonText="Angaben senden"
+        serviceId={import.meta.env.EMAILJS_SERVICE_ID}
+        templateId={import.meta.env.EMAILJS_PROJECT_TEMPLATE_ID}
+        publicKey={import.meta.env.EMAILJS_PUBLIC_KEY}
+      />
+    </div>
+  </section>
+</Layout>

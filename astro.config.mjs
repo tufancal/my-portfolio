@@ -21,7 +21,11 @@ export default defineConfig({
   }) : undefined,
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) =>
+        !page.endsWith("/projekt-formular/") &&
+        !page.endsWith("/projekt-formular"),
+    }),
     // Pagefind uses node:path/posix which isn't supported in Cloudflare Workers
     // Only include in static builds, not SSR (Storyblok preview)
     ...(!enableBridge ? [pagefind({ bundledCSSPath: false })] : []),

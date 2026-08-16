@@ -49,7 +49,10 @@ ENABLE_STORYBLOK_BRIDGE=true
 EMAILJS_SERVICE_ID=your_emailjs_service_id
 EMAILJS_TEMPLATE_ID=your_emailjs_template_id
 EMAILJS_PUBLIC_KEY=your_emailjs_public_key
+EMAILJS_PROJECT_TEMPLATE_ID=your_emailjs_project_template_id
 ```
+
+`EMAILJS_PROJECT_TEMPLATE_ID` is the template ID used by the separate `/projekt-formular` intake form (same EmailJS account/service, different template).
 
 4. Generate TypeScript types from Storyblok (ensure `.env` is configured first):
 ```sh
@@ -190,6 +193,7 @@ See [docs/storyblok.md](docs/storyblok.md) for integration details and patterns.
 - `STORYBLOK_SPACE_ID`: Your Storyblok space ID
 - `ENABLE_STORYBLOK_BRIDGE`: Enable live preview (`true` in dev, `false` in production)
 - `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`, `EMAILJS_PUBLIC_KEY`: EmailJS configuration
+- `EMAILJS_PROJECT_TEMPLATE_ID`: EmailJS template ID for the separate `/projekt-formular` intake form (same EmailJS account/service, different template)
 
 ### Build Modes
 
